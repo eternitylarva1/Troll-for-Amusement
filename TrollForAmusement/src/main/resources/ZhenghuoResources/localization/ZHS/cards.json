@@ -1,0 +1,65 @@
+{
+  "Zhenghuo:Soul_R": {
+    "NAME": "赌上你的灵魂",
+    "DESCRIPTION": "获得 !M! 点力量，3回合后你的角色永久变为故障机器人 ",
+    "UPGRADE_DESCRIPTION": "获得 !M! 点力量， 3回合后你的角色永久变为故障机器人 "
+  },"Zhenghuo:Soul_G": {
+    "NAME": "赌上你的灵魂",
+    "DESCRIPTION": "获得 !M! 层无实体，4回合后你的角色永久变为故障机器人 ",
+    "UPGRADE_DESCRIPTION": "获得 !M! 层无实体， 4回合后你的角色永久变为故障机器人 "
+  },"Zhenghuo:Soul_P": {
+    "NAME": "赌上你的灵魂",
+    "DESCRIPTION": "进入神格，!M! 回合后你的角色永久变为故障机器人 ",
+    "UPGRADE_DESCRIPTION": "进入神格，!M! 回合后你的角色永久变为故障机器人 "
+  },"Zhenghuo:Golden_Form": {
+  "NAME": "黄金契约",
+  "DESCRIPTION": "获得 !M! 金币，然后交换你的金币数和目标的血量, NL 消耗",
+  "UPGRADE_DESCRIPTION": "获得 !M! 金币，然后交换你的金币数和目标的血量， NL 消耗 "
+},
+  "Zhenghuo:CharacterCard": {
+    "NAME": "文字牌",
+    "DESCRIPTION": "一个普通的文字",
+    "UPGRADE_DESCRIPTION": "一个普通的文字 "
+  },
+  "Zhenghuo:Characterdesign": {
+    "NAME": "文字分解",
+    "DESCRIPTION": "可以把你的卡牌分解成文字",
+    "UPGRADE_DESCRIPTION": "可以把你的卡牌分解成文字 "
+  },"Zhenghuo:Charactergather": {
+  "NAME": "文字组合",
+  "DESCRIPTION": "可以把你的文字组成卡牌",
+  "UPGRADE_DESCRIPTION": "可以把你的文字组成卡牌"
+},"Zhenghuo:TongpeiCard": {
+  "NAME": "通配符",
+  "DESCRIPTION": "本卡可以代表任意一个文字",
+  "UPGRADE_DESCRIPTION": "本卡可以代表任意一个文字"
+},"Zhenghuo:Lookatme": {
+  "NAME": "看招",
+  "DESCRIPTION": "如果目标的意图是攻击，对目标打出一张招牌技",
+  "UPGRADE_DESCRIPTION": "如果目标的意图是攻击，对目标打出一张招牌技+"
+},"Zhenghuo:BlackMyth": {
+  "NAME": "黑神话",
+  "DESCRIPTION": "将你所有卡牌变为随机蓝色牌，并升级",
+  "UPGRADE_DESCRIPTION": "将你所有卡牌变为随机蓝色牌，并升级"
+},"Zhenghuo:Suijiyingbian": {
+  "NAME": "随机应变",
+  "DESCRIPTION": "将!M!张通配符加入手牌",
+  "UPGRADE_DESCRIPTION": "将!M!张通配符加入手牌"
+},"Zhenghuo:XuanDieStrike": {
+  "NAME": "玄蝶打击",
+  "DESCRIPTION": "造成 2x3+ !D! 点伤害，打出后旋转本牌中的运算符45°",
+  "UPGRADE_DESCRIPTION": "造成 2x3+ !D! 点伤害，打出后旋转本牌中的运算符45°"
+},"Zhenghuo:RelicName": {
+  "NAME": "遗物复写纸",
+  "DESCRIPTION": "选择并获取你的一个遗物的名字牌",
+  "UPGRADE_DESCRIPTION": "选择并获取你的一个遗物的名字牌"
+},"Zhenghuo:Who": {
+  "NAME": "你是谁",
+  "DESCRIPTION": "选择目标的名字牌",
+  "UPGRADE_DESCRIPTION": "选择目标的名字牌"
+},"Zhenghuo:SuiXin": {
+  "NAME": "碎腐化之心",
+  "DESCRIPTION": "如果目标是腐化之心，击杀之",
+  "UPGRADE_DESCRIPTION": "如果目标是腐化之心，击杀之"
+}
+}

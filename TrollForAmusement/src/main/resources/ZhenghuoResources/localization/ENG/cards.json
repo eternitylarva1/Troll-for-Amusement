@@ -1,0 +1,21 @@
+{
+  "TogetherFour:Soul_R": {
+    "NAME": "Bet Your Soul",
+    "DESCRIPTION": "Gain !M! Strength. After 3 turns, your character permanently becomes the Defect.",
+    "UPGRADE_DESCRIPTION": "Gain !M! Strength. After 3 turns, your character permanently becomes the Defect."
+  },
+  "TogetherFour:Soul_G": {
+    "NAME": "Bet Your Soul",
+    "DESCRIPTION": "Gain !M! Intangible. After 3 turns, your character permanently becomes the Defect.",
+    "UPGRADE_DESCRIPTION": "Gain !M! Intangible. After 3 turns, your character permanently becomes the Defect."
+  },
+  "TogetherFour:Soul_P": {
+    "NAME": "Bet Your Soul",
+    "DESCRIPTION": "ChangeStance Divinity. After !M! turns, your character permanently becomes the Defect.",
+    "UPGRADE_DESCRIPTION": "ChangeStance Divinity. After !M!  turns, your character permanently becomes the Defect."
+  },"Zhenghuo:Golden_Form": {
+  "NAME": "黄金契约",
+  "DESCRIPTION": "获得 !M! 金币，然后交换你的金币数和目标的血量",
+  "UPGRADE_DESCRIPTION": "获得 !M! 金币，然后交换你的金币数和目标的血量 "
+}
+}

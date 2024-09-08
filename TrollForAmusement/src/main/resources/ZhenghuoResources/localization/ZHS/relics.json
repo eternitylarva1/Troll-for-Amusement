@@ -1,0 +1,30 @@
+{
+  "Zhenghuo:StrongCharacter": {
+    "NAME": "最强角色",
+    "FLAVOR": "神秘高手，能够游走于无数的世界线",
+    "DESCRIPTIONS": [
+      "你可以随时右键本遗物返回塔底。遗物，卡牌，随机数,地图等变为本局开始状态。"   ]
+  },
+  "Zhenghuo:GatherMachine": {
+    "NAME": "文字合成器",
+    "FLAVOR": "",
+    "DESCRIPTIONS": [
+      "右键可以合成卡牌"   ]
+  },
+  "Zhenghuo:SplitMachine": {
+    "NAME": "文字分解器",
+    "FLAVOR": "",
+    "DESCRIPTIONS": [
+      "右键可以分解卡牌"   ]
+  },"Zhenghuo:Stickman": {
+  "NAME": "火柴人",
+  "FLAVOR": "有点烧",
+  "DESCRIPTIONS": [
+    "回合结束时，获得3层自燃"   ]
+},"Zhenghuo:Dictionary": {
+  "NAME": "词典",
+  "FLAVOR": "",
+  "DESCRIPTIONS": [
+    "右键查看所有词条(请将本Mod置于最下方)"   ]
+}
+}
