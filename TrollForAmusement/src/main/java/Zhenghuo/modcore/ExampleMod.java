@@ -16,6 +16,7 @@ import Zhenghuo.screens.MyScreen;
 import basemod.BaseMod;
 import basemod.abstracts.CustomSavable;
 import basemod.abstracts.CustomScreen;
+import basemod.devcommands.relic.RelicPool;
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
@@ -27,18 +28,21 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
+import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.screens.compendium.RelicViewScreen;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import static Zhenghuo.actions.ChangePlayerAction.ChangePlayer;
 import static Zhenghuo.utils.CardArguments.Chimeraopened;
-import static Zhenghuo.utils.CardArguments.RewardPatch.CardAugrments;
-import static Zhenghuo.utils.CardArguments.RewardPatch.ModifiedCards;
+import static Zhenghuo.utils.CardArguments.RewardPatch.*;
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.*;
-
+import java.util.ArrayList;
 
 @SpireInitializer
 public class ExampleMod implements PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
@@ -174,7 +178,21 @@ public static boolean hasLoaded=false;
 System.out.println("正在预加载");
         ModifiedCards.clear();
         ModifiedCards.addAll(CardLibrary.getAllCards());
-        JoinCharacterEvent aa=new JoinCharacterEvent();
+        CardAugrments.clear();
+        Relics.clear();
+        RelicLibrary.starterList = RelicLibrary.sortByStatus(RelicLibrary.starterList, false);
+        RelicLibrary.commonList = RelicLibrary.sortByStatus(RelicLibrary.commonList, false);
+        RelicLibrary.uncommonList = RelicLibrary.sortByStatus(RelicLibrary.uncommonList, false);
+        RelicLibrary.rareList = RelicLibrary.sortByStatus(RelicLibrary.rareList, false);
+        RelicLibrary.bossList = RelicLibrary.sortByStatus(RelicLibrary.bossList, false);
+        RelicLibrary.specialList = RelicLibrary.sortByStatus(RelicLibrary.specialList, false);
+        RelicLibrary.shopList = RelicLibrary.sortByStatus(RelicLibrary.shopList, false);
+       Relics= Arrays.asList(RelicLibrary.starterList, RelicLibrary.commonList,RelicLibrary.uncommonList,RelicLibrary.rareList,RelicLibrary.bossList,RelicLibrary.specialList,RelicLibrary.shopList)
+               .stream()
+               .flatMap(ArrayList::stream)
+               .collect(Collectors.toCollection(ArrayList::new));
+       System.out.println(Relics.toString());
+
         if(Chimeraopened())
         {
             for(AbstractCard c:CardLibrary.getAllCards()) {

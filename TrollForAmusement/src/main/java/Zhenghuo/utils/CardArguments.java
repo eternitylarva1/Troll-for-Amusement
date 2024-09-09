@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.colorless.Madness;
 import com.megacrit.cardcrawl.daily.mods.Chimera;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class CardArguments {
     public static class RewardPatch {
         public static ArrayList<AbstractCard> ModifiedCards=new ArrayList<AbstractCard>();
         public static CardGroup CardAugrments= new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        public static ArrayList<AbstractRelic> Relics= new ArrayList<>();
         @SpireInsertPatch(
                 loc = 1119,
                 localvars= {"c","retVal"}
