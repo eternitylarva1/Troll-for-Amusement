@@ -5,6 +5,7 @@ import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cards.DummyCard;
 import CardAugments.util.FormatHelper;
 import Zhenghuo.card.*;
+import Zhenghuo.events.JoinCharacterEvent;
 import Zhenghuo.otherplayer.OtherPlayerHelper;
 import Zhenghuo.relics.Dictionary;
 import Zhenghuo.relics.GatherMachine;
@@ -173,7 +174,7 @@ public static boolean hasLoaded=false;
 System.out.println("正在预加载");
         ModifiedCards.clear();
         ModifiedCards.addAll(CardLibrary.getAllCards());
-
+        JoinCharacterEvent aa=new JoinCharacterEvent();
         if(Chimeraopened())
         {
             for(AbstractCard c:CardLibrary.getAllCards()) {
