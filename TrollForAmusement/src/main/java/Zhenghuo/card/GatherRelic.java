@@ -2,6 +2,7 @@ package Zhenghuo.card;
 
 
 
+import Zhenghuo.actions.BetteGatheRelicAction;
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.utils.TextImageGenerator;
 import basemod.abstracts.CustomCard;
@@ -25,7 +26,7 @@ import static Zhenghuo.actions.GatherCharacterAction.result;
 
 public class GatherRelic extends CustomCard {
 
-    public static final String ID = ModHelper.makePath("RelicName");
+    public static final String ID = ModHelper.makePath("GatherRelic");
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String IMG_PATH = "ZhenghuoResources/images/Character.png";
     private static final int COST = 0;
@@ -63,24 +64,8 @@ public class GatherRelic extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        ArrayList<AbstractCard> stanceChoices = new ArrayList();
 
-        for (AbstractRelic relic : AbstractDungeon.player.relics) {
-            AbstractCard cardm=new CharacterCard(relic.name);
-            List<Character> charList = relic.name.chars()
-                    .mapToObj(c -> (char) c)
-                    .collect(Collectors.toList());
-            List<AbstractCard> CardList=result(charList);
-            if(!CardList.isEmpty())
-            {
-                System.out.println("检测到对应词条，正在替换");
-                cardm=CardList.get(0).makeSameInstanceOf();
-            }
-            stanceChoices.add(cardm);
-
-        }
-
-        this.addToBot(new ChooseOneAction(stanceChoices));
+        this.addToBot(new BetteGatheRelicAction(99,true));
     }
 
 }

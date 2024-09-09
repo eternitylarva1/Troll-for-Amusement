@@ -80,6 +80,7 @@ public static CharacterScreen getdictionary()
         BaseMod.addCard(new RelicName());
         BaseMod.addCard(new MonsterName());
         BaseMod.addCard(new SuiXin());
+        BaseMod.addCard(new GatherRelic());
     }
 
     @Override
@@ -191,7 +192,7 @@ System.out.println("正在预加载");
                .stream()
                .flatMap(ArrayList::stream)
                .collect(Collectors.toCollection(ArrayList::new));
-       System.out.println(Relics.toString());
+       System.out.println(Relics);
 
         if(Chimeraopened())
         {

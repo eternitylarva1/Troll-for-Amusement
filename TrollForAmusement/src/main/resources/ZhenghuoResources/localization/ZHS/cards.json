@@ -61,5 +61,9 @@
   "NAME": "碎腐化之心",
   "DESCRIPTION": "如果目标是腐化之心，击杀之",
   "UPGRADE_DESCRIPTION": "如果目标是腐化之心，击杀之"
+},"Zhenghuo:GatherRelic": {
+  "NAME": "合成遗物",
+  "DESCRIPTION": "进行一次遗物合成（仅限未获得的遗物）",
+  "UPGRADE_DESCRIPTION": "进行一次遗物合成（仅限未获得的遗物）"
 }
 }
