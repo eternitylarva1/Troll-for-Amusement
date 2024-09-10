@@ -5,7 +5,8 @@ import CardAugments.cardmods.AbstractAugment;
 import CardAugments.cards.DummyCard;
 import CardAugments.util.FormatHelper;
 import Zhenghuo.card.*;
-import Zhenghuo.events.JoinCharacterEvent;
+
+import Zhenghuo.events.MyFirstEvent;
 import Zhenghuo.otherplayer.OtherPlayerHelper;
 import Zhenghuo.relics.Dictionary;
 import Zhenghuo.relics.GatherMachine;
@@ -27,9 +28,11 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.events.shrines.WeMeetAgain;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.compendium.RelicViewScreen;
@@ -94,7 +97,9 @@ public static CharacterScreen getdictionary()
         BaseMod.loadCustomStringsFile(CardStrings.class, "ZhenghuoResources/localization/" + lang + "/cards.json"); // 加载相应语言的卡牌本地化内容。
 
         BaseMod.loadCustomStringsFile(RelicStrings.class, "ZhenghuoResources/localization/" + lang + "/relics.json");// 如果是中文，加载的就是"ExampleResources/localization/ZHS/cards.json"
-            }
+        BaseMod.loadCustomStringsFile(EventStrings.class, "ZhenghuoResources/localization/" + lang + "/events.json");// 如果是中文，加载的就是"ExampleResources/localization/ZHS/cards.json"
+
+    }
 
 
 
@@ -246,8 +251,10 @@ System.out.println("正在预加载");
         }
 
     }
+
     @Override
     public void receivePostInitialize() {
+        BaseMod.addEvent(MyFirstEvent.ID, MyFirstEvent.class);
         BaseMod.addCustomScreen(new CharacterScreen() {
         });/*
         BaseMod.addCustomScreen(new MyScreen() {
