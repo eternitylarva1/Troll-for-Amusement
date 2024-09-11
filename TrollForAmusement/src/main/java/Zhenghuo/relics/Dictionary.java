@@ -19,7 +19,7 @@ public class Dictionary extends CustomRelic implements ClickableRelic {
     // 遗物ID（此处的ModHelper在“04 - 本地化”中提到）
     public static final String ID = ModHelper.makePath("Dictionary");
     // 图片路径
-    private static final String IMG_PATH = "ZhenghuoResources/images/relics/GatherMachine.png";
+    private static final String IMG_PATH = "ZhenghuoResources/images/relics/tujian.png";
     // 遗物类型
     private static final RelicTier RELIC_TIER = RelicTier.STARTER;
     // 点击音效

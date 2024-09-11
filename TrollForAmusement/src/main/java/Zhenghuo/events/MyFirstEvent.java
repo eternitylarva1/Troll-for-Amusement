@@ -1,11 +1,15 @@
 package Zhenghuo.events;
 
+import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.CharacterCardEvent;
+import Zhenghuo.card.TongpeiCard;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -19,7 +23,18 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.random.Random;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+
+import static Zhenghuo.actions.BetteGatheRelicAction.resultRelic;
+import static Zhenghuo.actions.GatherCharacterAction.result;
+import static Zhenghuo.utils.CardArguments.RewardPatch.Relics;
 import static com.megacrit.cardcrawl.helpers.CardLibrary.getAllCards;
 
 public class MyFirstEvent extends AbstractImageEvent {
@@ -30,8 +45,9 @@ public class MyFirstEvent extends AbstractImageEvent {
     private static final String[] OPTIONS = eventStrings.OPTIONS;
     private static final String NAME = eventStrings.NAME;
     private final Texture pressKey1;
-
+    private  AbstractCard selectedCard=null;
     private AbstractCard hoverCard;
+    private AbstractRelic selectedRelic;
 
 
     private final AbstractCard[][] cardsMatrix = new AbstractCard[8][4];
@@ -40,11 +56,12 @@ public class MyFirstEvent extends AbstractImageEvent {
 
     private final Hitbox button;
     // 卡片之间的间距
-
+    private float timer = 18.0F;
     private final CardGroup characterCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     private final CardGroup RewardCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     private final CardGroup PlayCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     private final CardGroup LeftCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+    private final ArrayList<AbstractRelic> RewardRelics=new ArrayList<>();
     private Screen screen;
 
     public MyFirstEvent() {
@@ -54,21 +71,31 @@ public class MyFirstEvent extends AbstractImageEvent {
         this.imageEventText.setDialogOption(OPTIONS[0]); //This adds the option to a list of options
         button = new Hitbox(120, 120);
         this.pressKey1 = new Texture("ZhenghuoResources/images/ui/okay.png");
-for(int i=0;i<9;i++)
+for(int i=0;i<7;i++)
 {
     RewardCards.addToTop(getAllCards().get(AbstractDungeon.cardRandomRng.random(getAllCards().size()-1)));
 }
+for(int i=0;i<2;i++){
+    RewardRelics.add(Relics.get(AbstractDungeon.cardRandomRng.random(Relics.size()-1)));
+}
+        for(AbstractRelic c:RewardRelics)
+        {
+            for(char m:c.name.toCharArray())
+            {
+                PlayCards.group.add(new CharacterCardEvent(Character.toString(m)));
+            };
+            button.move(convertX(-0.5f), convertY(2.5f));
+
+        }
 for(AbstractCard c:RewardCards.group)
 {
     for(char m:c.name.toCharArray())
     {
         PlayCards.group.add(new CharacterCardEvent(Character.toString(m)));
     };
-    button.move(convertX(0), convertY(2.5f));
-
+    button.move(convertX(-0.5f), convertY(2.5f));
 
 }
-
 
     }
     private float convertX(float x) {
@@ -98,10 +125,101 @@ for(AbstractCard c:RewardCards.group)
             hitbox.clickStarted = true;
         }
     }
+    private void updateGameLogic() {
+if(button.clicked)
+{System.out.println("检测到按下按钮");
+    complete();
+}
+    }
+    private void complete() {
+        screen = Screen.GET_CARD;
+        GenericEventDialog.show();
+        this.imageEventText.updateBodyText(DESCRIPTIONS[2]);
+
+        this.imageEventText.setDialogOption(OPTIONS[1]);
+
+        if(!LeftCards.group.isEmpty()) {
+            AbstractCard c;
+            Iterator var4 = LeftCards.group.iterator();
+            ArrayList<Character> ChList = new ArrayList<>();
+            int upgradenum = 0;
+            while (var4.hasNext()) {
+                c = (AbstractCard) var4.next();
+
+
+                if (!(c instanceof TongpeiCard)) {
+
+                    System.out.println("正在尝试组合" + c.name);
+                    for (char ch : c.name.toCharArray()) {
+                        if (!(ch == "+".charAt(0) || Character.isDigit(ch))) {
+                            ChList.add(ch);
+                            System.out.println("已将" + ch + "加入检索序列");
+                        } else if (Character.isDigit(ch)) {
+                            int number = ch - '0' - 1;
+                            System.out.println("检测到数字" + number + "转换成升级");
+
+                            upgradenum += number;
+
+                        } else {
+                            upgradenum++;
+                        }
+
+
+                    }
+                } else {
+                    System.out.println("检测到名字为通配符，改为*");
+                    ChList.add("*".charAt(0));
+                }
+            }
+
+
+            List<AbstractCard> result = result(ChList);
+            List<AbstractRelic> resultRelic=resultRelic(ChList);
+            if(!result.isEmpty()) {
+                this.selectedCard = result.get(AbstractDungeon.cardRandomRng.random(0, result.size() - 1)).makeSameInstanceOf();
+                if(upgradenum>0){
+                    for(int i=0;i<upgradenum;i++)
+                    {
+                        selectedCard.upgraded=false;
+                        selectedCard.upgrade();
+                    }
+                }
+                System.out.println("已经将"+this.selectedCard.name+"加入奖励");
+            }
+            else if(!resultRelic.isEmpty())
+            {
+                this.selectedRelic=resultRelic.get(AbstractDungeon.cardRandomRng.random(0, resultRelic.size() - 1)).makeCopy();
+                System.out.println("已经将"+this.selectedRelic.name+"加入奖励");
+            }
+            else{
+                StringBuilder sb = new StringBuilder();
+                for (char str : ChList) {
+
+                    sb.append(str);
+                }
+                this.selectedCard=new CharacterCard(sb.toString());
+            }
+        }
+        if(this.selectedCard!=null)
+        {
+            this.imageEventText.setDialogOption(String.format(OPTIONS[3],this.selectedCard.name), this.selectedCard);
+        }
+        else
+        if(this.selectedRelic!=null)
+        {
+            this.imageEventText.setDialogOption(String.format(OPTIONS[3],this.selectedRelic.name), this.selectedRelic);
+        }else{
+            this.selectedCard=new CharacterCard("空");
+            this.imageEventText.setDialogOption(String.format(OPTIONS[3],this.selectedCard.name), this.selectedCard);
+        }
+     characterCards.clear();
+    }
+
     public void update()
     {
         super.update();
         this.characterCards.update();
+
 
         hoverCard = null;
         for (AbstractCard card : this.characterCards.group) {
@@ -109,24 +227,36 @@ for(AbstractCard c:RewardCards.group)
             if (card.hb.hovered) {
                 card.targetDrawScale = .7f;
                 hoverCard = card;
-            } else {
+            } else if(LeftCards.contains(card)){
 
+                card.targetDrawScale = .4f;
+            }
+            else{
                 card.targetDrawScale = .5f;
             }
         }
         if(this.screen==Screen.PLAY){
+            timer-= Gdx.graphics.getDeltaTime();
+            if(timer<=0){
+                complete();
+            }
             updateHitbox(button);
+            updateGameLogic();
             if (InputHelper.justReleasedClickLeft) {
                 button.clicked = false;}
+
         }
         if(InputHelper.isMouseDown&&hoverCard!=null&&InputHelper.justClickedLeft)
         {
             if(!LeftCards.group.contains(hoverCard))
             {
-                if(LeftCards.size()<4) {
-                    moveCard(hoverCard, 0, LeftCards.size());
+                if(LeftCards.size()<5) {
+
+                    hoverCard.target_x = convertX(0);
+                    hoverCard.target_y = convertY(0.8f*LeftCards.size());
                     LeftCards.addToTop(hoverCard);
                     hoverCard.beginGlowing();
+
                     for (int i = 1; i < cardsMatrix.length; i++) {
                         for (int j = 0; j < cardsMatrix[i].length; j++) {
                             if (cardsMatrix[i][j] == hoverCard) {
@@ -139,6 +269,11 @@ for(AbstractCard c:RewardCards.group)
             }
             else{
                 LeftCards.removeCard(hoverCard);
+                for(AbstractCard c:LeftCards.group)
+                {
+                    c.target_x=convertX(0);
+                    c.target_y=convertY(0.8f*LeftCards.group.indexOf(c));
+                }
                 hoverCard.stopGlowing();
                 for (int i=1;i<8;i++) {
                    for(int j=0;j<3;j++)
@@ -155,6 +290,7 @@ for(AbstractCard c:RewardCards.group)
         }
 
     }
+
     private void putNewCard() {
         if(!PlayCards.group.isEmpty()){
         System.out.println("将新的卡将入游戏");
@@ -162,7 +298,7 @@ for(AbstractCard c:RewardCards.group)
 
         AbstractCard card = PlayCards.group.get(rng.random(PlayCards.size()-1));
         PlayCards.group.remove(card);
-        if (rng.randomBoolean()) {
+        if (rng.randomBoolean(0.3f)) {
             card.upgrade();
         }
 
@@ -225,7 +361,7 @@ for(AbstractCard c:RewardCards.group)
                 flipX,
                 false);
      FontHelper.renderFont(sb,FontHelper.topPanelAmountFont,"确认",hitbox.cX - popupArrow.getWidth() / 2f,hitbox.cY - popupArrow.getHeight() / 2f+50, Color.WHITE);
-
+     FontHelper.renderFont(sb,FontHelper.menuBannerFont,"剩余时间"+(int)timer,convertX(6),convertY(-0.5f), Color.WHITE);
         if (hitbox.hovered) {
             sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
             sb.setColor(1, 1, 1, 0.5f);
@@ -247,6 +383,7 @@ for(AbstractCard c:RewardCards.group)
                     false);
             sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         }
+
     }
     private enum Screen {
         INTRO,
@@ -277,7 +414,29 @@ for(AbstractCard c:RewardCards.group)
                     this.screen = Screen.PLAY;
                     initializeCards();
                 }
-
+               return;
+            case GET_CARD:
+                if (buttonPressed == 1 ) {
+                    if(selectedCard!=null) {
+                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(this.selectedCard, (float) Settings.WIDTH / 2.0F, (float) Settings.HEIGHT / 2.0F));
+                    }
+                    else if(selectedRelic!=null)
+                    {
+                        AbstractDungeon.getCurrRoom().spawnRelicAndObtain((float) Settings.WIDTH / 2.0F, (float) Settings.HEIGHT / 2.0F,this.selectedRelic);
+                    }
+                    else {
+                        this.imageEventText.updateBodyText(DESCRIPTIONS[3]);
+                    }
+                } else {
+                    this.imageEventText.updateBodyText(DESCRIPTIONS[4]);
+                }
+                this.imageEventText.removeDialogOption(1);
+                this.imageEventText.removeDialogOption(0);
+                this.imageEventText.setDialogOption(OPTIONS[1]);
+                this.screen = Screen.COMPLETE;
+                return;
+            case COMPLETE:
+                this.openMap();
                 return;
         }
 
