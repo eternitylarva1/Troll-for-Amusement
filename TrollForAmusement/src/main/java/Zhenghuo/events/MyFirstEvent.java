@@ -1,11 +1,11 @@
 package Zhenghuo.events;
 
-import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.CharacterCardEvent;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.math.Vector2;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -13,16 +13,13 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractImageEvent;
 import com.megacrit.cardcrawl.events.GenericEventDialog;
-import com.megacrit.cardcrawl.helpers.CardLibrary;
+import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.Hitbox;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.random.Random;
 
-import java.util.Collections;
-import java.util.List;
-
-import static Zhenghuo.utils.CardArguments.RewardPatch.ModifiedCards;
 import static com.megacrit.cardcrawl.helpers.CardLibrary.getAllCards;
 
 public class MyFirstEvent extends AbstractImageEvent {
@@ -32,19 +29,18 @@ public class MyFirstEvent extends AbstractImageEvent {
     private static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;
     private static final String[] OPTIONS = eventStrings.OPTIONS;
     private static final String NAME = eventStrings.NAME;
+    private final Texture pressKey1;
 
     private AbstractCard hoverCard;
-    private Array<CharacterCardEvent> selectedCards;
-    private Hitbox backButton;
-    private BitmapFont font;
+
+
     private final AbstractCard[][] cardsMatrix = new AbstractCard[8][4];
 
     // 定义每行和每列的卡片数量
-    private int rows = 4;
-    private int cols = 4;
 
+    private final Hitbox button;
     // 卡片之间的间距
-    private float cardSpacing = 20;
+
     private final CardGroup characterCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     private final CardGroup RewardCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     private final CardGroup PlayCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
@@ -56,6 +52,8 @@ public class MyFirstEvent extends AbstractImageEvent {
         this.screen=Screen.INTRO;
         //This is where you would create your dialog options
         this.imageEventText.setDialogOption(OPTIONS[0]); //This adds the option to a list of options
+        button = new Hitbox(120, 120);
+        this.pressKey1 = new Texture("ZhenghuoResources/images/ui/okay.png");
 for(int i=0;i<9;i++)
 {
     RewardCards.addToTop(getAllCards().get(AbstractDungeon.cardRandomRng.random(getAllCards().size()-1)));
@@ -66,7 +64,7 @@ for(AbstractCard c:RewardCards.group)
     {
         PlayCards.group.add(new CharacterCardEvent(Character.toString(m)));
     };
-
+    button.move(convertX(0), convertY(2.5f));
 
 
 }
@@ -94,10 +92,17 @@ for(AbstractCard c:RewardCards.group)
             putNewCard();
         }
     }
+    private void updateHitbox(Hitbox hitbox) {
+        hitbox.update();
+        if (InputHelper.justClickedLeft && hitbox.hovered) {
+            hitbox.clickStarted = true;
+        }
+    }
     public void update()
     {
         super.update();
         this.characterCards.update();
+
         hoverCard = null;
         for (AbstractCard card : this.characterCards.group) {
             card.hb.update();
@@ -105,8 +110,14 @@ for(AbstractCard c:RewardCards.group)
                 card.targetDrawScale = .7f;
                 hoverCard = card;
             } else {
+
                 card.targetDrawScale = .5f;
             }
+        }
+        if(this.screen==Screen.PLAY){
+            updateHitbox(button);
+            if (InputHelper.justReleasedClickLeft) {
+                button.clicked = false;}
         }
         if(InputHelper.isMouseDown&&hoverCard!=null&&InputHelper.justClickedLeft)
         {
@@ -142,6 +153,7 @@ for(AbstractCard c:RewardCards.group)
 
             }
         }
+
     }
     private void putNewCard() {
         if(!PlayCards.group.isEmpty()){
@@ -175,35 +187,66 @@ for(AbstractCard c:RewardCards.group)
     public void render(SpriteBatch sb) {
         super.render(sb);
 
+
         if (screen == Screen.PLAY) {
             ///System.out.println("检测到进入play环节");
             this.characterCards.render(sb);
             if (hoverCard != null) {
                 hoverCard.render(sb);
             }
+            renderArrow(sb, button, 0, false);
+            button.render(sb);
+
+
+
 
         }
 /*
-            Texture img = pressKey1;
-            if (MathUtils.floor(timer) % 2 == 0) {
-                img = pressKey2;
-            }
 
-            sb.draw(img,
-                    convertX(-1) - img.getWidth() / 2f * Settings.scale,
-                    convertY(1.5f) - img.getHeight() / 2f * Settings.scale,
-                    img.getWidth() * Settings.scale,
-                    img.getHeight() * Settings.scale);
-
-            renderArrow(sb, left, 0, false);
-            left.render(sb);
-            renderArrow(sb, right, 0, true);
-            right.render(sb);
-            renderArrow(sb, up, 90, true);
-            up.render(sb);
-            renderArrow(sb, down, 90, false);
-            down.render(sb);
         }*/
+    }
+    private void renderArrow(SpriteBatch sb, Hitbox hitbox, float rotation, boolean flipX) {
+        Texture popupArrow = ImageMaster.OPTION_YES;
+        sb.setColor(1, 1, 1, 1);
+        sb.draw(popupArrow,
+                hitbox.cX - popupArrow.getWidth() / 2f,
+                hitbox.cY - popupArrow.getHeight() / 2f,
+                popupArrow.getWidth() / 2f,
+                popupArrow.getHeight() / 2f,
+                popupArrow.getWidth(),
+                popupArrow.getHeight(),
+                Settings.scale * 0.8f,
+                Settings.scale * 0.8f,
+                rotation,
+                0,
+                0,
+                popupArrow.getWidth(),
+                popupArrow.getHeight(),
+                flipX,
+                false);
+     FontHelper.renderFont(sb,FontHelper.topPanelAmountFont,"确认",hitbox.cX - popupArrow.getWidth() / 2f,hitbox.cY - popupArrow.getHeight() / 2f+50, Color.WHITE);
+
+        if (hitbox.hovered) {
+            sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
+            sb.setColor(1, 1, 1, 0.5f);
+            sb.draw(popupArrow,
+                    hitbox.cX - popupArrow.getWidth() / 2f,
+                    hitbox.cY - popupArrow.getHeight() / 2f,
+                    popupArrow.getWidth() / 2f,
+                    popupArrow.getHeight() / 2f,
+                    popupArrow.getWidth(),
+                    popupArrow.getHeight(),
+                    Settings.scale * 0.8f,
+                    Settings.scale * 0.8f,
+                    rotation,
+                    0,
+                    0,
+                    popupArrow.getWidth(),
+                    popupArrow.getHeight(),
+                    flipX,
+                    false);
+            sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        }
     }
     private enum Screen {
         INTRO,
