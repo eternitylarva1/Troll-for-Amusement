@@ -1,5 +1,6 @@
 package Zhenghuo.relics;
 
+import CardAugments.CardAugmentsMod;
 import Zhenghuo.actions.BetteGatherCharacterAction;
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.screens.CharacterScreen;
@@ -12,6 +13,7 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 import static Zhenghuo.modcore.ExampleMod.dictionary;
+import static Zhenghuo.utils.CardArguments.RewardPatch.CardAugrments;
 
 
 // 继承CustomRelic
@@ -31,7 +33,7 @@ public class Dictionary extends CustomRelic implements ClickableRelic {
 
     // 获取遗物描述，但原版游戏只在初始化和获取遗物时调用，故该方法等于初始描述
     public String getUpdatedDescription() {
-        return this.DESCRIPTIONS[0];
+        return this.DESCRIPTIONS[0]+ CardAugrments.size()+this.DESCRIPTIONS[1];
     }
 
     public AbstractRelic makeCopy() {

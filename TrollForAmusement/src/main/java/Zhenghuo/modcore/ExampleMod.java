@@ -37,15 +37,14 @@ import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.compendium.RelicViewScreen;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.text.Collator;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static Zhenghuo.actions.ChangePlayerAction.ChangePlayer;
 import static Zhenghuo.utils.CardArguments.Chimeraopened;
 import static Zhenghuo.utils.CardArguments.RewardPatch.*;
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.*;
-import java.util.ArrayList;
 
 @SpireInitializer
 public class ExampleMod implements PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
@@ -247,7 +246,12 @@ System.out.println("正在预加载");
                 ModifiedCards.add(copy);
                 CardAugrments.group.add(copy);
             }
-
+            Collections.sort(CardAugrments.group, new Comparator<AbstractCard>() {
+                @Override
+                public int compare(AbstractCard o1, AbstractCard o2) {
+                    return Collator.getInstance().compare(o1.name, o2.name);
+                }
+            });
         }
 
     }
