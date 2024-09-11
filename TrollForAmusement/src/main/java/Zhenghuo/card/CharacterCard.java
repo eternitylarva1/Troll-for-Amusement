@@ -6,6 +6,7 @@ import Zhenghuo.utils.TextImageGenerator;
 import basemod.BaseMod;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.abstracts.CustomCard;
+import basemod.abstracts.CustomSavable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,7 +32,7 @@ import static Zhenghuo.actions.GatherCharacterAction.result;
 import static basemod.helpers.CardModifierManager.modifiers;
 import static basemod.helpers.CardModifierManager.onRenderTitle;
 
-public class CharacterCard extends CustomCard {
+public class CharacterCard extends CustomCard implements CustomSavable<String> {
 
     public static final String ID = ModHelper.makePath("CharacterCard");
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -53,9 +54,6 @@ public class CharacterCard extends CustomCard {
         this.baseBlock = this.block = 1;
         this.baseMagicNumber = this.magicNumber = 1;
         this.exhaust=true;
-
-        this.tags.add(CardTags.STARTER_STRIKE);
-        this.tags.add(CardTags.STRIKE);
         this.Text=TextImageGenerator.getTextImage(NAME);
         Texture customTexture = Text;
 // Step 2: 将Texture转换为TextureAtlas.AtlasRegion
@@ -117,7 +115,36 @@ public void update()
     public void use(AbstractPlayer p, AbstractMonster m) {
     }
 
+    @Override
+    public String onSave() {
+        return this.name;
     }
+
+    @Override
+    public void onLoad(String s) {
+        this.name=s;
+        this.Text=TextImageGenerator.getTextImage(s);
+        Texture customTexture = Text;
+// Step 2: 将Texture转换为TextureAtlas.AtlasRegion
+        TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
+        customRegion.flip(false, true);
+        /*
+
+        List<Character> charList = this.name.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.toList());
+        List<AbstractCard> CardList=result(charList);
+        if(!CardList.isEmpty())
+        {
+            this.rawDescription=CardList.get(0).rawDescription;
+            this.initializeDescription();
+        }*/
+// Step 3: 设置卡牌的portrait属
+        this.portrait = customRegion;
+        this.rawDescription=DESCRIPTION;
+        this.initializeDescription();
+    }
+}
 
 
 
