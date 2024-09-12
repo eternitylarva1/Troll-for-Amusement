@@ -12,9 +12,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.SpawnModificationCard;
 import com.megacrit.cardcrawl.actions.common.GainGoldAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.curses.Pain;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -31,10 +33,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static Zhenghuo.actions.GatherCharacterAction.result;
+import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
+import static Zhenghuo.utils.CardArguments.RewardPatch.Words;
 import static basemod.helpers.CardModifierManager.modifiers;
 import static basemod.helpers.CardModifierManager.onRenderTitle;
 
-public class CharacterCard extends CustomCard implements CustomSavable<String> {
+public class CharacterCard extends CustomCard implements CustomSavable<String>, SpawnModificationCard {
 
     public static final String ID = ModHelper.makePath("CharacterCard");
 
@@ -42,8 +46,8 @@ public class CharacterCard extends CustomCard implements CustomSavable<String> {
     private static final int COST = 1;
     public static final String DESCRIPTION =Settings.language == Settings.GameLanguage.ZHS?"一张普通的文字牌 NL 消耗 ":"A normal card NL Exhaust";
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = CardColor.COLORLESS;
-    private static final CardRarity RARITY = CardRarity.SPECIAL;
+    private static final CardColor COLOR = CharacterBlack;
+    private static final CardRarity RARITY = CardRarity.COMMON;
     private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
     private Texture Text;
     private boolean haschanged=false;
@@ -145,7 +149,31 @@ public void update()
         this.rawDescription=DESCRIPTION;
         this.initializeDescription();
     }
+    @Override
+    public AbstractCard replaceWith(ArrayList<AbstractCard> currentRewardCards) {
+        this.name=Words.get(AbstractDungeon.cardRandomRng.random(Words.size()-1));
+        this.Text=TextImageGenerator.getTextImage( this.name);
+        Texture customTexture = Text;
+// Step 2: 将Texture转换为TextureAtlas.AtlasRegion
+        TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
+        customRegion.flip(false, true);
 
+
+        List<Character> charList = this.name.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.toList());
+        List<AbstractCard> CardList=result(charList);
+        if(!CardList.isEmpty())
+        {
+            this.rawDescription=CardList.get(0).rawDescription;
+            this.initializeDescription();
+        }
+// Step 3: 设置卡牌的portrait属
+        this.portrait = customRegion;
+        this.rawDescription=DESCRIPTION;
+        this.initializeDescription();
+        return this;
+    }
 
 }
 

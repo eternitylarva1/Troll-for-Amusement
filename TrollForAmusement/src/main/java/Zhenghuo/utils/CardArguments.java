@@ -44,6 +44,7 @@ public class CardArguments {
         public static ArrayList<AbstractCard> ModifiedCards=new ArrayList<AbstractCard>();
         public static CardGroup CardAugrments= new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         public static ArrayList<AbstractRelic> Relics= new ArrayList<>();
+        public static ArrayList<String> Words= new ArrayList<>();
         @SpireInsertPatch(
                 loc = 1119,
                 localvars= {"c","retVal"}

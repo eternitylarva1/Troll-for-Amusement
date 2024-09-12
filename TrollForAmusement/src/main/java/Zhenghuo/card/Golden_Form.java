@@ -54,6 +54,7 @@ public class Golden_Form extends CustomCard {
                 m.maxHealth=h;
                 m.currentHealth=h;
                 isDone=true;
+
             }
         });
     }

@@ -122,6 +122,7 @@ public class RandomCardWithWord extends CustomCard implements CustomSavable<Stri
     }
 
 
+
 }
 
 

@@ -44,7 +44,7 @@ import static Zhenghuo.utils.CardArguments.RewardPatch.*;
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.*;
 
 @SpireInitializer
-public class ExampleMod implements PostCreateStartingDeckSubscriber,EditCharactersSubscriber,PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
+public class ExampleMod implements PostCampfireSubscriber,PostCreateStartingDeckSubscriber,EditCharactersSubscriber,PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
 public static String NowPlayer=null;
     // 人物选择界面按钮的图片
     private static final String MY_CHARACTER_BUTTON = "ZhenghuoModResources/img/char/Character_Button.png";
@@ -105,11 +105,25 @@ public static CharacterScreen getdictionary()
         BaseMod.addCard(new SuiXin());
         BaseMod.addCard(new GatherRelic());
         BaseMod.addCard(new RandomCardWithWord());
+        BaseMod.addCard(new DescriptionStrike());
+/*
       String[]WordPool = new String[]{"打", "击", "神","+","之","重","暴"};
        for(String word :WordPool){
            BaseMod.addCard(new CharacterCard(word));
-       }
+       }*/
+int i=0;/*
+        for (AbstractCard.CardType ct : AbstractCard.CardType.values()) {
+          for(AbstractCard.CardRarity cr:AbstractCard.CardRarity.values())
+          {
+i++;
+              CharacterCard c= new CharacterCard(Integer.toString(i));
+              c.type=ct;
+              c.rarity=cr;
+              BaseMod.addCard(c);
+          }
 
+        }
+*/
     }
 
     @Override
@@ -215,6 +229,28 @@ public static boolean hasLoaded=false;
 System.out.println("正在预加载");
         ModifiedCards.clear();
         ModifiedCards.addAll(CardLibrary.getAllCards());
+        Map<String, Integer> wordCountMap = new HashMap<>();
+        for (AbstractCard nameObject : ModifiedCards) {
+            String[] words = nameObject.name.split("");
+            for (String word : words) {
+                wordCountMap.put(word, wordCountMap.getOrDefault(word, 0) + 1);
+            }
+        }
+
+        List<Map.Entry<String, Integer>> sortedEntries = wordCountMap.entrySet().stream()
+                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                .collect(Collectors.toList());
+
+        int count = 0;
+        for (Map.Entry<String, Integer> entry : sortedEntries) {
+            if (count == 15) {
+                break;
+            }
+            Words.add(entry.getKey());
+            System.out.println( entry.getKey()+ " 出现次数：" + entry.getValue());
+            count++;
+        }
+
         CardAugrments.clear();
         Relics.clear();
         RelicLibrary.starterList = RelicLibrary.sortByStatus(RelicLibrary.starterList, false);
@@ -314,5 +350,11 @@ System.out.println("正在预加载");
             }
 
         }
+    }
+
+    @Override
+    public boolean receivePostCampfire() {
+        //代码加在这里
+        return false;
     }
 }

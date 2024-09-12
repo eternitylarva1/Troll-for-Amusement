@@ -69,5 +69,9 @@
   "NAME": "随机？牌",
   "DESCRIPTION": "一个随机的带有？字的牌",
   "UPGRADE_DESCRIPTION": "一个随机的带有？字的牌"
+},"Zhenghuo:DescriptionStrike": {
+  "NAME": "描述打击",
+  "DESCRIPTION": "造成此牌描述长度的伤害",
+  "UPGRADE_DESCRIPTION": "造成此牌描述长度+3的伤害"
 }
 }

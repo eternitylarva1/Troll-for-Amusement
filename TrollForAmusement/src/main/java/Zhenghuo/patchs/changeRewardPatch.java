@@ -30,6 +30,7 @@ public class changeRewardPatch {
             return SpireReturn.Continue();
         }
     }
+    /*
     @SpirePatch(
             cls = "com.megacrit.cardcrawl.screens.CombatRewardScreen",
             method = "setupItemReward"
@@ -49,7 +50,7 @@ public class changeRewardPatch {
             }
             return SpireReturn.Continue();
         }
-    }
+    }*/
 }
 
 
