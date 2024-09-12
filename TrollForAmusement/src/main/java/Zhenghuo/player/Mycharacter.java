@@ -26,10 +26,10 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import java.util.ArrayList;
 
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
-import static Zhenghuo.player.Mycharacter.PlayerColorEnum.MY_CHARACTER;
+import static Zhenghuo.player.Mycharacter.PlayerColorEnum.Cangjie;
 
 // 继承CustomPlayer类
-public class Mycharacter extends CustomPlayer {
+public class Mycharacter extends CustomPlayer  {
     // 火堆的人物立绘（行动前）
     private static final String MY_CHARACTER_SHOULDER_1 = "ZhenghuoModResources/img/char/shoulder1.png";
     // 火堆的人物立绘（行动后）
@@ -56,7 +56,7 @@ public class Mycharacter extends CustomPlayer {
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString("Zhenghuo:MyCharacter");
 
     public Mycharacter(String name) {
-        super(name, MY_CHARACTER,ORB_TEXTURES,"ZhenghuoModResources/img/UI/orb/vfx.png", LAYER_SPEED, null, null);
+        super(name, Cangjie,ORB_TEXTURES,"ZhenghuoModResources/img/UI/orb/vfx.png", LAYER_SPEED, null, null);
 
 
         // 人物对话气泡的大小，如果游戏中尺寸不对在这里修改（libgdx的坐标轴左下为原点）
@@ -219,13 +219,15 @@ public class Mycharacter extends CustomPlayer {
         return new AbstractGameAction.AttackEffect[]{AbstractGameAction.AttackEffect.SLASH_HEAVY, AbstractGameAction.AttackEffect.FIRE, AbstractGameAction.AttackEffect.SLASH_DIAGONAL, AbstractGameAction.AttackEffect.SLASH_HEAVY, AbstractGameAction.AttackEffect.FIRE, AbstractGameAction.AttackEffect.SLASH_DIAGONAL};
     }
 
+
+
     // 以下为原版人物枚举、卡牌颜色枚举扩展的枚举，需要写，接下来要用
 
     // 注意此处是在 MyCharacter 类内部的静态嵌套类中定义的新枚举值
     // 不可将该定义放在外部的 MyCharacter 类中，具体原因见《高级技巧 / 01 - Patch / SpireEnum》
     public static class PlayerColorEnum {
         @SpireEnum
-        public static PlayerClass MY_CHARACTER;
+        public static PlayerClass Cangjie;
 
         // ***将CardColor和LibraryType的变量名改为你的角色的颜色名称，确保不会与其他mod冲突***
         // ***并且名称需要一致！***

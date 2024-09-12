@@ -47,4 +47,9 @@ public class Dictionary extends CustomRelic implements ClickableRelic {
         //BaseMod.openCustomScreen(CharacterScreen.Enum.MY_SCREEN);
         dictionary.open();
     }
+  @Override
+    public void atTurnStart()
+  {
+
+  }
 }

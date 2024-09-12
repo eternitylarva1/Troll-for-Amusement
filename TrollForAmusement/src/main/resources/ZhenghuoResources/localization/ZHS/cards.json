@@ -31,8 +31,8 @@
   "UPGRADE_DESCRIPTION": "可以把你的文字组成卡牌"
 },"Zhenghuo:TongpeiCard": {
   "NAME": "通配符",
-  "DESCRIPTION": "本卡可以代表任意一个文字",
-  "UPGRADE_DESCRIPTION": "本卡可以代表任意一个文字"
+  "DESCRIPTION": "本卡可以代表任意一个文字（本卡不能被拆解）",
+  "UPGRADE_DESCRIPTION": "本卡可以代表任意一个文字（（本卡不能被拆解））"
 },"Zhenghuo:Lookatme": {
   "NAME": "看招",
   "DESCRIPTION": "如果目标的意图是攻击，对目标打出一张招牌技",

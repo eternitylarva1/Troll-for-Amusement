@@ -2,8 +2,6 @@ package Zhenghuo.modcore;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
-import CardAugments.cards.DummyCard;
-import CardAugments.util.FormatHelper;
 import Zhenghuo.card.*;
 
 import Zhenghuo.events.MyFirstEvent;
@@ -14,24 +12,18 @@ import Zhenghuo.relics.GatherMachine;
 import Zhenghuo.relics.SplitMachine;
 import Zhenghuo.relics.StrongCharacter;
 import Zhenghuo.screens.CharacterScreen;
-import Zhenghuo.screens.MyScreen;
 import basemod.BaseMod;
 import basemod.abstracts.CustomSavable;
-import basemod.abstracts.CustomScreen;
-import basemod.devcommands.relic.RelicPool;
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
-import basemod.patches.com.megacrit.cardcrawl.screens.compendium.CardLibraryScreen.NoCompendium;
-import basemod.patches.whatmod.WhatMod;
 import com.badlogic.gdx.graphics.Color;
-import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.events.shrines.WeMeetAgain;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -39,7 +31,6 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import com.megacrit.cardcrawl.screens.compendium.RelicViewScreen;
 
 import java.text.Collator;
 import java.util.*;
@@ -47,13 +38,13 @@ import java.util.stream.Collectors;
 
 import static Zhenghuo.actions.ChangePlayerAction.ChangePlayer;
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
-import static Zhenghuo.player.Mycharacter.PlayerColorEnum.MY_CHARACTER;
+import static Zhenghuo.player.Mycharacter.PlayerColorEnum.Cangjie;
 import static Zhenghuo.utils.CardArguments.Chimeraopened;
 import static Zhenghuo.utils.CardArguments.RewardPatch.*;
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.*;
 
 @SpireInitializer
-public class ExampleMod implements EditCharactersSubscriber,PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
+public class ExampleMod implements PostCreateStartingDeckSubscriber,EditCharactersSubscriber,PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
 public static String NowPlayer=null;
     // 人物选择界面按钮的图片
     private static final String MY_CHARACTER_BUTTON = "ZhenghuoModResources/img/char/Character_Button.png";
@@ -114,6 +105,11 @@ public static CharacterScreen getdictionary()
         BaseMod.addCard(new SuiXin());
         BaseMod.addCard(new GatherRelic());
         BaseMod.addCard(new RandomCardWithWord());
+      String[]WordPool = new String[]{"打", "击", "神","+","之","重","暴"};
+       for(String word :WordPool){
+           BaseMod.addCard(new CharacterCard(word));
+       }
+
     }
 
     @Override
@@ -161,7 +157,7 @@ public static CharacterScreen getdictionary()
     @Override
     public void receiveEditCharacters() {
         // 向basemod注册人物
-        BaseMod.addCharacter(new Mycharacter(CardCrawlGame.playerName), MY_CHARACTER_BUTTON, MY_CHARACTER_PORTRAIT, MY_CHARACTER);
+        BaseMod.addCharacter(new Mycharacter(CardCrawlGame.playerName), MY_CHARACTER_BUTTON, MY_CHARACTER_PORTRAIT, Cangjie);
     }
     @Override
     public void onLoad(String s) {
@@ -302,5 +298,21 @@ System.out.println("正在预加载");
         dictionary=new CharacterScreen();
         InitizeModifiedCards();
 
+    }
+
+    @Override
+    public void receivePostCreateStartingDeck(AbstractPlayer.PlayerClass playerClass, CardGroup cardGroup) {
+        if(playerClass== Cangjie){
+            cardGroup.clear();
+            for (int x = 0; x < 3; x++) {
+                cardGroup.group.add(new CharacterCard("打"));
+                cardGroup.group.add(new CharacterCard("击"));
+            }
+            for (int x = 0; x < 3; x++) {
+                cardGroup.group.add(new CharacterCard("防"));
+                cardGroup.group.add(new CharacterCard("御"));
+            }
+
+        }
     }
 }
