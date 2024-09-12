@@ -113,6 +113,7 @@ public static CharacterScreen getdictionary()
         BaseMod.addCard(new MonsterName());
         BaseMod.addCard(new SuiXin());
         BaseMod.addCard(new GatherRelic());
+        BaseMod.addCard(new RandomCardWithWord());
     }
 
     @Override

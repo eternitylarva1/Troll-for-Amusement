@@ -1,7 +1,6 @@
 package Zhenghuo.card;
 
 
-import Zhenghuo.powers.ChangePlayerPower;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;

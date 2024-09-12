@@ -1,6 +1,8 @@
 package Zhenghuo.player;
 
+import Zhenghuo.card.Charactergather;
 import Zhenghuo.card.Strike;
+import Zhenghuo.card.TongpeiCard;
 import Zhenghuo.modcore.ExampleMod;
 import basemod.abstracts.CustomPlayer;
 import com.badlogic.gdx.graphics.Color;
@@ -87,9 +89,9 @@ public class Mycharacter extends CustomPlayer {
     public ArrayList<String> getStartingDeck() {
         ArrayList<String> retVal = new ArrayList<>();
         for(int x = 0; x<5; x++) {
-            retVal.add(Strike.ID);
+            retVal.add(TongpeiCard.ID);
         }
-        retVal.add("ExampleMod:Strike");
+        retVal.add(Charactergather.ID);
         return retVal;
     }
 
