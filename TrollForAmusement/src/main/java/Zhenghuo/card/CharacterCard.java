@@ -55,7 +55,7 @@ public class CharacterCard extends CustomCard implements CustomSavable<String>, 
     public CharacterCard(String NAME,String DESCRIPTION) {
 
         // 为了命名规范修改了变量名。这些参数具体的作用见下方
-        super(ID+NAME, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         this.baseDamage = this.damage = 1;
         this.baseBlock = this.block = 1;
         this.baseMagicNumber = this.magicNumber = 1;
@@ -133,18 +133,6 @@ public void update()
 // Step 2: 将Texture转换为TextureAtlas.AtlasRegion
         TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
         customRegion.flip(false, true);
-        /*
-
-        List<Character> charList = this.name.chars()
-                .mapToObj(c -> (char) c)
-                .collect(Collectors.toList());
-        List<AbstractCard> CardList=result(charList);
-        if(!CardList.isEmpty())
-        {
-            this.rawDescription=CardList.get(0).rawDescription;
-            this.initializeDescription();
-        }*/
-// Step 3: 设置卡牌的portrait属
         this.portrait = customRegion;
         this.rawDescription=DESCRIPTION;
         this.initializeDescription();

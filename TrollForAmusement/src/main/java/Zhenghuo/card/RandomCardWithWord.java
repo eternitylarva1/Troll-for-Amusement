@@ -3,8 +3,10 @@ package Zhenghuo.card;
 
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.utils.TextImageGenerator;
+import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
+import basemod.interfaces.OnStartBattleSubscriber;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,10 +15,11 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
 
-public class RandomCardWithWord extends CustomCard implements CustomSavable<String> {
+public class RandomCardWithWord extends CustomCard implements CustomSavable<String> , OnStartBattleSubscriber {
 
     public static final String ID = ModHelper.makePath("RandomCardWithWord");
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -37,6 +40,7 @@ public class RandomCardWithWord extends CustomCard implements CustomSavable<Stri
 
         //  为了命名规范修改了变量名。这些参数具体的作用见下方
         super(ID, "随机"+NAME+"牌", IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        BaseMod.subscribe(this);
         this.baseDamage = this.damage = 1;
         this.baseBlock = this.block = 1;
         this.baseMagicNumber = this.magicNumber = 1;
@@ -122,8 +126,17 @@ public class RandomCardWithWord extends CustomCard implements CustomSavable<Stri
     }
 
 
+    @Override
+    public void receiveOnBattleStart(AbstractRoom abstractRoom) {
+        for (AbstractCard abstractCard : AbstractDungeon.player.drawPile.group) {
+            if(abstractCard instanceof RandomCardWithWord)
+            {
 
-}
+            }
+        }
+
+    }
+    }
 
 
 
