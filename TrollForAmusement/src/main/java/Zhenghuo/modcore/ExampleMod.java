@@ -8,6 +8,7 @@ import Zhenghuo.card.*;
 
 import Zhenghuo.events.MyFirstEvent;
 import Zhenghuo.otherplayer.OtherPlayerHelper;
+import Zhenghuo.player.Mycharacter;
 import Zhenghuo.relics.Dictionary;
 import Zhenghuo.relics.GatherMachine;
 import Zhenghuo.relics.SplitMachine;
@@ -23,15 +24,18 @@ import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import basemod.patches.com.megacrit.cardcrawl.screens.compendium.CardLibraryScreen.NoCompendium;
 import basemod.patches.whatmod.WhatMod;
+import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.events.shrines.WeMeetAgain;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
@@ -42,14 +46,38 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static Zhenghuo.actions.ChangePlayerAction.ChangePlayer;
+import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
+import static Zhenghuo.player.Mycharacter.PlayerColorEnum.MY_CHARACTER;
 import static Zhenghuo.utils.CardArguments.Chimeraopened;
 import static Zhenghuo.utils.CardArguments.RewardPatch.*;
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.*;
 
 @SpireInitializer
-public class ExampleMod implements PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
+public class ExampleMod implements EditCharactersSubscriber,PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
 public static String NowPlayer=null;
-
+    // 人物选择界面按钮的图片
+    private static final String MY_CHARACTER_BUTTON = "ZhenghuoModResources/img/char/Character_Button.png";
+    // 人物选择界面的立绘
+    private static final String MY_CHARACTER_PORTRAIT = "ZhenghuoModResources/img/char/Character_Portrait.png";
+    // 攻击牌的背景（小尺寸）
+    private static final String BG_ATTACK_512 = "ZhenghuoModResources/img/512/bg_attack_512.png";
+    // 能力牌的背景（小尺寸）
+    private static final String BG_POWER_512 = "ZhenghuoModResources/img/512/bg_power_512.png";
+    // 技能牌的背景（小尺寸）
+    private static final String BG_SKILL_512 = "ZhenghuoModResources/img/512/bg_skill_512.png";
+    // 在卡牌和遗物描述中的能量图标
+    private static final String SMALL_ORB = "ZhenghuoModResources/img/char/small_orb.png";
+    // 攻击牌的背景（大尺寸）
+    private static final String BG_ATTACK_1024 = "ZhenghuoModResources/img/1024/bg_attack.png";
+    // 能力牌的背景（大尺寸）
+    private static final String BG_POWER_1024 = "ZhenghuoModResources/img/1024/bg_power.png";
+    // 技能牌的背景（大尺寸）
+    private static final String BG_SKILL_1024 = "ZhenghuoModResources/img/1024/bg_skill.png";
+    // 在卡牌预览界面的能量图标
+    private static final String BIG_ORB = "ZhenghuoModResources/img/char/card_orb.png";
+    // 小尺寸的能量图标（战斗中，牌堆预览）
+    private static final String ENEYGY_ORB = "ZhenghuoModResources/img/char/cost_orb.png";
+    public static final Color MY_COLOR = new Color(1.0F / 255.0F, 1.0F / 255.0F, 3.0F / 255.0F, 0.85F);
     public ExampleMod() {
         BaseMod.subscribe(this); // 告诉basemod你要订阅事件
         BaseMod.addSaveField("Zhenghuo", this);
@@ -59,6 +87,8 @@ public static String NowPlayer=null;
     public static void initialize() {
 
         new ExampleMod();
+        BaseMod.addColor(CharacterBlack, MY_COLOR, MY_COLOR, MY_COLOR, MY_COLOR, MY_COLOR, MY_COLOR, MY_COLOR,BG_ATTACK_512,BG_SKILL_512,BG_POWER_512,ENEYGY_ORB,BG_ATTACK_1024,BG_SKILL_1024,BG_POWER_1024,BIG_ORB,SMALL_ORB);
+
     }
 
     // 当basemod开始注册mod卡牌时，便会调用这个函数
@@ -97,7 +127,7 @@ public static CharacterScreen getdictionary()
 
         BaseMod.loadCustomStringsFile(RelicStrings.class, "ZhenghuoResources/localization/" + lang + "/relics.json");// 如果是中文，加载的就是"ExampleResources/localization/ZHS/cards.json"
         BaseMod.loadCustomStringsFile(EventStrings.class, "ZhenghuoResources/localization/" + lang + "/events.json");// 如果是中文，加载的就是"ExampleResources/localization/ZHS/cards.json"
-
+        BaseMod.loadCustomStringsFile(CharacterStrings.class, "ZhenghuoResources/localization/" + lang + "/characters.json");
     }
 
 
@@ -126,6 +156,11 @@ public static CharacterScreen getdictionary()
         }*/
             return NowPlayer;
 
+    }
+    @Override
+    public void receiveEditCharacters() {
+        // 向basemod注册人物
+        BaseMod.addCharacter(new Mycharacter(CardCrawlGame.playerName), MY_CHARACTER_BUTTON, MY_CHARACTER_PORTRAIT, MY_CHARACTER);
     }
     @Override
     public void onLoad(String s) {

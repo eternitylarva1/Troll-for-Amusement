@@ -25,6 +25,8 @@ import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
+
 public class BlackMyth extends CustomCard {
 
     public static final String ID = ModHelper.makePath("BlackMyth");
@@ -34,7 +36,7 @@ public class BlackMyth extends CustomCard {
     private static final int COST = 2;
     private static final String DESCRIPTION = CARD_STRINGS.DESCRIPTION;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = CardColor.RED;
+    private static final CardColor COLOR = CharacterBlack;
     private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = CardTarget.SELF;
 

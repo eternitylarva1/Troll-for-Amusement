@@ -16,6 +16,8 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.ending.CorruptHeart;
 
+import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
+
 public class SuiXin extends CustomCard {
 
     public static final String ID = ModHelper.makePath("SuiXin");
@@ -25,7 +27,7 @@ public class SuiXin extends CustomCard {
     private static final String NAME = CARD_STRINGS.NAME;
     private static final String DESCRIPTION = CARD_STRINGS.DESCRIPTION;
     private static final CardType TYPE = CardType.SKILL;
-    private static final CardColor COLOR = CardColor.COLORLESS;
+    private static final CardColor COLOR = CharacterBlack;
     private static final CardRarity RARITY = CardRarity.SPECIAL;
     private static final CardTarget TARGET = CardTarget.ENEMY;
 
