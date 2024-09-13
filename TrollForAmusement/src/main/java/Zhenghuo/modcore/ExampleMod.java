@@ -106,6 +106,7 @@ public static CharacterScreen getdictionary()
         BaseMod.addCard(new GatherRelic());
         BaseMod.addCard(new RandomCardWithWord());
         BaseMod.addCard(new DescriptionStrike());
+        BaseMod.addCard(new RandomNumberCard());
 /*
       String[]WordPool = new String[]{"打", "击", "神","+","之","重","暴"};
        for(String word :WordPool){
