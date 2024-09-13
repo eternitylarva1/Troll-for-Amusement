@@ -42,7 +42,7 @@ public class ThreeWordBook extends CustomCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         this.magicNumber = 1;
 
-        Texture customTexture = TextImageGenerator.getTextImage(NAME);;
+        Texture customTexture = TextImageGenerator.getTextImage(NAME,this.type);;
 
 // Step 2: 将Texture转换为TextureAtlas.AtlasRegion
         TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());

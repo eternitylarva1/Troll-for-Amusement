@@ -12,6 +12,7 @@ import Zhenghuo.relics.GatherMachine;
 import Zhenghuo.relics.SplitMachine;
 import Zhenghuo.relics.StrongCharacter;
 import Zhenghuo.screens.CharacterScreen;
+import Zhenghuo.utils.CardTextureGenerator;
 import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.abstracts.CustomSavable;
@@ -66,6 +67,7 @@ public static String NowPlayer=null;
     private static final String BIG_ORB = "ZhenghuoModResources/img/char/card_orb.png";
     // 小尺寸的能量图标（战斗中，牌堆预览）
     private static final String ENEYGY_ORB = "ZhenghuoModResources/img/char/cost_orb.png";
+
     public static final Color MY_COLOR = new Color(1.0F / 255.0F, 1.0F / 255.0F, 3.0F / 255.0F, 0.85F);
     public ExampleMod() {
         BaseMod.subscribe(this); // 告诉basemod你要订阅事件
@@ -76,6 +78,7 @@ public static String NowPlayer=null;
     public static void initialize() {
 
         new ExampleMod();
+
         BaseMod.addColor(CharacterBlack, MY_COLOR, MY_COLOR, MY_COLOR, MY_COLOR, MY_COLOR, MY_COLOR, MY_COLOR,BG_ATTACK_512,BG_SKILL_512,BG_POWER_512,ENEYGY_ORB,BG_ATTACK_1024,BG_SKILL_1024,BG_POWER_1024,BIG_ORB,SMALL_ORB);
 
     }

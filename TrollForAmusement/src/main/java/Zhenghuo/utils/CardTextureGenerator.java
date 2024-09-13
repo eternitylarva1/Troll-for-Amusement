@@ -1,19 +1,33 @@
 package Zhenghuo.utils;
 
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import javax.imageio.ImageIO;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.utils.ScreenUtils;
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-import java.io.File;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
+import java.awt.FontMetrics;
+import java.awt.Font;
+
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Pixmap;
+import java.awt.image.DataBufferByte;
+public class CardTextureGenerator {
 
 
-
-public class TextImageGenerator {
     private static BufferedImage textureToBufferedImage(Texture texture) {
         texture.getTextureData().prepare(); // 让纹理数据准备好
         Pixmap pixmap = texture.getTextureData().consumePixmap(); // 获取 Pixmap
@@ -43,8 +57,8 @@ public class TextImageGenerator {
         pixmap.dispose(); // 清理 Pixmap 内存
         return image;
     }
-/*
-    private static BufferedImage createTextImage(String text, int width, int height, AbstractCard.CardType cardType) {
+
+    public static BufferedImage createTextImage(String text, int width, int height, AbstractCard.CardType cardType) {
         Texture baseTexture;
         BufferedImage baseImage = null;
 
@@ -71,7 +85,7 @@ public class TextImageGenerator {
 
         // 设置背景色和填充
         g2d.setColor(Color.WHITE);
-
+        //g2d.fillRect(0, 0, width, height);
 
         // 绘制 baseTexture
         if (baseImage != null) {
@@ -100,39 +114,5 @@ public class TextImageGenerator {
         // 返回图像对象
         return image;
     }
-*/
-    private static BufferedImage createTextImage(String text, int width, int height)
-    {
-       return CardTextureGenerator.createTextImage( text,  width,  height, AbstractCard.CardType.SKILL);
-    }
 
-
-        private static Texture convertToTexture(BufferedImage image) {
-            int width = image.getWidth();
-            int height = image.getHeight();
-            Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    int pixel = image.getRGB(x, y);
-                    int r = (pixel >> 16) & 0xff;
-                    int g = (pixel >> 8) & 0xff;
-                    int b = pixel & 0xff;
-                    int a = (pixel >> 24) & 0xff;
-                    pixmap.drawPixel(x, height - y - 1, (a << 24) | (b << 16) | (g << 8) | r);
-                }
-            }
-
-            Texture texture = new Texture(pixmap);
-            pixmap.dispose();
-            return texture;
-        }
-    public static Texture getTextImage(String Name)
-    {
-        return convertToTexture(createTextImage(Name,250,190));
-    }
-    public static Texture getTextImage(String Name, AbstractCard.CardType cardType)
-    {
-        return convertToTexture( CardTextureGenerator.createTextImage( Name,  250,  190, cardType));
-    }
 }
