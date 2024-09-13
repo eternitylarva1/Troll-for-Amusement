@@ -78,5 +78,9 @@
   "NAME": "随机%s字牌",
   "DESCRIPTION": "一个随机的名字长度为",
   "UPGRADE_DESCRIPTION": "一个随机升级的名字长度为"
+},"Zhenghuo:ThreeWordBook": {
+  "NAME": "三字经",
+  "DESCRIPTION": "当你打出名字长度为3的牌时，抽一张牌",
+  "UPGRADE_DESCRIPTION": "当你打出名字长度为3的牌时，抽一张牌"
 }
 }

@@ -1,8 +1,9 @@
-package Zhenghuo.card;
+package Zhenghuo.events;
 
 
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.utils.TextImageGenerator;
+import basemod.AutoAdd;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -10,10 +11,9 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-
+@AutoAdd.Ignore
 public class CharacterCardEvent extends CustomCard {
 
     public static final String ID = ModHelper.makePath("CharacterCard");
@@ -28,6 +28,7 @@ public class CharacterCardEvent extends CustomCard {
     private Texture Text;
     private boolean haschanged=false;
     public boolean isAugrment=false;
+
     public CharacterCardEvent(String NAME, String DESCRIPTION) {
 
         // 为了命名规范修改了变量名。这些参数具体的作用见下方

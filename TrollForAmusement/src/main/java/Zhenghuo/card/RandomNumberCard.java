@@ -162,7 +162,7 @@ public class RandomNumberCard extends CustomCard implements CustomSavable<Intege
     }
     public AbstractCard replaceWith(ArrayList<AbstractCard> currentRewardCards) {
 
-            this.RandomNumber = AbstractDungeon.cardRandomRng.random(1,5);
+            this.RandomNumber = AbstractDungeon.cardRandomRng.random(2,5);
             this.name = String.format(NAMES, RandomNumber);
             this.Text = TextImageGenerator.getTextImage(String.valueOf(RandomNumber));
             Texture customTexture = Text;

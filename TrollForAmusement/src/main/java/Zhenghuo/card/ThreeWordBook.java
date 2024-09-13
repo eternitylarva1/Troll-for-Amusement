@@ -2,16 +2,14 @@ package Zhenghuo.card;
 
 
 import Zhenghuo.helpers.ModHelper;
+import Zhenghuo.powers.ThreeWordBookPower;
 import Zhenghuo.utils.TextImageGenerator;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.red.Strike_Red;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -26,23 +24,23 @@ import java.util.stream.Collectors;
 import static Zhenghuo.actions.GatherCharacterAction.result;
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
 
-public class DescriptionStrike extends CustomCard {
+public class ThreeWordBook extends CustomCard {
 
-    public static final String ID = ModHelper.makePath("DescriptionStrike");
+    public static final String ID = ModHelper.makePath("ThreeWordBook");
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String IMG_PATH = "ZhenghuoResources/images/Character.png";
-    private static final int COST = 0;
+    private static final int COST = 1;
     private static final String NAME = CARD_STRINGS.NAME;
     private static final String DESCRIPTION = CARD_STRINGS.DESCRIPTION;
-    private static final CardType TYPE = CardType.ATTACK;
+    private static final CardType TYPE = CardType.POWER;
     private static final CardColor COLOR = CharacterBlack;
     private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.SELF;
 
-    public DescriptionStrike() {
+    public ThreeWordBook() {
         // 为了命名规范修改了变量名。这些参数具体的作用见下方
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-      this.damage=this.baseDamage=this.rawDescription.length();
+        this.magicNumber = 1;
 
         Texture customTexture = TextImageGenerator.getTextImage(NAME);;
 
@@ -51,29 +49,24 @@ public class DescriptionStrike extends CustomCard {
         customRegion.flip(false, true);
 // Step 3: 设置卡牌的portrait属
         this.portrait = customRegion;
-        this.damage=this.baseDamage=this.rawDescription.length();
+
     }
+
+
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName(); // 卡牌名字变为绿色并添加“+”，且标为升级过的卡牌，之后不能再升级。
+            this.upgradeBaseCost(0); // 将该卡牌的伤害提高3点。
             this.rawDescription = CARD_STRINGS.UPGRADE_DESCRIPTION;
             this.initializeDescription();
 
-
         }
-    }
-    @Override
-    public void calculateCardDamage(AbstractMonster mo)
-    {
-        super.calculateCardDamage(mo);
-        this.baseDamage=this.rawDescription.length();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-
-        this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+    this.addToBot(new ApplyPowerAction(p,p,new ThreeWordBookPower(p,this.magicNumber)));
     }
 
     }

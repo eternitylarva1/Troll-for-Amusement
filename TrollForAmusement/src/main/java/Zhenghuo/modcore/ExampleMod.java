@@ -12,6 +12,7 @@ import Zhenghuo.relics.GatherMachine;
 import Zhenghuo.relics.SplitMachine;
 import Zhenghuo.relics.StrongCharacter;
 import Zhenghuo.screens.CharacterScreen;
+import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.CardModifierManager;
@@ -26,10 +27,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
-import com.megacrit.cardcrawl.localization.CardStrings;
-import com.megacrit.cardcrawl.localization.CharacterStrings;
-import com.megacrit.cardcrawl.localization.EventStrings;
-import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import java.text.Collator;
@@ -88,7 +86,7 @@ public static CharacterScreen getdictionary()
     return dictionary;
 }
     @Override
-    public void receiveEditCards() {
+    public void receiveEditCards() {/*
         // TODO 这里写添加你卡牌的代码
         BaseMod.addCard(new Strike());
         BaseMod.addCard(new Soul_P());
@@ -106,8 +104,13 @@ public static CharacterScreen getdictionary()
         BaseMod.addCard(new GatherRelic());
         BaseMod.addCard(new RandomCardWithWord());
         BaseMod.addCard(new DescriptionStrike());
-        BaseMod.addCard(new RandomNumberCard());
-/*
+        BaseMod.addCard(new RandomNumberCard());*/
+        new AutoAdd("Zhenghuo") // 这里填写你在ModTheSpire.json中写的modid
+                .packageFilter(BlackMyth.class) // 寻找所有和此类同一个包及内部包的类（本例子是所有卡牌）
+                .setDefaultSeen(true) // 是否将卡牌标为可见
+                .cards();
+BaseMod.addCard(new CharacterCard(""));
+        /*
       String[]WordPool = new String[]{"打", "击", "神","+","之","重","暴"};
        for(String word :WordPool){
            BaseMod.addCard(new CharacterCard(word));
@@ -140,6 +143,7 @@ i++;
         BaseMod.loadCustomStringsFile(RelicStrings.class, "ZhenghuoResources/localization/" + lang + "/relics.json");// 如果是中文，加载的就是"ExampleResources/localization/ZHS/cards.json"
         BaseMod.loadCustomStringsFile(EventStrings.class, "ZhenghuoResources/localization/" + lang + "/events.json");// 如果是中文，加载的就是"ExampleResources/localization/ZHS/cards.json"
         BaseMod.loadCustomStringsFile(CharacterStrings.class, "ZhenghuoResources/localization/" + lang + "/characters.json");
+        BaseMod.loadCustomStringsFile(PowerStrings.class, "ZhenghuoResources/localization/" + lang + "/powers.json");
     }
 
 

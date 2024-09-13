@@ -2,12 +2,29 @@ package Zhenghuo.utils;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class TextImageGenerator {
-    private static BufferedImage createTextImage(String text, int width, int height) {
+    private static BufferedImage createTextImage(String text, int width, int height, AbstractCard.CardType cardType) {
+        Texture baseTexture ;
+        switch (cardType)
+        {
+            case ATTACK:
+                baseTexture=new Texture("ZhenghuoResources/images/baseattack.png");
+                break;
+            case SKILL:
+                baseTexture=new Texture("ZhenghuoResources/images/baseskill.png");
+                break;
+            case POWER:
+                baseTexture=new Texture("ZhenghuoResources/images/basePower.png");
+                break;
+            default:
+                baseTexture=new Texture("ZhenghuoResources/images/baseskill.png");
+        }
+
         // 创建BufferedImage对象
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
@@ -42,6 +59,10 @@ public class TextImageGenerator {
         return image;
     }
 
+    private static BufferedImage createTextImage(String text, int width, int height)
+    {
+       return createTextImage( text,  width,  height, AbstractCard.CardType.SKILL);
+    }
 
         private static Texture convertToTexture(BufferedImage image) {
             int width = image.getWidth();

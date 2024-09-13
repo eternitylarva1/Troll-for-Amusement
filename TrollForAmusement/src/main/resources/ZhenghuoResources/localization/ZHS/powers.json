@@ -1,0 +1,8 @@
+{
+  "Zhenghuo:ThreeWordBook": {
+    "NAME": "三字经",
+    "DESCRIPTIONS": [
+      "当你打出名字长度为 #y3 的牌时，抽 #b%d 张牌。"
+    ]
+  }
+}

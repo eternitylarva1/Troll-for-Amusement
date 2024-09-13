@@ -3,6 +3,7 @@ package Zhenghuo.card;
 
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.utils.TextImageGenerator;
+import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.abstracts.CustomCard;
@@ -37,7 +38,7 @@ import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
 import static Zhenghuo.utils.CardArguments.RewardPatch.Words;
 import static basemod.helpers.CardModifierManager.modifiers;
 import static basemod.helpers.CardModifierManager.onRenderTitle;
-
+@AutoAdd.Ignore
 public class CharacterCard extends CustomCard implements CustomSavable<String>, SpawnModificationCard {
 
     public static final String ID = ModHelper.makePath("CharacterCard");
@@ -52,6 +53,7 @@ public class CharacterCard extends CustomCard implements CustomSavable<String>, 
     private Texture Text;
     private boolean haschanged=false;
     public boolean isAugrment=false;
+
     public CharacterCard(String NAME,String DESCRIPTION) {
 
         // 为了命名规范修改了变量名。这些参数具体的作用见下方
