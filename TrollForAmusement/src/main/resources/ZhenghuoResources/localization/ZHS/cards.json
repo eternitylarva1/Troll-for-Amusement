@@ -66,9 +66,9 @@
   "DESCRIPTION": "进行一次遗物合成（仅限未获得的遗物）",
   "UPGRADE_DESCRIPTION": "进行一次遗物合成（仅限未获得的遗物）"
 },"Zhenghuo:RandomCardWithWord": {
-  "NAME": "随机？牌",
-  "DESCRIPTION": "一个随机的带有？字的牌",
-  "UPGRADE_DESCRIPTION": "一个随机的带有？字的牌"
+  "NAME": "随机%s牌",
+  "DESCRIPTION": "一个随机的带有特定字的牌",
+  "UPGRADE_DESCRIPTION": "一个随机升级的带有特定字的牌"
 },"Zhenghuo:DescriptionStrike": {
   "NAME": "描述打击",
   "DESCRIPTION": "造成此牌描述长度的伤害",

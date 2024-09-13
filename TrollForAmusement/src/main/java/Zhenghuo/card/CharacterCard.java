@@ -145,17 +145,6 @@ public void update()
 // Step 2: 将Texture转换为TextureAtlas.AtlasRegion
         TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
         customRegion.flip(false, true);
-
-
-        List<Character> charList = this.name.chars()
-                .mapToObj(c -> (char) c)
-                .collect(Collectors.toList());
-        List<AbstractCard> CardList=result(charList);
-        if(!CardList.isEmpty())
-        {
-            this.rawDescription=CardList.get(0).rawDescription;
-            this.initializeDescription();
-        }
 // Step 3: 设置卡牌的portrait属
         this.portrait = customRegion;
         this.rawDescription=DESCRIPTION;

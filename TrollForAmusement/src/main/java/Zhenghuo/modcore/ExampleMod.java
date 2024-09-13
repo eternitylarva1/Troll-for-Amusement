@@ -44,7 +44,7 @@ import static Zhenghuo.utils.CardArguments.RewardPatch.*;
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.*;
 
 @SpireInitializer
-public class ExampleMod implements PostCampfireSubscriber,PostCreateStartingDeckSubscriber,EditCharactersSubscriber,PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
+public class ExampleMod implements PostCreateStartingDeckSubscriber,EditCharactersSubscriber,PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
 public static String NowPlayer=null;
     // 人物选择界面按钮的图片
     private static final String MY_CHARACTER_BUTTON = "ZhenghuoModResources/img/char/Character_Button.png";
@@ -351,10 +351,10 @@ System.out.println("正在预加载");
 
         }
     }
-
+/*
     @Override
     public boolean receivePostCampfire() {
         //代码加在这里
-        return false;
-    }
+        return true;
+    }*/
 }
