@@ -61,7 +61,7 @@ public static ArrayList<AbstractCard> CardPool=new ArrayList<>();
     }
     public void triggerWhenDrawn() {
         super.triggerWhenDrawn();
-        getTopCardStat();
+
         if (this.sutureCards.size() > 0) {
             Iterator var2 = this.sutureCards.iterator();
 
@@ -220,7 +220,7 @@ public void update()
             for (AbstractCard abstractCard : CardPool) {
                 if(CardCrawlGame.languagePack.getCardStrings(abstractCard.cardID).NAME.contains(String.valueOf(a)))
                 {
-                    System.out.println("已经将"+abstractCard.name+"描述加入卡牌");
+
                     sutureCards.add(abstractCard);
                 }}}
         getTopCardStat();
@@ -292,6 +292,8 @@ public void update()
 
             while(var4.hasNext()) {
                 AbstractCard c = (AbstractCard)var4.next();
+                c.damage=this.damage;
+                c.block=this.block;
                 c.use(p, m);
             }
         }
@@ -307,14 +309,8 @@ public void update()
     @Override
     public void onLoad(String s) {
         this.name=s;
-        this.Text=TextImageGenerator.getTextImage(s);
-        Texture customTexture = Text;
-// Step 2: 将Texture转换为TextureAtlas.AtlasRegion
-        TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
-        customRegion.flip(false, true);
-        this.portrait = customRegion;
-        this.rawDescription=DESCRIPTION;
-        this.initializeDescription();
+        InitizethisCard();
+        initializeSutureCard();
     }
     @Override
     public AbstractCard replaceWith(ArrayList<AbstractCard> currentRewardCards) {

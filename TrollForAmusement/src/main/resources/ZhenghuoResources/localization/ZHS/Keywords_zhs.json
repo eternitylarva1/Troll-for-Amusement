@@ -16,6 +16,21 @@
     "词条"
   ],
   "DESCRIPTION": " #y奇美拉Mod专属 从奇美拉Mod以及其拓展Mod中抽取词条"
+},{
+  "NAMES": [
+    "融合"
+  ],
+  "DESCRIPTION": " 将两张 zhenghuo:文字牌 的效果和名字合二为一"
+},{
+  "NAMES": [
+    "组合"
+  ],
+  "DESCRIPTION": "从所有角色卡池中寻找由选择的文字组成的卡牌(支持单个词条的奇美拉)"
+},{
+  "NAMES": [
+    "通配符"
+  ],
+  "DESCRIPTION": "在进行 zhenghuo:组合 时，本牌可以视为任意一个 zhenghuo:文字牌 "
 }
 ]
 

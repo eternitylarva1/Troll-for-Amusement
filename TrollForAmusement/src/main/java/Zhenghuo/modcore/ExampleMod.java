@@ -27,6 +27,8 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.blue.DoubleEnergy;
 import com.megacrit.cardcrawl.cards.green.Outmaneuver;
+import com.megacrit.cardcrawl.cards.purple.EmptyFist;
+import com.megacrit.cardcrawl.cards.purple.ForeignInfluence;
 import com.megacrit.cardcrawl.cards.purple.SpiritShield;
 import com.megacrit.cardcrawl.cards.red.*;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -42,6 +44,7 @@ import java.text.Collator;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static CardAugments.CardAugmentsMod.cardAugmentsConfig;
 import static Zhenghuo.actions.ChangePlayerAction.ChangePlayer;
 import static Zhenghuo.card.CharacterCard.CardPool;
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.Cangjie;
@@ -260,7 +263,7 @@ public static boolean hasLoaded=false;
         }}
     public static void InitizeModifiedCards()
     {
-
+        cardAugmentsConfig.setBool("modifyInCombat", false);
         CardPool.add(new Strike_Red());
         CardPool.add(new Defend_Red());
         CardPool.add(new HeavyBlade());
@@ -271,6 +274,8 @@ public static boolean hasLoaded=false;
         CardPool.add(new SpiritShield());
         CardPool.add(new DoubleEnergy());
         CardPool.add(new ThunderClap());
+        CardPool.add(new EmptyFist());
+        CardPool.add(new ForeignInfluence());
 System.out.println("正在预加载");
         ModifiedCards.clear();
         ModifiedCards.addAll(CardLibrary.getAllCards());

@@ -84,7 +84,15 @@
   "UPGRADE_DESCRIPTION": "当你打出名字长度为3的牌时，抽一张牌"
 },"Zhenghuo:AugrmentAttack": {
   "NAME": "词条攻击",
-  "DESCRIPTION": "造成 !D! 点伤害，获得一个随机词条牌",
-  "UPGRADE_DESCRIPTION": "造成 !D! 点伤害，获得一个随机词条牌 "
+  "DESCRIPTION": "造成 !D! 点伤害，获得一个随机奇美拉词条 (没开奇美拉改为补偿5点伤害)",
+  "UPGRADE_DESCRIPTION": "造成 !D! 点伤害，获得一个随机词条 (没开奇美拉改为补偿5点伤害)"
+},"Zhenghuo:Characterfusion": {
+  "NAME": "文字融合",
+  "DESCRIPTION": " zhenghuo:融合 2 张手牌",
+  "UPGRADE_DESCRIPTION": "zhenghuo:融合 2 张手牌 "
+},"Zhenghuo:GainWords": {
+  "NAME": "随机词语",
+  "DESCRIPTION": " 随机获得两张 zhenghuo:文字牌 ",
+  "UPGRADE_DESCRIPTION": "随机获得两张 zhenghuo:文字牌  "
 }
 }
