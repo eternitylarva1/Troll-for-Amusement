@@ -4,6 +4,7 @@ import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import Zhenghuo.card.BlackMyth;
 import Zhenghuo.card.CharacterCard;
+import Zhenghuo.card.RandomCardWithWord;
 import Zhenghuo.events.MyFirstEvent;
 import Zhenghuo.otherplayer.OtherPlayerHelper;
 import Zhenghuo.player.Mycharacter;
@@ -24,9 +25,10 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.cards.red.Defend_Red;
-import com.megacrit.cardcrawl.cards.red.HeavyBlade;
-import com.megacrit.cardcrawl.cards.red.Strike_Red;
+import com.megacrit.cardcrawl.cards.blue.DoubleEnergy;
+import com.megacrit.cardcrawl.cards.green.Outmaneuver;
+import com.megacrit.cardcrawl.cards.purple.SpiritShield;
+import com.megacrit.cardcrawl.cards.red.*;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -41,6 +43,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static Zhenghuo.actions.ChangePlayerAction.ChangePlayer;
+import static Zhenghuo.card.CharacterCard.CardPool;
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.Cangjie;
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
 import static Zhenghuo.utils.CardArguments.Chimeraopened;
@@ -73,7 +76,7 @@ public static String NowPlayer=null;
     private static final String BIG_ORB = "ZhenghuoModResources/img/char/card_orb.png";
     // 小尺寸的能量图标（战斗中，牌堆预览）
     private static final String ENEYGY_ORB = "ZhenghuoModResources/img/char/cost_orb.png";
-    public static ArrayList<AbstractCard> CharacterFusionCardPool=new ArrayList<AbstractCard>();
+
     public static final Color MY_COLOR = new Color(1.0F / 255.0F, 1.0F / 255.0F, 3.0F / 255.0F, 0.85F);
     public ExampleMod() {
         BaseMod.subscribe(this); // 告诉basemod你要订阅事件
@@ -257,10 +260,17 @@ public static boolean hasLoaded=false;
         }}
     public static void InitizeModifiedCards()
     {
-        CharacterFusionCardPool.add(new Strike_Red());
-        CharacterFusionCardPool.add(new Defend_Red());
-        CharacterFusionCardPool.add(new HeavyBlade());
 
+        CardPool.add(new Strike_Red());
+        CardPool.add(new Defend_Red());
+        CardPool.add(new HeavyBlade());
+        CardPool.add(new GhostlyArmor());
+        CardPool.add(new Rampage());
+        CardPool.add(new Outmaneuver());
+        CardPool.add(new Dropkick());
+        CardPool.add(new SpiritShield());
+        CardPool.add(new DoubleEnergy());
+        CardPool.add(new ThunderClap());
 System.out.println("正在预加载");
         ModifiedCards.clear();
         ModifiedCards.addAll(CardLibrary.getAllCards());
@@ -383,7 +393,8 @@ System.out.println("正在预加载");
                 cardGroup.group.add(new CharacterCard("防"));
                 cardGroup.group.add(new CharacterCard("御"));
             }
-
+            cardGroup.group.add(new RandomCardWithWord(Words.get(0)));
+            cardGroup.group.add(new RandomCardWithWord(Words.get(1)));
         }
     }
 /*
