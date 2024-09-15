@@ -6,20 +6,12 @@ import Zhenghuo.utils.TextImageGenerator;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static Zhenghuo.actions.GatherCharacterAction.result;
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
 
 public class GainWords extends CustomCard {
@@ -62,24 +54,8 @@ public class GainWords extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        ArrayList<AbstractCard> stanceChoices = new ArrayList();
-
-        for (AbstractRelic relic : AbstractDungeon.player.relics) {
-            AbstractCard cardm=new CharacterCard(relic.name);
-            List<Character> charList = relic.name.chars()
-                    .mapToObj(c -> (char) c)
-                    .collect(Collectors.toList());
-            List<AbstractCard> CardList=result(charList);
-            if(!CardList.isEmpty())
-            {
-                System.out.println("检测到对应词条，正在替换");
-                cardm=CardList.get(0).makeSameInstanceOf();
-            }
-            stanceChoices.add(cardm);
-
-        }
-
-        this.addToBot(new ChooseOneAction(stanceChoices));
+        for(int i=0;i<this.magicNumber;i++)
+    this.addToBot(new MakeTempCardInHandAction(new CharacterCard()));
     }
 
     }

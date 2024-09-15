@@ -57,12 +57,7 @@ public class AugrmentAttack extends CustomCard {
 
         }
     }
-    @Override
-    public void calculateCardDamage(AbstractMonster mo)
-    {
-        super.calculateCardDamage(mo);
 
-    }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
