@@ -16,14 +16,11 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
-import static Zhenghuo.actions.GatherCharacterAction.result;
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
 import static Zhenghuo.utils.CardArguments.RewardPatch.ModifiedCards;
 import static Zhenghuo.utils.CardArguments.RewardPatch.Words;
@@ -156,7 +153,9 @@ public class RandomCardWithWord extends CustomCard implements CustomSavable<Stri
                         .filter(element -> element.name.contains(targetChar))
                         .collect(Collectors.toCollection(ArrayList::new));
                 if(!newList.isEmpty()) {
-                    AbstractDungeon.player.drawPile.group.set(AbstractDungeon.player.drawPile.group.indexOf(abstractCard), newList.get(AbstractDungeon.cardRandomRng.random(newList.size() - 1)).makeSameInstanceOf());
+                    AbstractCard m=newList.get(AbstractDungeon.cardRandomRng.random(newList.size() - 1)).makeStatEquivalentCopy();
+                    m.name=m.originalName;
+                    AbstractDungeon.player.drawPile.group.set(AbstractDungeon.player.drawPile.group.indexOf(abstractCard),m );
                 }
             }
         }

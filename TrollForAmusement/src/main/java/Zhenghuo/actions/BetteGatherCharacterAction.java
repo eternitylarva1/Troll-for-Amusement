@@ -6,19 +6,15 @@ package Zhenghuo.actions;
 //
 
 
-
 import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.TongpeiCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.cards.CardGroup.CardGroupType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -106,9 +102,9 @@ public class BetteGatherCharacterAction extends AbstractGameAction {
                     }
 
                     if (this.optional) {
-                        gridSelectScreen.open(temp, this.numberOfCards, true, "请组合需要的卡牌");
+                        gridSelectScreen.open(temp, this.numberOfCards, true, "请组合需要的卡牌(手牌+所有文字牌)");
                     } else {
-                        gridSelectScreen.open(temp, this.numberOfCards, "请组合需要的卡牌", false);
+                        gridSelectScreen.open(temp, this.numberOfCards, "请组合需要的卡牌，(手牌+所有文字牌", false);
                     }
 
                     this.tickDuration();

@@ -172,6 +172,9 @@ if(button.clicked)
             List<AbstractRelic> resultRelic=resultRelic(ChList);
             if(!result.isEmpty()) {
                 this.selectedCard = result.get(AbstractDungeon.cardRandomRng.random(0, result.size() - 1)).makeSameInstanceOf();
+                if(!(selectedCard instanceof CharacterCard)) {
+                    selectedCard.name = selectedCard.originalName;
+                }
                 if(upgradenum>0){
                     for(int i=0;i<upgradenum;i++)
                     {
@@ -198,6 +201,7 @@ if(button.clicked)
         if(this.selectedCard!=null)
         {
             this.imageEventText.setDialogOption(String.format(OPTIONS[3],this.selectedCard.name), this.selectedCard);
+
         }
         else
         if(this.selectedRelic!=null)
@@ -208,6 +212,7 @@ if(button.clicked)
             this.imageEventText.setDialogOption(String.format(OPTIONS[3],this.selectedCard.name), this.selectedCard);
         }
      characterCards.clear();
+
     }
 
     public void update()

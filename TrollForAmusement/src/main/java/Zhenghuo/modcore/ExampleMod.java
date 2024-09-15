@@ -2,8 +2,8 @@ package Zhenghuo.modcore;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
-import Zhenghuo.card.*;
-
+import Zhenghuo.card.BlackMyth;
+import Zhenghuo.card.CharacterCard;
 import Zhenghuo.events.MyFirstEvent;
 import Zhenghuo.otherplayer.OtherPlayerHelper;
 import Zhenghuo.player.Mycharacter;
@@ -12,17 +12,21 @@ import Zhenghuo.relics.GatherMachine;
 import Zhenghuo.relics.SplitMachine;
 import Zhenghuo.relics.StrongCharacter;
 import Zhenghuo.screens.CharacterScreen;
-import Zhenghuo.utils.CardTextureGenerator;
 import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.cards.red.Defend_Red;
+import com.megacrit.cardcrawl.cards.red.HeavyBlade;
+import com.megacrit.cardcrawl.cards.red.Strike_Red;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -31,19 +35,21 @@ import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
+import java.nio.charset.StandardCharsets;
 import java.text.Collator;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static Zhenghuo.actions.ChangePlayerAction.ChangePlayer;
-import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.Cangjie;
+import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
 import static Zhenghuo.utils.CardArguments.Chimeraopened;
 import static Zhenghuo.utils.CardArguments.RewardPatch.*;
-import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.*;
+import static com.megacrit.cardcrawl.core.Settings.language;
+import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.player;
 
 @SpireInitializer
-public class ExampleMod implements PostCreateStartingDeckSubscriber,EditCharactersSubscriber,PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
+public class ExampleMod implements EditKeywordsSubscriber,PostCreateStartingDeckSubscriber,EditCharactersSubscriber,PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
 public static String NowPlayer=null;
     // 人物选择界面按钮的图片
     private static final String MY_CHARACTER_BUTTON = "ZhenghuoModResources/img/char/Character_Button.png";
@@ -67,7 +73,7 @@ public static String NowPlayer=null;
     private static final String BIG_ORB = "ZhenghuoModResources/img/char/card_orb.png";
     // 小尺寸的能量图标（战斗中，牌堆预览）
     private static final String ENEYGY_ORB = "ZhenghuoModResources/img/char/cost_orb.png";
-
+    public static ArrayList<AbstractCard> CharacterFusionCardPool=new ArrayList<AbstractCard>();
     public static final Color MY_COLOR = new Color(1.0F / 255.0F, 1.0F / 255.0F, 3.0F / 255.0F, 0.85F);
     public ExampleMod() {
         BaseMod.subscribe(this); // 告诉basemod你要订阅事件
@@ -136,7 +142,7 @@ i++;
     @Override
     public void receiveEditStrings() {
         String lang;
-        if (Settings.language == Settings.GameLanguage.ZHS) {
+        if (language == Settings.GameLanguage.ZHS) {
             lang = "ZHS"; // 如果语言设置为简体中文，则加载ZHS文件夹的资源
         } else {
             lang = "ENG"; // 如果没有相应语言的版本，默认加载英语
@@ -158,6 +164,7 @@ i++;
         BaseMod.addRelic(new GatherMachine(), RelicType.SHARED);
         BaseMod.addRelic(new SplitMachine(), RelicType.SHARED);
         BaseMod.addRelic(new Dictionary(),RelicType.SHARED);
+
     }
 
     @Override
@@ -231,9 +238,29 @@ public static boolean hasLoaded=false;
 
         }
     }
+    @Override
+    public void receiveEditKeywords() {
+        Gson gson = new Gson();
+        String lang = "eng";
+        if (language == Settings.GameLanguage.ZHS) {
+            lang = "zhs";
+        }
 
+        String json = Gdx.files.internal("ZhenghuoResources/localization/ZHS/Keywords_"+lang+".json")
+                .readString(String.valueOf(StandardCharsets.UTF_8));
+        Keyword[] keywords = gson.fromJson(json, Keyword[].class);
+        if (keywords != null) {
+            for (Keyword keyword : keywords) {
+                // 这个id要全小写
+                BaseMod.addKeyword("zhenghuo", keyword.NAMES[0], keyword.NAMES, keyword.DESCRIPTION);
+            }
+        }}
     public static void InitizeModifiedCards()
     {
+        CharacterFusionCardPool.add(new Strike_Red());
+        CharacterFusionCardPool.add(new Defend_Red());
+        CharacterFusionCardPool.add(new HeavyBlade());
+
 System.out.println("正在预加载");
         ModifiedCards.clear();
         ModifiedCards.addAll(CardLibrary.getAllCards());

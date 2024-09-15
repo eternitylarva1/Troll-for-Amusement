@@ -1,29 +1,11 @@
 package Zhenghuo.utils;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
-import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.BufferedImage;
-import java.awt.Graphics2D;
-import java.awt.FontMetrics;
-import java.awt.Font;
-
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Pixmap;
 import java.awt.image.DataBufferByte;
 public class CardTextureGenerator {
 
@@ -60,7 +42,7 @@ public class CardTextureGenerator {
 
     public static BufferedImage createTextImage(String text, int width, int height, AbstractCard.CardType cardType) {
         Texture baseTexture;
-        BufferedImage baseImage = null;
+        BufferedImage baseImage;
 
         switch (cardType) {
             case ATTACK:
@@ -88,9 +70,7 @@ public class CardTextureGenerator {
         //g2d.fillRect(0, 0, width, height);
 
         // 绘制 baseTexture
-        if (baseImage != null) {
-            g2d.drawImage(baseImage, 0, 0, width, height, null);
-        }
+        g2d.drawImage(baseImage, 0, 0, width, height, null);
 
         // 设置文本颜色、字体
         g2d.setColor(Color.BLACK);
