@@ -92,7 +92,7 @@
   "UPGRADE_DESCRIPTION": "zhenghuo:融合 2 张手牌 "
 },"Zhenghuo:GainWords": {
   "NAME": "随机词语",
-  "DESCRIPTION": " 随机获得两张 zhenghuo:文字牌 ",
-  "UPGRADE_DESCRIPTION": "随机获得两张 zhenghuo:文字牌  "
+  "DESCRIPTION": " 随机获得 !M! 张 zhenghuo:文字牌 ",
+  "UPGRADE_DESCRIPTION": "随机获得 !M! 张 zhenghuo:文字牌  "
 }
 }

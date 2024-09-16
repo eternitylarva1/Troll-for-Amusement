@@ -44,7 +44,6 @@ import java.text.Collator;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static CardAugments.CardAugmentsMod.cardAugmentsConfig;
 import static Zhenghuo.actions.ChangePlayerAction.ChangePlayer;
 import static Zhenghuo.card.CharacterCard.CardPool;
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.Cangjie;
@@ -263,7 +262,7 @@ public static boolean hasLoaded=false;
         }}
     public static void InitizeModifiedCards()
     {
-        cardAugmentsConfig.setBool("modifyInCombat", false);
+        //cardAugmentsConfig.setBool("modifyInCombat", false);
         CardPool.add(new Strike_Red());
         CardPool.add(new Defend_Red());
         CardPool.add(new HeavyBlade());
