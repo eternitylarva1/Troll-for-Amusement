@@ -79,6 +79,7 @@ public static String NowPlayer=null;
     // 小尺寸的能量图标（战斗中，牌堆预览）
     private static final String ENEYGY_ORB = "ZhenghuoModResources/img/char/cost_orb.png";
 
+
     public static final Color MY_COLOR = new Color(1.0F / 255.0F, 1.0F / 255.0F, 3.0F / 255.0F, 0.85F);
     public ExampleMod() {
         BaseMod.subscribe(this); // 告诉basemod你要订阅事件
@@ -158,6 +159,7 @@ i++;
         BaseMod.loadCustomStringsFile(EventStrings.class, "ZhenghuoResources/localization/" + lang + "/events.json");// 如果是中文，加载的就是"ExampleResources/localization/ZHS/cards.json"
         BaseMod.loadCustomStringsFile(CharacterStrings.class, "ZhenghuoResources/localization/" + lang + "/characters.json");
         BaseMod.loadCustomStringsFile(PowerStrings.class, "ZhenghuoResources/localization/" + lang + "/powers.json");
+        BaseMod.loadCustomStringsFile(UIStrings.class, "ZhenghuoResources/localization/" + lang + "/uistrings.json");
     }
 
 
@@ -261,8 +263,16 @@ public static boolean hasLoaded=false;
             }
         }}
     public static void InitizeModifiedCards()
-    {
+    {Descriptions.clear();
+        Descriptions.add("虚无");
+        Descriptions.add("斩杀");
+        Descriptions.add("充能球");
+        Descriptions.add("斩杀");
+        Descriptions.add("充能球");
+        Descriptions.add("每当");
+        Descriptions.add("回合");
         //cardAugmentsConfig.setBool("modifyInCombat", false);
+        CardPool.clear();
         CardPool.add(new Strike_Red());
         CardPool.add(new Defend_Red());
         CardPool.add(new HeavyBlade());

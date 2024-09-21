@@ -94,5 +94,13 @@
   "NAME": "随机词语",
   "DESCRIPTION": " 随机获得 !M! 张 zhenghuo:文字牌 ",
   "UPGRADE_DESCRIPTION": "随机获得 !M! 张 zhenghuo:文字牌  "
+},"Zhenghuo:RandomCardWithDescription": {
+  "NAME": "随机%s牌",
+  "DESCRIPTION": "一张描述中带有%s的牌",
+  "UPGRADE_DESCRIPTION": "一张描述中带有%s的牌"
+},"Zhenghuo:GainDescriptions": {
+  "NAME": "%s三选一",
+  "DESCRIPTION": "从三张%s牌中选择一张加入手牌",
+  "UPGRADE_DESCRIPTION": "从三张%s牌中选择一张加入手牌"
 }
 }

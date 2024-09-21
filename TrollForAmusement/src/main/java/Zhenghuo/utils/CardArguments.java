@@ -1,28 +1,16 @@
 package Zhenghuo.utils;
 
-import CardAugments.CardAugmentsMod;
-import CardAugments.cardmods.AbstractAugment;
-import basemod.BaseMod;
-import basemod.helpers.CardModifierManager;
-import basemod.patches.com.megacrit.cardcrawl.screens.compendium.CardLibraryScreen.NoCompendium;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.colorless.Madness;
-import com.megacrit.cardcrawl.daily.mods.Chimera;
-import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 
 import java.util.ArrayList;
 import java.util.Map;
-
-import static Zhenghuo.actions.ChangePlayerAction.ChangePlayer;
-import static Zhenghuo.modcore.ExampleMod.NowPlayer;
 
 public class CardArguments {
     private static AbstractCard fallback=(AbstractCard)new Madness();
@@ -45,6 +33,7 @@ public class CardArguments {
         public static CardGroup CardAugrments= new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         public static ArrayList<AbstractRelic> Relics= new ArrayList<>();
         public static ArrayList<String> Words= new ArrayList<>();
+        public static ArrayList<String> Descriptions= new ArrayList<>();
         @SpireInsertPatch(
                 loc = 1119,
                 localvars= {"c","retVal"}

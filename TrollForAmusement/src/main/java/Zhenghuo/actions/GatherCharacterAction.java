@@ -11,7 +11,6 @@ import Zhenghuo.card.TongpeiCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -20,7 +19,9 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static Zhenghuo.utils.CardArguments.Chimeraopened;
@@ -210,8 +211,7 @@ public static List<AbstractCard> result (List<Character> charList){
                                 .collect(Collectors.toList());
 
                         // 复制一份字符集以供匹配
-                        List<Character> charListCopy = charList.stream()
-                                .collect(Collectors.toList());
+                        List<Character> charListCopy = new ArrayList<>(charList);
 
                         // 检查字符串中的字符是否能在字符集中找到对应项或被通配符替代
                         for (char c : nameCharList) {
@@ -240,8 +240,7 @@ public static List<AbstractCard> result (List<Character> charList){
                             .collect(Collectors.toList());
 
                     // 复制一份字符集以供匹配
-                    List<Character> charListCopy = charList.stream()
-                            .collect(Collectors.toList());
+                    List<Character> charListCopy = new ArrayList<>(charList);
 
                     // 检查字符串中的字符是否能在字符集中找到对应项或被通配符替代
                     for (char c : nameCharList) {
