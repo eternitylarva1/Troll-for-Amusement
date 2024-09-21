@@ -102,5 +102,9 @@
   "NAME": "%s三选一",
   "DESCRIPTION": "从三张%s牌中选择一张加入手牌",
   "UPGRADE_DESCRIPTION": "从三张%s牌中选择一张加入手牌"
+},"Zhenghuo:WordToElectory": {
+  "NAME": "文字发电机",
+  "DESCRIPTION": "丢弃一张手牌，获得其名字长度的能量 NL 消耗",
+  "UPGRADE_DESCRIPTION": "丢弃一张手牌，获得其名字长度的能量"
 }
 }
