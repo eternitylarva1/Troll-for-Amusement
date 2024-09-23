@@ -106,5 +106,9 @@
   "NAME": "文字发电机",
   "DESCRIPTION": "丢弃一张手牌，获得其名字长度的能量 NL 消耗",
   "UPGRADE_DESCRIPTION": "丢弃一张手牌，获得其名字长度的能量"
+},"Zhenghuo:SplitDescriptions": {
+  "NAME": "分解描述",
+  "DESCRIPTION": "选择并拆解一张手牌的描述成文字牌",
+  "UPGRADE_DESCRIPTION": "选择并拆解一张手牌的描述成文字牌"
 }
 }
