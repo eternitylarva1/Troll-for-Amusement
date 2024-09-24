@@ -1,12 +1,14 @@
 package Zhenghuo.card;
 
 
+import Zhenghuo.actions.SplitDescriptionAction;
 import Zhenghuo.actions.WordToEnergyAction;
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.utils.TextImageGenerator;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -56,7 +58,7 @@ public class SplitDescriptions extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-       addToBot(new WordToEnergyAction());
+this.addToBot(new SplitDescriptionAction());
     }
 
     }
