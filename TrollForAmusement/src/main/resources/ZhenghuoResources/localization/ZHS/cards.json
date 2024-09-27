@@ -84,8 +84,8 @@
   "UPGRADE_DESCRIPTION": "造成 !D! 点伤害，获得一个随机词条 (没开奇美拉改为补偿5点伤害)"
 },"Zhenghuo:Characterfusion": {
   "NAME": "文字融合",
-  "DESCRIPTION": " zhenghuo:融合 2 张手牌",
-  "UPGRADE_DESCRIPTION": "zhenghuo:融合 2 张手牌 "
+  "DESCRIPTION": " zhenghuo:融合 2 张手牌,抽一张牌",
+  "UPGRADE_DESCRIPTION": "zhenghuo:融合 3 张手牌,抽一张牌"
 },"Zhenghuo:GainWords": {
   "NAME": "随机词语",
   "DESCRIPTION": " 随机获得 !M! 张 zhenghuo:文字牌 ",

@@ -20,6 +20,9 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
+import static Zhenghuo.actions.GatherCharacterAction.result;
 
 public class FusionAction extends AbstractGameAction {
     private static final UIStrings uiStrings;
@@ -116,8 +119,17 @@ public class FusionAction extends AbstractGameAction {
                     ChList.add("*".charAt(0));
                 }
                }
+            AbstractCard result;
+            List<AbstractCard> result1=result(ChList);
+                if(!result1.isEmpty())
+                {
 
-               AbstractCard result =new CharacterCard(ChList.toString());
+                   result= result1.get(AbstractDungeon.cardRandomRng.random(0,result1.size()-1)).makeSameInstanceOf();
+
+                }
+               else{
+                result=new CharacterCard(ChList.toString());
+            }
                 if(result!=null){
                     AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(result));
                    }

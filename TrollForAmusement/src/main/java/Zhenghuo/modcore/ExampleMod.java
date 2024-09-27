@@ -44,6 +44,7 @@ import java.text.Collator;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static CardAugments.CardAugmentsMod.cardAugmentsConfig;
 import static Zhenghuo.actions.ChangePlayerAction.ChangePlayer;
 import static Zhenghuo.card.CharacterCard.CardPool;
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.Cangjie;
@@ -271,7 +272,7 @@ public static boolean hasLoaded=false;
         Descriptions.add("充能球");
         Descriptions.add("每当");
         Descriptions.add("回合");
-        //cardAugmentsConfig.setBool("modifyInCombat", false);
+        //
         CardPool.clear();
         CardPool.add(new Strike_Red());
         CardPool.add(new Defend_Red());
@@ -327,6 +328,7 @@ System.out.println("正在预加载");
 
         if(Chimeraopened())
         {
+            cardAugmentsConfig.setBool("modifyInCombat", false);
             for(AbstractCard c:CardLibrary.getAllCards()) {
 
                 for (String id : CardAugmentsMod.modMap.keySet()) {

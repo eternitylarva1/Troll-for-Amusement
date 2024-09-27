@@ -4,6 +4,7 @@ import Zhenghuo.card.Charactergather;
 import Zhenghuo.card.Strike;
 import Zhenghuo.card.TongpeiCard;
 import Zhenghuo.modcore.ExampleMod;
+import Zhenghuo.relics.Dictionary;
 import basemod.abstracts.CustomPlayer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -98,7 +99,8 @@ public class Mycharacter extends CustomPlayer  {
     // 初始遗物的ID，可以先写个原版遗物凑数
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add(Vajra.ID);
+        retVal.add(Dictionary.ID);
+        retVal.add(Dictionary.ID);
         return retVal;
     }
 

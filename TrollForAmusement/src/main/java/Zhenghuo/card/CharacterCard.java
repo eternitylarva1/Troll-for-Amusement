@@ -312,6 +312,7 @@ public void update()
 
     @Override
     public String onSave() {
+
         return this.name;
     }
 
@@ -320,6 +321,8 @@ public void update()
         this.name=s;
         InitizethisCard();
         initializeSutureCard();
+        this.rawDescription = this.getDescription();
+        this.initializeDescription();
     }
     @Override
     public AbstractCard replaceWith(ArrayList<AbstractCard> currentRewardCards) {
