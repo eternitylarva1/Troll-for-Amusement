@@ -14,5 +14,20 @@
   "DESCRIPTIONS": [
     "当你打出名字长度为 #y5 的牌时，获得 #b%d 点力量。"
   ]
+},"Zhenghuo:FoureWordPower": {
+  "NAME": "四字真言",
+  "DESCRIPTIONS": [
+    "当你打出名字长度为 #y5 的牌时，获得 #b%d 点 真言 。"
+  ]
+},"Zhenghuo:WuwenPower": {
+  "NAME": "舞文",
+  "DESCRIPTIONS": [
+    "当你打出 zhenghuo:文字牌 时，抽 #b%d 张牌。"
+  ]
+},"Zhenghuo:NongMo": {
+  "NAME": "弄墨",
+  "DESCRIPTIONS": [
+    "当你打出 zhenghuo:文字牌 时，获得 #b%s 。"
+  ]
 }
 }

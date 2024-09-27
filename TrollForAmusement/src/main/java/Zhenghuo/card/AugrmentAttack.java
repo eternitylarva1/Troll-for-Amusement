@@ -68,6 +68,7 @@ public class AugrmentAttack extends CustomCard {
         if(Chimeraopened()){
             applyWeightedCardMod(this, rollRarity(this.rarity), 0);
 
+
         }
         else{
             CardModifierManager.addModifier(this, new AttackModifier());

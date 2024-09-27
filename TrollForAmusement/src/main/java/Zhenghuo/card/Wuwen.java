@@ -2,7 +2,7 @@ package Zhenghuo.card;
 
 
 import Zhenghuo.helpers.ModHelper;
-import Zhenghuo.powers.TwoWordPower;
+import Zhenghuo.powers.WuwenPower;
 import Zhenghuo.utils.TextImageGenerator;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,9 +15,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
 
-public class TwoWord extends CustomCard {
+public class Wuwen extends CustomCard {
 
-    public static final String ID = ModHelper.makePath("TwoWord");
+    public static final String ID = ModHelper.makePath("Wuwen");
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String IMG_PATH = "ZhenghuoResources/images/Character.png";
     private static final int COST = 1;
@@ -28,7 +28,7 @@ public class TwoWord extends CustomCard {
     private static final CardRarity RARITY = CardRarity.RARE;
     private static final CardTarget TARGET = CardTarget.SELF;
 
-    public TwoWord() {
+    public Wuwen() {
         // 为了命名规范修改了变量名。这些参数具体的作用见下方
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         this.magicNumber = 2;
@@ -57,7 +57,7 @@ public class TwoWord extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-    this.addToBot(new ApplyPowerAction(p,p,new TwoWordPower(p,this.magicNumber)));
+    this.addToBot(new ApplyPowerAction(p,p,new WuwenPower(p,this.magicNumber)));
     }
 
     }

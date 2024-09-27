@@ -7,7 +7,8 @@ public class CustomTags {
     @SpireEnum
     public static AbstractCard.CardTags ZhenghuoCharacter;
     @SpireEnum
-    public static AbstractCard.CardTags wildcard;
+    public static AbstractCard.CardTags WordCard;
     @SpireEnum
     public static AbstractCard.CardTags Zhenghuoblack;
+
 }

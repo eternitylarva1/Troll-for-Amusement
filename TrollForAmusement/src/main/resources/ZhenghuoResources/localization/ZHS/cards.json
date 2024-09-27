@@ -27,8 +27,8 @@
     "UPGRADE_DESCRIPTION": "可以把你的卡牌分解成文字 "
   },"Zhenghuo:Charactergather": {
   "NAME": "文字组合",
-  "DESCRIPTION": "可以把你的文字组成卡牌",
-  "UPGRADE_DESCRIPTION": "可以把你的文字组成卡牌"
+  "DESCRIPTION": "可以把你的文字组成卡牌,抽一张牌",
+  "UPGRADE_DESCRIPTION": "可以把你的文字组成卡牌，抽一张牌"
 },"Zhenghuo:TongpeiCard": {
   "NAME": "通配符",
   "DESCRIPTION": "本卡可以代表任意一个文字（本卡不能被拆解）zhenghuo:文字牌",
@@ -78,10 +78,6 @@
   "NAME": "随机%s字牌",
   "DESCRIPTION": "一个随机的名字长度为",
   "UPGRADE_DESCRIPTION": "一个随机升级的名字长度为"
-},"Zhenghuo:ThreeWordBook": {
-  "NAME": "三言",
-  "DESCRIPTION": "当你打出名字长度为3的牌时，抽一张牌",
-  "UPGRADE_DESCRIPTION": "当你打出名字长度为3的牌时，抽一张牌"
 },"Zhenghuo:AugrmentAttack": {
   "NAME": "词条攻击",
   "DESCRIPTION": "造成 !D! 点伤害，获得一个随机奇美拉词条 (没开奇美拉改为补偿5点伤害)",
@@ -110,9 +106,30 @@
   "NAME": "分解描述",
   "DESCRIPTION": "选择并拆解一张手牌的描述成文字牌",
   "UPGRADE_DESCRIPTION": "选择并拆解一张手牌的描述成文字牌"
+},"Zhenghuo:ThreeWordBook": {
+  "NAME": "三言",
+  "DESCRIPTION": "当你打出名字长度为3的牌时，抽一张牌",
+  "UPGRADE_DESCRIPTION": "当你打出名字长度为3的牌时，抽一张牌"
 },"Zhenghuo:TwoWord": {
   "NAME": "两语",
   "DESCRIPTION": "当你打出名字长度为2的牌时，获得 !M! 点格挡",
   "UPGRADE_DESCRIPTION": "当你打出名字长度为2的牌时，获得 !M! 点格挡"
+},"Zhenghuo:FourWord": {
+  "NAME": "四字真言",
+  "DESCRIPTION": "当你打出名字长度为4的牌时，获得 !M! 点真言",
+  "UPGRADE_DESCRIPTION": "当你打出名字长度为4的牌时，获得 !M! 点真言"
+},"Zhenghuo:FiveWord": {
+  "NAME": "五字",
+  "DESCRIPTION": "当你打出名字长度为5的牌时，获得 !M! 点 力量 ",
+  "UPGRADE_DESCRIPTION": "当你打出名字长度为5的牌时，获得 !M! 点 力量 "
+},
+  "Zhenghuo:Wuwen": {
+  "NAME": "舞文",
+  "DESCRIPTION": "当你打出文字牌时，抽 !M! 张牌",
+  "UPGRADE_DESCRIPTION": "当你打出文字牌时，抽 !M! 张牌"
+},"Zhenghuo:NongMo": {
+  "NAME": "弄墨",
+  "DESCRIPTION": "当你打出文字牌时，获得 [E] ",
+  "UPGRADE_DESCRIPTION": "当你打出文字牌时，获得 [E] [E] "
 }
 }
