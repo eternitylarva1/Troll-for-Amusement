@@ -49,6 +49,7 @@ public class FusionAction extends AbstractGameAction {
     public void update() {
         AbstractCard c;
         Iterator var1;
+
         if (this.duration == DURATION) {
 
             var1 = this.p.hand.group.iterator();

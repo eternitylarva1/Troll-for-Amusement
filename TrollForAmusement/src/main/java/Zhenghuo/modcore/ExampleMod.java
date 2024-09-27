@@ -4,6 +4,7 @@ import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import Zhenghuo.card.BlackMyth;
 import Zhenghuo.card.CharacterCard;
+import Zhenghuo.card.Characterfusion;
 import Zhenghuo.card.RandomCardWithWord;
 import Zhenghuo.events.MyFirstEvent;
 import Zhenghuo.otherplayer.OtherPlayerHelper;
@@ -409,8 +410,9 @@ System.out.println("正在预加载");
                 cardGroup.group.add(new CharacterCard("防"));
                 cardGroup.group.add(new CharacterCard("御"));
             }
-            cardGroup.group.add(new RandomCardWithWord(Words.get(0)));
-            cardGroup.group.add(new RandomCardWithWord(Words.get(1)));
+            cardGroup.group.add(new CharacterCard(Words.get(0)));
+            cardGroup.group.add(new CharacterCard(Words.get(1)));
+            cardGroup.group.add(new Characterfusion());
         }
     }
 /*

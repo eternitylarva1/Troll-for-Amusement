@@ -100,7 +100,6 @@ public class Mycharacter extends CustomPlayer  {
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
         retVal.add(Dictionary.ID);
-        retVal.add(Dictionary.ID);
         return retVal;
     }
 

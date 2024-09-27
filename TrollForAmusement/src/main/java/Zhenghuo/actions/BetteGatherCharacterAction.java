@@ -162,6 +162,7 @@ public class BetteGatherCharacterAction extends AbstractGameAction {
 
 
                     AbstractCard cm=result.get(AbstractDungeon.cardRandomRng.random(0,result.size()-1)).makeSameInstanceOf();
+
                     if(!(cm instanceof CharacterCard)){
                         cm.name = cm.originalName;
                     }else
