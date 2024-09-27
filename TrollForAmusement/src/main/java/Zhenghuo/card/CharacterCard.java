@@ -210,6 +210,15 @@ public void update()
             this.block = this.baseBlock;
             this.costForTurn = this.cost;
         }
+        else{
+            this.Text=TextImageGenerator.getTextImage(this.name,type);
+            Texture customTexture = Text;
+// Step 2: 将Texture转换为TextureAtlas.AtlasRegion
+            TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
+
+            customRegion.flip(false, true);
+            this.portrait = customRegion;
+        }
     }
     public void InitizethisCard()
     {
