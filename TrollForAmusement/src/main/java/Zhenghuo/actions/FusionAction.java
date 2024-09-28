@@ -7,6 +7,7 @@ package Zhenghuo.actions;
 
 
 import Zhenghuo.card.CharacterCard;
+import Zhenghuo.card.Characterfusion;
 import Zhenghuo.card.TongpeiCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
@@ -32,6 +33,8 @@ public class FusionAction extends AbstractGameAction {
     private boolean endTurn;
     public static int numDiscarded;
     private static final float DURATION;
+    private int num=0;
+    private AbstractCard cardResult;
     private ArrayList<AbstractCard> cannotUpgrade = new ArrayList();
     public FusionAction(AbstractCreature target, AbstractCreature source, int amount, boolean isRandom) {
         this(target, source, amount, isRandom, false);
@@ -85,8 +88,14 @@ public class FusionAction extends AbstractGameAction {
                 return;
             }
         }
+        if(num!=AbstractDungeon.handCardSelectScreen.selectedCards.size())
+        {
+            this.cardResult=new Characterfusion();
+            num=AbstractDungeon.handCardSelectScreen.selectedCards.size();
+        }
 
         if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
+
             Iterator var4 = AbstractDungeon.handCardSelectScreen.selectedCards.group.iterator();
             ArrayList<Character> ChList = new ArrayList<>();
             int upgradenum=0;
@@ -119,19 +128,24 @@ public class FusionAction extends AbstractGameAction {
                     System.out.println("检测到名字为通配符，改为*");
                     ChList.add("*".charAt(0));
                 }
-               }
+            }
             AbstractCard result;
             List<AbstractCard> result1=result(ChList);
-                if(!result1.isEmpty())
-                {
+            if(!result1.isEmpty())
+            {
 
-                   result= result1.get(AbstractDungeon.cardRandomRng.random(0,result1.size()-1)).makeSameInstanceOf();
+                result= result1.get(AbstractDungeon.cardRandomRng.random(0,result1.size()-1)).makeSameInstanceOf();
 
-                }
-               else{
-                result=new CharacterCard(ChList.toString());
             }
-                if(result!=null){
+            else{
+                StringBuilder sb = new StringBuilder();
+                for (char s : ChList) {
+                    sb.append(s);
+                }
+                result=new CharacterCard( sb.toString());
+            }
+
+                if(this.cardResult!=null){
                     AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(result));
                    }
                 else
