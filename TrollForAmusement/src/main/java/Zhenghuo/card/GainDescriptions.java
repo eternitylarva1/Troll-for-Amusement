@@ -1,6 +1,7 @@
 package Zhenghuo.card;
 
 
+import Zhenghuo.actions.RandomDescription;
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.utils.TextImageGenerator;
 import basemod.BaseMod;
@@ -23,11 +24,11 @@ import java.util.stream.Collectors;
 
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
 import static Zhenghuo.utils.CardArguments.RewardPatch.ModifiedCards;
-import static Zhenghuo.utils.CardArguments.RewardPatch.Words;
+import static Zhenghuo.utils.CardArguments.RewardPatch.Descriptions;
 
-public class RandomCardWithWord extends CustomCard implements CustomSavable<String> , OnStartBattleSubscriber , SpawnModificationCard {
+public class GainDescriptions extends CustomCard implements CustomSavable<String> , SpawnModificationCard {
 
-    public static final String ID = ModHelper.makePath("RandomCardWithWord");
+    public static final String ID = ModHelper.makePath("GainDescriptions");
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String IMG_PATH = "ZhenghuoResources/images/Character.png";
     private static final int COST = 1;
@@ -43,11 +44,11 @@ public class RandomCardWithWord extends CustomCard implements CustomSavable<Stri
 
     private String RandomWord="";
 
-    public RandomCardWithWord(String NAME) {
+    public GainDescriptions(String NAME) {
 
         //  为了命名规范修改了变量名。这些参数具体的作用见下方
-        super(ID, String.format(NAMES,NAME ) , IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        BaseMod.subscribe(this);
+        super(ID, String.format(NAMES,NAME), IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+
         this.RandomWord=NAME;
         this.baseDamage = this.damage = 1;
         this.baseBlock = this.block = 1;
@@ -72,13 +73,14 @@ public class RandomCardWithWord extends CustomCard implements CustomSavable<Stri
 // Step 3: 设置卡牌的portrait属
         this.portrait = customRegion;
         this.rawDescription=DESCRIPTION;
+        this.rawDescription=String.format(this.rawDescription,NAME);
         this.initializeDescription();
         tags.add(CardTags.HEALING);
     }
 
-    public RandomCardWithWord() {
+    public GainDescriptions() {
         // 为了命名规范修改了变量名。这些参数具体的作用见下方
-        this("描述");
+        this("斩杀");
     }
 
 
@@ -86,7 +88,7 @@ public class RandomCardWithWord extends CustomCard implements CustomSavable<Stri
 
     public AbstractCard makeCopy()
     {
-        return new RandomCardWithWord(RandomWord);
+        return new GainDescriptions(RandomWord);
     }
     public void update()
 {
@@ -109,6 +111,7 @@ public class RandomCardWithWord extends CustomCard implements CustomSavable<Stri
             this.rawDescription=DESCRIPTION;
             this.upgradeName(); // 卡牌名字变为绿色并添加“+”，且标为升级过的卡牌，之后不能再升级。
             this.rawDescription = CARD_STRINGS.UPGRADE_DESCRIPTION;
+            this.rawDescription=String.format(this.rawDescription,RandomWord);
             this.initializeDescription();
         }
     }
@@ -117,6 +120,7 @@ public class RandomCardWithWord extends CustomCard implements CustomSavable<Stri
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        addToBot(new RandomDescription(false,this.RandomWord));
     }
 
     @Override
@@ -137,33 +141,15 @@ public class RandomCardWithWord extends CustomCard implements CustomSavable<Stri
 // Step 3: 设置卡牌的portrait属
         this.portrait = customRegion;
         this.rawDescription=DESCRIPTION;
+        this.rawDescription=String.format(this.rawDescription,RandomWord);
         this.initializeDescription();
     }
 
 
-    @Override
-    public void receiveOnBattleStart(AbstractRoom abstractRoom) {
-        for (AbstractCard abstractCard : AbstractDungeon.player.drawPile.group) {
-            if(abstractCard ==this)
-            {
-                System.out.println("检测到随机牌"+this.RandomWord);
-                String targetChar =this.RandomWord;
-                ArrayList<AbstractCard> newList =ModifiedCards.stream()
-                        .filter(element -> element.name.contains(targetChar))
-                        .collect(Collectors.toCollection(ArrayList::new));
-                if(!newList.isEmpty()) {
-                    AbstractCard m=newList.get(AbstractDungeon.cardRandomRng.random(newList.size() - 1)).makeStatEquivalentCopy();
-                    m.name=m.originalName;
-                    System.out.println(m.name);
-                    AbstractDungeon.player.drawPile.group.set(AbstractDungeon.player.drawPile.group.indexOf(abstractCard),m );
-                }
-            }
-        }
-
-    }
+   
     public AbstractCard replaceWith(ArrayList<AbstractCard> currentRewardCards) {
 
-            this.RandomWord = Words.get(AbstractDungeon.cardRandomRng.random(Words.size() - 1));
+            this.RandomWord = Descriptions.get(AbstractDungeon.cardRandomRng.random(Descriptions.size() - 1));
             this.name = String.format(NAMES, RandomWord);
             this.Text = TextImageGenerator.getTextImage(RandomWord);
             Texture customTexture = Text;
@@ -173,10 +159,11 @@ public class RandomCardWithWord extends CustomCard implements CustomSavable<Stri
 // Step 3: 设置卡牌的portrait属
             this.portrait = customRegion;
             this.rawDescription = DESCRIPTION;
+        this.rawDescription=String.format(this.rawDescription,RandomWord);
             this.initializeDescription();
         System.out.println("已经将随机牌"+this.RandomWord+"替换");
 
-        return new RandomCardWithWord(this.RandomWord);
+        return new GainDescriptions(this.RandomWord);
     }
 
     }

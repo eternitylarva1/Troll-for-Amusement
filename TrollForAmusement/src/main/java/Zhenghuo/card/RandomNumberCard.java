@@ -154,7 +154,10 @@ public class RandomNumberCard extends CustomCard implements CustomSavable<Intege
                         .filter(element -> element.name.length()==targetChar)
                         .collect(Collectors.toCollection(ArrayList::new));
                 if(!newList.isEmpty()) {
-                    AbstractDungeon.player.drawPile.group.set(AbstractDungeon.player.drawPile.group.indexOf(abstractCard), newList.get(AbstractDungeon.cardRandomRng.random(newList.size() - 1)).makeSameInstanceOf());
+                    AbstractCard m=newList.get(AbstractDungeon.cardRandomRng.random(newList.size() - 1)).makeSameInstanceOf();
+                    AbstractDungeon.player.drawPile.group.set(AbstractDungeon.player.drawPile.group.indexOf(abstractCard),m );
+                    m.name=m.originalName;
+                    System.out.println(m.name);
                 }
             }
         }

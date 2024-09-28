@@ -19,6 +19,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static Zhenghuo.utils.CardArguments.RewardPatch.ModifiedCards;
+import static basemod.helpers.CardModifierManager.onCreateDescription;
+import static basemod.helpers.CardModifierManager.onRenderTitle;
+
 public class RandomDescription extends AbstractGameAction {
     private boolean retrieveCard = false;
     private boolean upgraded;
@@ -66,8 +70,8 @@ public class RandomDescription extends AbstractGameAction {
         while(derp.size() != 3) {
             boolean dupe = false;
             int roll = AbstractDungeon.cardRandomRng.random(99);
-            List<AbstractCard> filteredList = CardLibrary.getAllCards().stream()
-                    .filter(item -> item.rawDescription.contains(this.description))
+            List<AbstractCard> filteredList = ModifiedCards.stream()
+                    .filter(item -> onCreateDescription(item,item.rawDescription).contains(this.description))
                     .collect(Collectors.toCollection(ArrayList::new));
             AbstractCard tmp=filteredList.get(AbstractDungeon.cardRandomRng.random(filteredList.size()-1));
 
@@ -82,7 +86,8 @@ public class RandomDescription extends AbstractGameAction {
             }
 
             if (!dupe) {
-                derp.add(tmp.makeCopy());
+                tmp.name=tmp.originalName;
+                derp.add(tmp.makeStatEquivalentCopy());
             }
         }
 
