@@ -2,6 +2,7 @@ package Zhenghuo.modcore;
 
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
+import Zhenghuo.actions.FusionAction;
 import Zhenghuo.card.BlackMyth;
 import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.Characterfusion;
@@ -36,6 +37,7 @@ import com.megacrit.cardcrawl.cards.red.*;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.*;
@@ -44,6 +46,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import java.nio.charset.StandardCharsets;
 import java.text.Collator;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static CardAugments.CardAugmentsMod.cardAugmentsConfig;
@@ -81,6 +84,7 @@ public static String NowPlayer=null;
     private static final String BIG_ORB = "ZhenghuoModResources/img/char/card_orb.png";
     // 小尺寸的能量图标（战斗中，牌堆预览）
     private static final String ENEYGY_ORB = "ZhenghuoModResources/img/char/cost_orb.png";
+    public static final List<Consumer<SpriteBatch>> renderable = new ArrayList();
 
 
     public static final Color MY_COLOR = new Color(1.0F / 255.0F, 1.0F / 255.0F, 3.0F / 255.0F, 0.85F);
@@ -419,7 +423,11 @@ System.out.println("正在预加载");
     }
 
     @Override
-    public void receivePostRender(SpriteBatch spriteBatch) {
+    public void receivePostRender(SpriteBatch sb) {
+        for (Consumer<SpriteBatch> item : renderable) {
+            item.accept(sb);
+        }
+        renderable.clear();
 
     }
 /*

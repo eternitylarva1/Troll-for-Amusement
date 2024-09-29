@@ -9,6 +9,7 @@ package Zhenghuo.actions;
 import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.Characterfusion;
 import Zhenghuo.card.TongpeiCard;
+import Zhenghuo.modcore.ExampleMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -34,8 +35,9 @@ public class FusionAction extends AbstractGameAction {
     public static int numDiscarded;
     private static final float DURATION;
     private int num=0;
-    private AbstractCard cardResult;
+    public static   AbstractCard cardResult;
     private ArrayList<AbstractCard> cannotUpgrade = new ArrayList();
+    public static boolean isFusion=false;
     public FusionAction(AbstractCreature target, AbstractCreature source, int amount, boolean isRandom) {
         this(target, source, amount, isRandom, false);
     }
@@ -70,6 +72,7 @@ public class FusionAction extends AbstractGameAction {
                 return;
             }
             this.p.hand.group.removeAll(this.cannotUpgrade);
+            isFusion=true;
         if (!this.isRandom) {
                 if (this.amount < 0) {
                     AbstractDungeon.handCardSelectScreen.open("选择需要融合的牌", 99, true, true);
@@ -89,68 +92,18 @@ public class FusionAction extends AbstractGameAction {
                 return;
             }
         }
-        if(num!=AbstractDungeon.handCardSelectScreen.selectedCards.size())
-        {
-            Iterator var4 = AbstractDungeon.handCardSelectScreen.selectedCards.group.iterator();
-            ArrayList<Character> ChList = new ArrayList<>();
-            int upgradenum=0;
-            while(var4.hasNext()) {
-                c = (AbstractCard)var4.next();
 
-
-                if(!(c instanceof TongpeiCard)){
-
-                    System.out.println("正在尝试组合"+c.name);
-                    for (char ch : c.name.toCharArray()) {
-                        if(!(ch == "+".charAt(0)||Character.isDigit(ch))) {
-                            ChList.add(ch);
-                            System.out.println("已将"+ch+"加入检索序列");
-                        }
-                        else if(Character.isDigit(ch)){
-                            int number = ch - '0'-1;
-                            System.out.println("检测到数字"+number+"转换成升级");
-
-                            upgradenum+=number;
-
-                        }else{
-                            upgradenum++;
-                        }
-
-
-                    }
-                }
-                else{
-                    System.out.println("检测到名字为通配符，改为*");
-                    ChList.add("*".charAt(0));
-                }
-            }
-            AbstractCard result;
-            List<AbstractCard> result1=result(ChList);
-            if(!result1.isEmpty())
-            {
-
-                result= result1.get(AbstractDungeon.cardRandomRng.random(0,result1.size()-1)).makeSameInstanceOf();
-
-            }
-            else{
-                StringBuilder sb = new StringBuilder();
-                for (char s : ChList) {
-                    sb.append(s);
-                }
-                result=new CharacterCard( sb.toString());
-            }
-
-
-            this.cardResult=result;
-            num=AbstractDungeon.handCardSelectScreen.selectedCards.size();
-        }
-
+if(cardResult!=null){
+    ExampleMod.renderable.add(spriteBatch -> {
+        cardResult.render(spriteBatch);
+    });
+}
         if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
+isFusion=false;
 
 
-
-                if(this.cardResult!=null){
-                    AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(this.cardResult));
+                if(cardResult!=null){
+                    AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(cardResult));
                    }
                 else
                 {
