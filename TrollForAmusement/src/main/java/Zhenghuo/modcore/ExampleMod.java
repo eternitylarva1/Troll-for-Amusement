@@ -22,6 +22,7 @@ import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -56,7 +57,7 @@ import static com.megacrit.cardcrawl.core.Settings.language;
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.player;
 
 @SpireInitializer
-public class ExampleMod implements EditKeywordsSubscriber,PostCreateStartingDeckSubscriber,EditCharactersSubscriber,PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
+public class ExampleMod implements PostRenderSubscriber,EditKeywordsSubscriber,PostCreateStartingDeckSubscriber,EditCharactersSubscriber,PostInitializeSubscriber,PostDungeonInitializeSubscriber,OnStartBattleSubscriber, PostBattleSubscriber,CustomSavable<String>,EditCardsSubscriber, EditStringsSubscriber , EditRelicsSubscriber { // 实现接口
 public static String NowPlayer=null;
     // 人物选择界面按钮的图片
     private static final String MY_CHARACTER_BUTTON = "ZhenghuoModResources/img/char/Character_Button.png";
@@ -398,6 +399,7 @@ System.out.println("正在预加载");
 
     }
 
+
     @Override
     public void receivePostCreateStartingDeck(AbstractPlayer.PlayerClass playerClass, CardGroup cardGroup) {
         if(playerClass== Cangjie){
@@ -414,6 +416,11 @@ System.out.println("正在预加载");
             cardGroup.group.add(new CharacterCard(Words.get(1)));
             cardGroup.group.add(new Characterfusion());
         }
+    }
+
+    @Override
+    public void receivePostRender(SpriteBatch spriteBatch) {
+
     }
 /*
     @Override
