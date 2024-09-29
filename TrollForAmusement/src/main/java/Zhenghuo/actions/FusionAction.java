@@ -49,6 +49,7 @@ public class FusionAction extends AbstractGameAction {
         this.duration = DURATION;
     }
 
+
     public void update() {
         AbstractCard c;
         Iterator var1;
@@ -90,12 +91,6 @@ public class FusionAction extends AbstractGameAction {
         }
         if(num!=AbstractDungeon.handCardSelectScreen.selectedCards.size())
         {
-            this.cardResult=new Characterfusion();
-            num=AbstractDungeon.handCardSelectScreen.selectedCards.size();
-        }
-
-        if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
-
             Iterator var4 = AbstractDungeon.handCardSelectScreen.selectedCards.group.iterator();
             ArrayList<Character> ChList = new ArrayList<>();
             int upgradenum=0;
@@ -145,8 +140,17 @@ public class FusionAction extends AbstractGameAction {
                 result=new CharacterCard( sb.toString());
             }
 
+
+            this.cardResult=result;
+            num=AbstractDungeon.handCardSelectScreen.selectedCards.size();
+        }
+
+        if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
+
+
+
                 if(this.cardResult!=null){
-                    AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(result));
+                    AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(this.cardResult));
                    }
                 else
                 {
