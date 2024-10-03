@@ -424,16 +424,13 @@ System.out.println("正在预加载");
 
     @Override
     public void receivePostRender(SpriteBatch sb) {
-        for (Consumer<SpriteBatch> item : renderable) {
+        return;
+       /* for (Consumer<SpriteBatch> item : renderable) {
             item.accept(sb);
         }
         renderable.clear();
-
+*/
     }
-/*
-    @Override
-    public boolean receivePostCampfire() {
-        //代码加在这里
-        return true;
-    }*/
+
+
 }

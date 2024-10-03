@@ -46,7 +46,7 @@ public static ArrayList<AbstractCard> CardPool=new ArrayList<>();
         this.baseBlock = this.block = 0;
         this.baseMagicNumber = this.magicNumber = 0;
         this.exhaust=true;
-
+applyPowers();
 
 // Step 3: 设置卡牌的portrait属
 
@@ -195,7 +195,8 @@ public void update()
             Texture customTexture = Text;
 // Step 2: 将Texture转换为TextureAtlas.AtlasRegion
             TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
-
+            int attack=0;
+            int skill=0;
             customRegion.flip(false, true);
             this.portrait = customRegion;
             AbstractCard card;
@@ -203,12 +204,28 @@ public void update()
                 card = (AbstractCard) var1.next();
                 this.cost += Integer.max(0, card.cost-1);
                 this.baseDamage += Integer.max(0, card.baseDamage);
+                if(card.baseDamage>0){
+                    attack++;
+                }
+                if(card.baseBlock>0){
+                    skill++;
+                }
+                if(card.baseMagicNumber>0){
+                    this.baseMagicNumber=card.baseMagicNumber;
+                }
                 System.out.println("已经将卡牌增加"+card.baseDamage+"来源"+card.name);
             }
 
-            this.damage = this.baseDamage;
-            this.block = this.baseBlock;
+                this.baseDamage = attack>0?this.baseDamage/attack:this.baseDamage;
+                System.out.println("基础伤害"+this.damage);
+                this.baseBlock = skill>0? this.baseBlock/skill:this.baseBlock;
+                System.out.println("基础格挡"+this.block);
+                this.magicNumber=this.baseMagicNumber;
+                this.damage=this.baseDamage;
+                this.block=this.baseBlock;
+
             this.costForTurn = this.cost;
+            initializeDescription();
         }
         else{
             this.Text=TextImageGenerator.getTextImage(this.name,type);
@@ -264,7 +281,7 @@ public void update()
         for(int i = 0; i < max; ++i) {
             des = des+ ((AbstractCard)this.sutureCards.get(i)).rawDescription + " ";
         }
-        return des;
+        return des+"NL 消耗 ";
     }
 
 
