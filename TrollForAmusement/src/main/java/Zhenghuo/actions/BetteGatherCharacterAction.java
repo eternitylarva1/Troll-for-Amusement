@@ -8,6 +8,7 @@ package Zhenghuo.actions;
 
 import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.TongpeiCard;
+import Zhenghuo.modcore.CustomTags;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -74,7 +75,7 @@ public class BetteGatherCharacterAction extends AbstractGameAction {
                     var6 = AbstractDungeon.player.drawPile.group.iterator();
                     while(var6.hasNext()) {
                         c = (AbstractCard)var6.next();
-                        if(c instanceof CharacterCard||c instanceof TongpeiCard) {
+                        if(c.hasTag(CustomTags.WordCard)) {
                             temp.addToTop(c);
                             c.isGlowing=false;
                         }
@@ -82,7 +83,7 @@ public class BetteGatherCharacterAction extends AbstractGameAction {
                     Iterator<AbstractCard> var7 = AbstractDungeon.player.hand.group.iterator();
                     while(var7.hasNext()) {
                         c = (AbstractCard)var7.next();
-                        if(c instanceof CharacterCard||c instanceof TongpeiCard) {
+                        if(c.hasTag(CustomTags.WordCard)) {
                             temp.addToTop(c);
                             c.isGlowing=false;
                         }
@@ -95,7 +96,7 @@ public class BetteGatherCharacterAction extends AbstractGameAction {
                     Iterator<AbstractCard> var8 = AbstractDungeon.player.discardPile.group.iterator();
                     while(var8.hasNext()) {
                         c = (AbstractCard)var8.next();
-                        if(c instanceof CharacterCard ||c instanceof TongpeiCard) {
+                        if(c.hasTag(CustomTags.WordCard)) {
                             temp.addToTop(c);
                             c.isGlowing=false;
                         }
@@ -163,7 +164,7 @@ public class BetteGatherCharacterAction extends AbstractGameAction {
 
                     AbstractCard cm=result.get(AbstractDungeon.cardRandomRng.random(0,result.size()-1)).makeSameInstanceOf();
 
-                    if(!(cm instanceof CharacterCard)){
+                    if(!(cm.hasTag(CustomTags.WordCard))){
                         cm.name = cm.originalName;
                     }else
                     {/*

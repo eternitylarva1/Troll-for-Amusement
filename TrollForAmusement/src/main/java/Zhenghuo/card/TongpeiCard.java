@@ -2,6 +2,7 @@ package Zhenghuo.card;
 
 
 import Zhenghuo.helpers.ModHelper;
+import Zhenghuo.modcore.CustomTags;
 import Zhenghuo.utils.TextImageGenerator;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Texture;
@@ -39,6 +40,14 @@ public class TongpeiCard extends CustomCard {
         customRegion.flip(false, true);
 // Step 3: 设置卡牌的portrait属
         this.portrait = customRegion;
+
+        this.tags.add(CustomTags.WordCard);
+
+
+
+
+
+
 
     }
     @Override
