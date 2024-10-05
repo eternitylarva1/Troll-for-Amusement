@@ -11,11 +11,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.SpawnModificationCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DescriptionLine;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,7 +50,7 @@ public static ArrayList<AbstractCard> CardPool=new ArrayList<>();
         this.baseMagicNumber = this.magicNumber = 0;
         this.exhaust=true;
         this.tags.add(CustomTags.WordCard);
-applyPowers();
+
 
 // Step 3: 设置卡牌的portrait属
 
@@ -58,6 +60,19 @@ applyPowers();
 
         this.rawDescription = this.getDescription();
         this.initializeDescription();
+
+        if (this.sutureCards.size() > 0) {
+            description.clear();
+            Iterator var2 = this.sutureCards.iterator();
+
+            while(var2.hasNext()) {
+                AbstractCard c = (AbstractCard)var2.next();
+                c.applyPowers();
+                c.initializeDescription();
+                this.description.addAll(c.description);
+
+            }
+        }
 
 
     }
@@ -130,6 +145,19 @@ public void update()
 
             this.rawDescription = this.getDescription();
             this.initializeDescription();
+
+            if (this.sutureCards.size() > 0) {
+                description.clear();
+                Iterator var3 = this.sutureCards.iterator();
+
+                while(var3.hasNext()) {
+                    AbstractCard c = (AbstractCard)var3.next();
+                    c.applyPowers();
+                    c.initializeDescription();
+                    this.description.addAll(c.description);
+
+                }
+            }
         }
 
     }
@@ -233,6 +261,18 @@ public void update()
 
             this.costForTurn = this.cost;
             initializeDescription();
+            if (this.sutureCards.size() > 0) {
+                description.clear();
+                Iterator var2 = this.sutureCards.iterator();
+
+                while(var2.hasNext()) {
+                    AbstractCard c = (AbstractCard)var2.next();
+                    c.applyPowers();
+                    c.initializeDescription();
+                    this.description.addAll(c.description);
+
+                }
+            }
         }
         else{
             this.Text=TextImageGenerator.getTextImage(this.name,type);
@@ -296,6 +336,8 @@ public void update()
 
     public void applyPowers() {
         super.applyPowers();
+      this.description.clear();
+
         if (this.sutureCards.size() > 0) {
             Iterator var2 = this.sutureCards.iterator();
 
@@ -303,10 +345,21 @@ public void update()
                 AbstractCard c = (AbstractCard)var2.next();
                 c.applyPowers();
                 c.initializeDescription();
+                System.out.println(c.description.get(0).text);
+
+                for(DescriptionLine dl:c.description){
+                    dl.text= dl.text.replaceAll(" D ", String.valueOf(c.damage));
+
+                    System.out.println("检测到D,正在替换");
+                }
+
+                this.description.addAll(c.description);
+
             }
         }
+/*
         this.rawDescription=getDescription();
-        initializeDescription();
+        initializeDescription();*/
 
     }
 
@@ -325,8 +378,6 @@ public void update()
 
             while(var4.hasNext()) {
                 AbstractCard c = (AbstractCard)var4.next();
-                c.damage=this.damage;
-                c.block=this.block;
                 c.use(p, m);
             }
         }
@@ -347,6 +398,19 @@ public void update()
         initializeSutureCard();
         this.rawDescription = this.getDescription();
         this.initializeDescription();
+
+        if (this.sutureCards.size() > 0) {
+            description.clear();
+            Iterator var2 = this.sutureCards.iterator();
+
+            while(var2.hasNext()) {
+                AbstractCard c = (AbstractCard)var2.next();
+                c.applyPowers();
+                c.initializeDescription();
+                this.description.addAll(c.description);
+
+            }
+        }
     }
     @Override
     public AbstractCard replaceWith(ArrayList<AbstractCard> currentRewardCards) {
@@ -360,6 +424,19 @@ public void update()
         this.portrait = customRegion;
         this.rawDescription=DESCRIPTION;
         this.initializeDescription();
+
+        if (this.sutureCards.size() > 0) {
+            description.clear();
+            Iterator var2 = this.sutureCards.iterator();
+
+            while(var2.hasNext()) {
+                AbstractCard c = (AbstractCard)var2.next();
+                c.applyPowers();
+                c.initializeDescription();
+                this.description.addAll(c.description);
+
+            }
+        }
         return this;
     }
     public void triggerOnGlowCheck() {

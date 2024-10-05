@@ -131,5 +131,21 @@
   "NAME": "弄墨",
   "DESCRIPTION": "当你打出文字牌时，获得 [E] ",
   "UPGRADE_DESCRIPTION": "当你打出文字牌时，获得 [E] [E] "
+},"Zhenghuo:da": {
+  "NAME": "打",
+  "DESCRIPTION": "造成 !D! 点伤害",
+  "UPGRADE_DESCRIPTION": "造成 !D! 点伤害"
+},"Zhenghuo:ji": {
+  "NAME": "击",
+  "DESCRIPTION": "造成 !D! 点伤害",
+  "UPGRADE_DESCRIPTION": "造成 !D! 点伤害"
+},"Zhenghuo:fang": {
+  "NAME": "防",
+  "DESCRIPTION": "获得 !D! 点格挡",
+  "UPGRADE_DESCRIPTION": "获得 !D! 点格挡"
+},"Zhenghuo:yu": {
+  "NAME": "御",
+  "DESCRIPTION": "获得 !D! 点格挡",
+  "UPGRADE_DESCRIPTION": "获得 !D! 点格挡"
 }
 }

@@ -143,6 +143,7 @@ public class playerMethodPatch {
             cardResult.target_x=convertX(1);
             cardResult.target_y=convertY(3);
             cardResult.name=cardResult.originalName;
+            cardResult.applyPowers();
             System.out.println("已经成功改变");
         }
 
