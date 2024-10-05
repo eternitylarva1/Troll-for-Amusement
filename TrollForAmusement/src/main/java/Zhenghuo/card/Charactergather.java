@@ -1,6 +1,7 @@
 package Zhenghuo.card;
 
 
+import Zhenghuo.actions.BetteGatherCharacterAction;
 import Zhenghuo.actions.GatherAction;
 import Zhenghuo.actions.GatherCharacterAction;
 import Zhenghuo.actions.SplitCharacterAction;
@@ -63,7 +64,7 @@ public class Charactergather extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new GatherCharacterAction(p, p, -1, false,false));
+        addToBot(new BetteGatherCharacterAction( -1,true));
 
     }
 

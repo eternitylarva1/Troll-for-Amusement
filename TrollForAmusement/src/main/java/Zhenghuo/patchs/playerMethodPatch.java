@@ -9,6 +9,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.screens.select.HandCardSelectScreen;
 
@@ -64,7 +65,13 @@ public class playerMethodPatch {
 
 
     }
+    private static float convertX(float x) {
+        return x * 235.0F * Settings.scale-2*235.0F * Settings.scale + 640.0F * Settings.scale;
+    }
 
+    private static float convertY(float y) {
+        return y * -235.0F * Settings.scale + 850.0F * Settings.scale;
+    }
     @SpirePatch(
             cls = "com.megacrit.cardcrawl.screens.select.HandCardSelectScreen",
             method = "update"
@@ -76,6 +83,9 @@ public class playerMethodPatch {
         @SpirePostfixPatch
         public static void Postfix(HandCardSelectScreen _instance) {
             AbstractCard c;
+            if(cardResult!=null){
+                cardResult.update();
+            }
         if(num!=_instance.selectedCards.size()){
             num=_instance.selectedCards.size();
             Iterator var4 = AbstractDungeon.handCardSelectScreen.selectedCards.group.iterator();
@@ -130,8 +140,10 @@ public class playerMethodPatch {
 
             cardResult=result;
             num=AbstractDungeon.handCardSelectScreen.selectedCards.size();
-            cardResult.current_x=100;
-            cardResult.current_y=100;
+            cardResult.target_x=convertX(1);
+            cardResult.target_y=convertY(3);
+            cardResult.name=cardResult.originalName;
+            cardResult.applyPowers();
             System.out.println("已经成功改变");
         }
 
