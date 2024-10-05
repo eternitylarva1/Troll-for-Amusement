@@ -2,6 +2,7 @@ package Zhenghuo.card;
 
 
 import Zhenghuo.helpers.ModHelper;
+import Zhenghuo.modcore.CustomTags;
 import Zhenghuo.utils.TextImageGenerator;
 import basemod.AutoAdd;
 import basemod.abstracts.CustomCard;
@@ -38,15 +39,15 @@ public class CharacterCard extends CustomCard implements CustomSavable<String>, 
     public boolean isAugrment=false;
 public static ArrayList<AbstractCard> CardPool=new ArrayList<>();
 
-    public CharacterCard(String NAME,String DESCRIPTION) {
+    public CharacterCard(String NAME,String DESCRIPTION,String id) {
 
         // 为了命名规范修改了变量名。这些参数具体的作用见下方
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        super(id, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         this.baseDamage = this.damage = 0;
         this.baseBlock = this.block = 0;
         this.baseMagicNumber = this.magicNumber = 0;
         this.exhaust=true;
-
+        this.tags.add(CustomTags.WordCard);
 
 // Step 3: 设置卡牌的portrait属
 
@@ -59,6 +60,7 @@ public static ArrayList<AbstractCard> CardPool=new ArrayList<>();
 
 
     }
+
     public void triggerWhenDrawn() {
         super.triggerWhenDrawn();
 
@@ -97,12 +99,16 @@ public static ArrayList<AbstractCard> CardPool=new ArrayList<>();
         this(NAME, DESCRIPTION);
     }
 
+    public CharacterCard(String NAME,String description)
+    {
+        this(NAME, DESCRIPTION,ID);
+    }
 public static String katu="";
 
 
     public AbstractCard makeCopy()
     {
-        return new CharacterCard(this.name,this.rawDescription);
+        return new CharacterCard(this.name,this.rawDescription,this.cardID);
     }
 public void update()
 {

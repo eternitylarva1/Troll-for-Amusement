@@ -2,6 +2,7 @@ package Zhenghuo.events;
 
 import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.TongpeiCard;
+import Zhenghuo.modcore.CustomTags;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -172,7 +173,7 @@ if(button.clicked)
             List<AbstractRelic> resultRelic=resultRelic(ChList);
             if(!result.isEmpty()) {
                 this.selectedCard = result.get(AbstractDungeon.cardRandomRng.random(0, result.size() - 1)).makeSameInstanceOf();
-                if(!(selectedCard instanceof CharacterCard)) {
+                if(!(selectedCard.hasTag(CustomTags.WordCard))) {
                     selectedCard.name = selectedCard.originalName;
                 }
                 if(upgradenum>0){
