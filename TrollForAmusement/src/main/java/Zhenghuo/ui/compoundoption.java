@@ -23,7 +23,7 @@ public class compoundoption extends AbstractCampfireOption {
 
     public void useOption() {
         if (this.usable) {
-            AbstractDungeon.effectList.add(new CampfireTokeEffect());
+            AbstractDungeon.effectList.add(new compoundeffect());
         }
 
     }
