@@ -5,12 +5,20 @@ import Zhenghuo.actions.BetteGatherCharacterAction;
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.screens.CharacterScreen;
 import Zhenghuo.screens.MyScreen;
+import Zhenghuo.ui.compoundoption;
 import basemod.BaseMod;
 import basemod.abstracts.CustomRelic;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.tempCards.Shiv;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.relics.PeacePipe;
+import com.megacrit.cardcrawl.ui.campfire.AbstractCampfireOption;
+import com.megacrit.cardcrawl.ui.campfire.TokeOption;
+
+import java.util.ArrayList;
 
 import static Zhenghuo.modcore.ExampleMod.dictionary;
 import static Zhenghuo.utils.CardArguments.RewardPatch.CardAugrments;
@@ -52,4 +60,8 @@ public class Dictionary extends CustomRelic implements ClickableRelic {
   {
 
   }
+  @Override
+    public void addCampfireOption(ArrayList<AbstractCampfireOption> options) {
+        options.add(new compoundoption(!CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck.getPurgeableCards()).isEmpty()));
+    }
 }
