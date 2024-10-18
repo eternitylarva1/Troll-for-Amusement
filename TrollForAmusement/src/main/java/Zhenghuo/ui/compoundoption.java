@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.relics.PeacePipe;
 import com.megacrit.cardcrawl.rooms.RestRoom;
 import com.megacrit.cardcrawl.ui.campfire.AbstractCampfireOption;
+import com.megacrit.cardcrawl.ui.campfire.SmithOption;
 import com.megacrit.cardcrawl.vfx.campfire.CampfireTokeEffect;
 
 
@@ -24,6 +25,7 @@ public class compoundoption extends AbstractCampfireOption {
     public void useOption() {
         if (this.usable) {
             AbstractDungeon.effectList.add(new compoundeffect());
+
         }
 
     }
