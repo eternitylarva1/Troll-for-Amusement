@@ -31,7 +31,7 @@ public class compoundoption extends AbstractCampfireOption {
     }
 
     static {
-        uiStrings = CardCrawlGame.languagePack.getUIString("Toke Option");
+        uiStrings = CardCrawlGame.languagePack.getUIString("Zhenghuo:compoundoption");
         TEXT = uiStrings.TEXT;
     }
 }

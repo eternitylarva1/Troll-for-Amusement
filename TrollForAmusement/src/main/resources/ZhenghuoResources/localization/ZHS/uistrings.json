@@ -4,5 +4,14 @@
       " *伤害+5 。 NL %s",
       "攻杀%s"
     ]
-  }
+  },"Zhenghuo:compoundoption": {
+  "TEXT": [
+    "融合",
+    "将至多3张卡牌/文字合成为一张卡牌"
+  ]
+},"Zhenghuo:compoundeffect": {
+  "TEXT": [
+    "选择需要融合的牌（至多5张）"
+  ]
+}
 }

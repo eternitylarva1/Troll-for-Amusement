@@ -112,7 +112,7 @@ public class compoundeffect extends AbstractGameEffect {
     }
 
     static {
-        uiStrings = CardCrawlGame.languagePack.getUIString("CampfireSmithEffect");
+        uiStrings = CardCrawlGame.languagePack.getUIString("Zhenghuo:compoundeffect");
         TEXT = uiStrings.TEXT;
     }
 }

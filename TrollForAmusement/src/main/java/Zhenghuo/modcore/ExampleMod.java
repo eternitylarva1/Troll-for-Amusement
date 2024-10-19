@@ -381,6 +381,9 @@ System.out.println("正在预加载");
                 ModifiedCards.add(copy);
                 CardAugrments.group.add(copy);
             }
+
+
+
             Collections.sort(CardAugrments.group, new Comparator<AbstractCard>() {
                 @Override
                 public int compare(AbstractCard o1, AbstractCard o2) {
