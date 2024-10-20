@@ -15,13 +15,17 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon.CurrentScreen;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.monsters.beyond.WrithingMass;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.relics.CallingBell;
+import com.megacrit.cardcrawl.relics.PeacePipe;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.CampfireUI;
 import com.megacrit.cardcrawl.rooms.RestRoom;
 import com.megacrit.cardcrawl.rooms.AbstractRoom.RoomPhase;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 import java.util.Iterator;
 
@@ -68,7 +72,7 @@ public class compoundeffect extends AbstractGameEffect {
         if (this.duration < 1.0F && !this.openedScreen) {
             this.openedScreen = true;
 
-            AbstractDungeon.gridSelectScreen.open(AbstractDungeon.player.masterDeck.getUpgradableCards(), -1, true,TEXT[0]);
+            AbstractDungeon.gridSelectScreen.open(AbstractDungeon.player.masterDeck.getUpgradableCards(), 3, true,TEXT[0]);
             var1 = AbstractDungeon.player.relics.iterator();
 
             while(var1.hasNext()) {
@@ -78,6 +82,9 @@ public class compoundeffect extends AbstractGameEffect {
         }
 
         if (this.duration < 0.0F) {
+            AbstractCard c=cardResult.makeSameInstanceOf();
+            AbstractDungeon.topLevelEffects.add(new ShowCardAndObtainEffect(c, (float)Settings.WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F));
+
             cardResult=null;
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
             this.isDone = true;
