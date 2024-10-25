@@ -158,6 +158,7 @@ public void update()
 
                 }
             }
+            ChangeD();
         }
 
     }
@@ -336,7 +337,16 @@ public void update()
 
     public void applyPowers() {
         super.applyPowers();
-      this.description.clear();
+
+
+        ChangeD();
+/*
+        this.rawDescription=getDescription();
+        initializeDescription();*/
+
+    }
+    public void ChangeD(){
+        this.description.clear();
 
         if (this.sutureCards.size() > 0) {
             Iterator var2 = this.sutureCards.iterator();
@@ -354,15 +364,14 @@ public void update()
                 }
 
                 this.description.addAll(c.description);
+                if(this.exhaust){
+                    if(!this.rawDescription.contains("消耗"))
+                    {   this.rawDescription+="Nl 消耗";}
 
+                }
             }
         }
-/*
-        this.rawDescription=getDescription();
-        initializeDescription();*/
-
     }
-
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (p == null) {
