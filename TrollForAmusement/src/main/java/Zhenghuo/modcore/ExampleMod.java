@@ -7,6 +7,7 @@ import Zhenghuo.card.BlackMyth;
 import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.Characterfusion;
 import Zhenghuo.card.RandomCardWithWord;
+import Zhenghuo.charactercard.Da;
 import Zhenghuo.events.MyFirstEvent;
 import Zhenghuo.otherplayer.OtherPlayerHelper;
 import Zhenghuo.player.Mycharacter;
@@ -129,6 +130,10 @@ public static CharacterScreen getdictionary()
         BaseMod.addCard(new RandomNumberCard());*/
         new AutoAdd("Zhenghuo") // 这里填写你在ModTheSpire.json中写的modid
                 .packageFilter(BlackMyth.class) // 寻找所有和此类同一个包及内部包的类（本例子是所有卡牌）
+                .setDefaultSeen(true) // 是否将卡牌标为可见
+                .cards();
+        new AutoAdd("Zhenghuo") // 这里填写你在ModTheSpire.json中写的modid
+                .packageFilter(Da.class) // 寻找所有和此类同一个包及内部包的类（本例子是所有卡牌）
                 .setDefaultSeen(true) // 是否将卡牌标为可见
                 .cards();
 BaseMod.addCard(new CharacterCard(""));

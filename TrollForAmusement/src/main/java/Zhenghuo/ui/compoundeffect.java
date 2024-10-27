@@ -68,7 +68,7 @@ public class compoundeffect extends AbstractGameEffect {
         if (this.duration < 1.0F && !this.openedScreen) {
             this.openedScreen = true;
 
-            AbstractDungeon.gridSelectScreen.open(AbstractDungeon.player.masterDeck.getUpgradableCards(), -1, true,TEXT[0]);
+            AbstractDungeon.gridSelectScreen.open(AbstractDungeon.player.masterDeck.getUpgradableCards(), 3, true,TEXT[0]);
             var1 = AbstractDungeon.player.relics.iterator();
 
             while(var1.hasNext()) {

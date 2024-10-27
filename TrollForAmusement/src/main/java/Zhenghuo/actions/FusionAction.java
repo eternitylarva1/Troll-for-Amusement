@@ -19,6 +19,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDiscardEffect;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToHandEffect;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -92,18 +94,20 @@ public class FusionAction extends AbstractGameAction {
                 return;
             }
         }
-
+/*
 if(cardResult!=null){
     ExampleMod.renderable.add(spriteBatch -> {
         cardResult.render(spriteBatch);
     });
-}
+}*/
         if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
 isFusion=false;
 
 
                 if(cardResult!=null){
-                    AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(cardResult));
+                    float PADDING = 25.0F * Settings.scale;
+//AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(cardResult));
+                    AbstractDungeon.effectList.add(new ShowCardAndAddToHandEffect(cardResult, (float)Settings.WIDTH / 2.0F + PADDING + AbstractCard.IMG_WIDTH, (float)Settings.HEIGHT / 2.0F));
                    }
                 else
                 {
