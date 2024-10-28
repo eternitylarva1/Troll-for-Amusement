@@ -30,7 +30,7 @@ public class zhi extends CustomCard {
     private static final CardType TYPE = CardType.SKILL;
     private static final CardColor COLOR = CharacterBlack;
     private static final CardRarity RARITY = CardRarity.COMMON;
-    private static final CardTarget TARGET = CardTarget.ENEMY;
+    private static final CardTarget TARGET = CardTarget.SELF;
 
     public zhi() {
         // 为了命名规范修改了变量名。这些参数具体的作用见下方
