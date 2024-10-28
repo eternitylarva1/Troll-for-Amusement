@@ -161,11 +161,47 @@
   "UPGRADE_DESCRIPTION": "进入 愤怒 姿态"
 },"Zhenghuo:hua": {
   "NAME": "化",
-  "DESCRIPTION": "变为能力牌，每回合打出",
-  "UPGRADE_DESCRIPTION": "变为能力牌，每回合打出"
+  "DESCRIPTION": "变为能力牌，每回合开始打出",
+  "UPGRADE_DESCRIPTION": "变为能力牌，每回合开始打出"
 },"Zhenghuo:ling": {
   "NAME": "灵",
-  "DESCRIPTION": "将 *无实体 层数设定为 1",
-  "UPGRADE_DESCRIPTION": "将 *无实体 层数设定为 1"
+  "DESCRIPTION": "获得 !M! 层敏捷",
+  "UPGRADE_DESCRIPTION": "获得 !M! 层敏捷"
+},"Zhenghuo:shen": {
+  "NAME": "神",
+  "DESCRIPTION": "获得5层真言 NL 保留",
+  "UPGRADE_DESCRIPTION": "获得5层真言 NL 保留"
+},"Zhenghuo:reng": {
+  "NAME": "刃",
+  "DESCRIPTION": "将两张 *小刀 加入手牌",
+  "UPGRADE_DESCRIPTION": "将两张 *小刀 加入手牌"
+},"Zhenghuo:dian": {
+  "NAME": "电",
+  "DESCRIPTION": "生成一颗 闪电充能球 ",
+  "UPGRADE_DESCRIPTION": "生成一颗 闪电充能球 "
+},"Zhenghuo:zhan": {
+  "NAME": "斩",
+  "DESCRIPTION": "预见 !M! NL 造成 !D! 点伤害",
+  "UPGRADE_DESCRIPTION": "预见 !M! NL 造成 !D! 点伤害"
+},"Zhenghuo:fei": {
+  "NAME": "飞",
+  "DESCRIPTION": "造成 !D! 点伤害 NL 下回合获得 [E]",
+  "UPGRADE_DESCRIPTION": "造成 !D! 点伤害 NL 下回合获得 [E]"
+},"Zhenghuo:kuang": {
+  "NAME": "狂",
+  "DESCRIPTION": "合成本卡的其他卡数值*1.5",
+  "UPGRADE_DESCRIPTION": "合成本卡的其他卡数值*1.5"
+},"Zhenghuo:dong": {
+  "NAME": "动",
+  "DESCRIPTION": "获得 !M! 层临时力量",
+  "UPGRADE_DESCRIPTION": "获得 !M! 层临时力量"
+},"Zhenghuo:hui": {
+  "NAME": "回",
+  "DESCRIPTION": "造成 !D! 点伤害 NL 抽 !M! 张牌",
+  "UPGRADE_DESCRIPTION": "获得 !M! 层临时力量"
+},"Zhenghuo:bao": {
+  "NAME": "暴",
+  "DESCRIPTION": "造成 !D! 点伤害 NL 抽 !M! 张攻击牌",
+  "UPGRADE_DESCRIPTION": "造成 !D! 点伤害 NL 抽 !M! 张攻击牌"
 }
 }

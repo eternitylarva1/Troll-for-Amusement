@@ -22,6 +22,7 @@ import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Objects;
 
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
 import static Zhenghuo.utils.CardArguments.RewardPatch.Words;
@@ -292,10 +293,19 @@ public void update()
         initializeSutureCard();
         for(char a:this.name.toCharArray())
         {
-            AbstractCard cm=getSpecificCardWithWord(String.valueOf(a));
-            if(cm!=null) {
-                sutureCards.add(cm);
-            };
+            boolean changjianzi=false;
+            for(AbstractCard cm:CardPool){
+
+                if (Objects.equals(cm.name, String.valueOf(a))){
+                    sutureCards.add(cm);
+                    changjianzi=true;
+                }
+            }
+            if(!changjianzi){AbstractCard cm=getSpecificCardWithWord(String.valueOf(a));
+                if(cm!=null) {
+                    sutureCards.add(cm);
+                };}
+
         }
         getTopCardStat();
 
@@ -374,11 +384,13 @@ public void update()
     }
     public  AbstractCard getSpecificCardWithWord(String specialword){
         ArrayList<AbstractCard> SPAC=new ArrayList<>();
+
 for(AbstractCard c: CardLibrary.getAllCards()){
     if(c.name.contains(specialword)){
         SPAC.add(c);
     }
 }
+
 if(!SPAC.isEmpty()) {
     return SPAC.get(AbstractDungeon.cardRandomRng.random(SPAC.size()-1));
 }

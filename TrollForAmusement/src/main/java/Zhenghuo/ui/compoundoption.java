@@ -1,5 +1,6 @@
 package Zhenghuo.ui;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -19,7 +20,7 @@ public class compoundoption extends AbstractCampfireOption {
         this.label = TEXT[0];
         this.usable = active;
         this.description = TEXT[1];
-        this.img = ImageMaster.CAMPFIRE_TOKE_BUTTON;
+        this.img = new Texture("ZhenghuoResources/images/ui/palslee1p.png");
     }
 
     public void useOption() {
