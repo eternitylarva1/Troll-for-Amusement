@@ -1,6 +1,5 @@
 package Zhenghuo.patchs;
 
-import Zhenghuo.actions.FusionAction;
 import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.TongpeiCard;
 import Zhenghuo.otherplayer.OtherPlayerHelper;
@@ -110,68 +109,77 @@ public class playerMethodPatch {
         if(num!=_instance.selectedCards.size()){
             num=_instance.selectedCards.size();
             Iterator var4 = AbstractDungeon.handCardSelectScreen.selectedCards.group.iterator();
-            ArrayList<Character> ChList = new ArrayList<>();
-            int upgradenum=0;
-            while(var4.hasNext()) {
-                c = (AbstractCard)var4.next();
-
-
-                if(!(c instanceof TongpeiCard)){
-
-                    System.out.println("正在尝试组合"+c.name);
-                    for (char ch : c.name.toCharArray()) {
-                        if(!(ch == "+".charAt(0)||Character.isDigit(ch))) {
-                            ChList.add(ch);
-                            System.out.println("已将"+ch+"加入检索序列");
-                        }
-                        else if(Character.isDigit(ch)){
-                            int number = ch - '0'-1;
-                            System.out.println("检测到数字"+number+"转换成升级");
-
-                            upgradenum+=number;
-
-                        }else{
-                            upgradenum++;
-                        }
-
-
-                    }
-                }
-                else{
-                    System.out.println("检测到名字为通配符，改为*");
-                    ChList.add("*".charAt(0));
-                }
-            }
-            AbstractCard result;
-            List<AbstractCard> result1=result(ChList);
-            if(!result1.isEmpty())
-            {
-
-                result= result1.get(AbstractDungeon.cardRandomRng.random(0,result1.size()-1)).makeSameInstanceOf();
-
-            }
-            else{
-                StringBuilder sb = new StringBuilder();
-                for (char s : ChList) {
-                    sb.append(s);
-                }
-                result=new CharacterCard( sb.toString());
-            }
-
-
-            cardResult=result;
-            num=AbstractDungeon.handCardSelectScreen.selectedCards.size();
-            cardResult.target_x=convertX(1);
-            cardResult.target_y=convertY(3);
-            cardResult.name=cardResult.originalName;
-            cardResult.applyPowers();
-            System.out.println("已经成功改变");
-        }
+            updateCard(var4);
 
         }
 
 
     }
+
+
+    public static void updateCard(Iterator var4)
+    {
+        AbstractCard c;
+        ArrayList<Character> ChList = new ArrayList<>();
+        int upgradenum=0;
+
+        while(var4.hasNext()) {
+            c = (AbstractCard)var4.next();
+
+
+            if(!(c instanceof TongpeiCard)){
+
+                System.out.println("正在尝试组合"+c.name);
+                for (char ch : c.name.toCharArray()) {
+                    if(!(ch == "+".charAt(0)||Character.isDigit(ch))) {
+                        ChList.add(ch);
+                        System.out.println("已将"+ch+"加入检索序列");
+                    }
+                    else if(Character.isDigit(ch)){
+                        int number = ch - '0'-1;
+                        System.out.println("检测到数字"+number+"转换成升级");
+
+                        upgradenum+=number;
+
+                    }else{
+                        upgradenum++;
+                    }
+
+
+                }
+            }
+            else{
+                System.out.println("检测到名字为通配符，改为*");
+                ChList.add("*".charAt(0));
+            }
+        }
+        AbstractCard result;
+        List<AbstractCard> result1=result(ChList);
+        if(!result1.isEmpty())
+        {
+
+            result= result1.get(AbstractDungeon.cardRandomRng.random(0,result1.size()-1)).makeSameInstanceOf();
+
+        }
+        else{
+            StringBuilder sb = new StringBuilder();
+            for (char s : ChList) {
+                sb.append(s);
+            }
+            result=new CharacterCard( sb.toString());
+        }
+
+
+        cardResult=result;
+
+        cardResult.target_x=convertX(1);
+        cardResult.target_y=convertY(3);
+        cardResult.name=cardResult.originalName;
+        cardResult.applyPowers();
+        System.out.println("已经成功改变");
+    }
+
+
 
     @SpirePatch(
             cls = "com.megacrit.cardcrawl.screens.select.GridCardSelectScreen",
@@ -190,67 +198,13 @@ public class playerMethodPatch {
             if(num!=_instance.selectedCards.size()){
                 num=_instance.selectedCards.size();
                 Iterator var4 = AbstractDungeon.gridSelectScreen.selectedCards.iterator();
-                ArrayList<Character> ChList = new ArrayList<>();
-                int upgradenum=0;
-                while(var4.hasNext()) {
-                    c = (AbstractCard)var4.next();
-
-
-                    if(!(c instanceof TongpeiCard)){
-
-                        System.out.println("正在尝试组合"+c.name);
-                        for (char ch : c.name.toCharArray()) {
-                            if(!(ch == "+".charAt(0)||Character.isDigit(ch))) {
-                                ChList.add(ch);
-                                System.out.println("已将"+ch+"加入检索序列");
-                            }
-                            else if(Character.isDigit(ch)){
-                                int number = ch - '0'-1;
-                                System.out.println("检测到数字"+number+"转换成升级");
-
-                                upgradenum+=number;
-
-                            }else{
-                                upgradenum++;
-                            }
-
-
-                        }
-                    }
-                    else{
-                        System.out.println("检测到名字为通配符，改为*");
-                        ChList.add("*".charAt(0));
-                    }
-                }
-                AbstractCard result;
-                List<AbstractCard> result1=result(ChList);
-                if(!result1.isEmpty())
-                {
-
-                    result= result1.get(AbstractDungeon.cardRandomRng.random(0,result1.size()-1)).makeSameInstanceOf();
-
-                }
-                else{
-                    StringBuilder sb = new StringBuilder();
-                    for (char s : ChList) {
-                        sb.append(s);
-                    }
-                    result=new CharacterCard( sb.toString());
-                }
-
-
-                cardResult=result;
                 num=AbstractDungeon.gridSelectScreen.selectedCards.size();
-                cardResult.target_x=convertX(1);
-                cardResult.target_y=convertY(3);
-                cardResult.name=cardResult.originalName;
-                cardResult.applyPowers();
-                System.out.println("已经成功改变");
-            }
+                updateCard(var4);
+
 
         }
 
 
     }
 
-}
+}}}

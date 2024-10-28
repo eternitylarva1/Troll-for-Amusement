@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import org.lwjgl.Sys;
 
@@ -291,12 +292,11 @@ public void update()
         initializeSutureCard();
         for(char a:this.name.toCharArray())
         {
-            for (AbstractCard abstractCard : CardPool) {
-                if(CardCrawlGame.languagePack.getCardStrings(abstractCard.cardID).NAME.contains(String.valueOf(a)))
-                {
-
-                    sutureCards.add(abstractCard);
-                }}}
+            AbstractCard cm=getSpecificCardWithWord(String.valueOf(a));
+            if(cm!=null) {
+                sutureCards.add(cm);
+            };
+        }
         getTopCardStat();
 
     }
@@ -372,6 +372,20 @@ public void update()
             }
         }
     }
+    public  AbstractCard getSpecificCardWithWord(String specialword){
+        ArrayList<AbstractCard> SPAC=new ArrayList<>();
+for(AbstractCard c: CardLibrary.getAllCards()){
+    if(c.name.contains(specialword)){
+        SPAC.add(c);
+    }
+}
+if(!SPAC.isEmpty()) {
+    return SPAC.get(AbstractDungeon.cardRandomRng.random(SPAC.size()-1));
+}
+else
+    return null;
+    }
+
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (p == null) {

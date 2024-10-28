@@ -141,11 +141,31 @@
   "UPGRADE_DESCRIPTION": "造成 !D! 点伤害"
 },"Zhenghuo:fang": {
   "NAME": "防",
-  "DESCRIPTION": "获得 !D! 点格挡",
+  "DESCRIPTION": "获得 !B! 点格挡",
   "UPGRADE_DESCRIPTION": "获得 !D! 点格挡"
 },"Zhenghuo:yu": {
   "NAME": "御",
-  "DESCRIPTION": "获得 !D! 点格挡",
+  "DESCRIPTION": "获得 !B! 点格挡",
   "UPGRADE_DESCRIPTION": "获得 !D! 点格挡"
+},"Zhenghuo:zhi": {
+  "NAME": "之",
+  "DESCRIPTION": "重复前面一个字的效果",
+  "UPGRADE_DESCRIPTION": "重复前面一个字的效果"
+},"Zhenghuo:shuang": {
+  "NAME": "双",
+  "DESCRIPTION": "再打出一次",
+  "UPGRADE_DESCRIPTION": "再打出一次"
+},"Zhenghuo:nu": {
+  "NAME": "怒",
+  "DESCRIPTION": "进入 愤怒 姿态",
+  "UPGRADE_DESCRIPTION": "进入 愤怒 姿态"
+},"Zhenghuo:hua": {
+  "NAME": "化",
+  "DESCRIPTION": "变为能力牌，每回合打出",
+  "UPGRADE_DESCRIPTION": "变为能力牌，每回合打出"
+},"Zhenghuo:ling": {
+  "NAME": "灵",
+  "DESCRIPTION": "将 *无实体 层数设定为 1",
+  "UPGRADE_DESCRIPTION": "将 *无实体 层数设定为 1"
 }
 }
