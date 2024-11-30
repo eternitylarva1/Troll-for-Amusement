@@ -107,7 +107,7 @@ public static CharacterScreen getdictionary()
 }
     @Override
     public void receiveEditCards() {/*
-        // TODO 这里写添加你卡牌的代码
+
         BaseMod.addCard(new Strike());
         BaseMod.addCard(new Soul_P());
         BaseMod.addCard(new Soul_G());
