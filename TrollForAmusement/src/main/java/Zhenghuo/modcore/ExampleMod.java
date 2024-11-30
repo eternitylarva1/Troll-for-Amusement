@@ -3,10 +3,7 @@ package Zhenghuo.modcore;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import Zhenghuo.actions.FusionAction;
-import Zhenghuo.card.BlackMyth;
-import Zhenghuo.card.CharacterCard;
-import Zhenghuo.card.Characterfusion;
-import Zhenghuo.card.RandomCardWithWord;
+import Zhenghuo.card.*;
 import Zhenghuo.charactercard.*;
 import Zhenghuo.events.MyFirstEvent;
 import Zhenghuo.otherplayer.OtherPlayerHelper;
@@ -357,6 +354,7 @@ System.out.println("正在预加载");
                         CardModifierManager.addModifier(copy, a.makeCopy());
                         copy.targetDrawScale = 0.75F;
                         copy.name=a.modifyName(copy.name,copy);
+
                         ///加入卡池
                         ModifiedCards.add(copy);
                     }
@@ -382,7 +380,7 @@ System.out.println("正在预加载");
                 AbstractAugment a = (AbstractAugment) CardAugmentsMod.modMap.get(id);
                 AbstractCard c=new CharacterCard("",CharacterCard.DESCRIPTION);
                 //给卡牌加入词条
-                AbstractCard copy = new CharacterCard(a.modifyName("",c),a.getAugmentDescription().replaceAll("#[yb]", ""));
+                AbstractCard copy = new CardArgument(a.modifyName("",c),a.getAugmentDescription().replaceAll("#[yb]", ""));
 
                 copy.targetDrawScale = 0.75F;
                 ///加入卡池

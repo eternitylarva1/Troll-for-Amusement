@@ -58,8 +58,10 @@ public static ArrayList<AbstractCard> CardPool=new ArrayList<>();
 
         InitizethisCard();
         initializeSutureCard();
-
-
+/*
+        if(this.tags.contains(CustomTags.CardArgument)){
+            this.sutureCards.clear();
+        }*/
         this.rawDescription = this.getDescription();
         this.initializeDescription();
 
@@ -69,7 +71,7 @@ public static ArrayList<AbstractCard> CardPool=new ArrayList<>();
 
             while(var2.hasNext()) {
                 AbstractCard c = (AbstractCard)var2.next();
-                c.applyPowers();
+
                 c.initializeDescription();
                 this.description.addAll(c.description);
 
@@ -270,7 +272,8 @@ public void update()
 
                 while(var2.hasNext()) {
                     AbstractCard c = (AbstractCard)var2.next();
-                    c.applyPowers();
+
+
                     c.initializeDescription();
                     this.description.addAll(c.description);
 
@@ -291,6 +294,10 @@ public void update()
     {
         sutureCards.clear();
         initializeSutureCard();
+        if(this.tags.contains(CustomTags.CardArgument)){
+            System.out.println("检测到为词条，取消修改");
+            return;
+        }
         for(char a:this.name.toCharArray())
         {
             boolean changjianzi=false;

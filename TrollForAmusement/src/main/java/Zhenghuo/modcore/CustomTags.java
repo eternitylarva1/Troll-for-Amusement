@@ -10,5 +10,8 @@ public class CustomTags {
     public static AbstractCard.CardTags WordCard;
     @SpireEnum
     public static AbstractCard.CardTags Zhenghuoblack;
+    @SpireEnum
+    public static AbstractCard.CardTags CardArgument;
+
 
 }
