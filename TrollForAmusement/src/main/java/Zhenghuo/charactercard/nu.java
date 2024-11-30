@@ -9,6 +9,8 @@ import basemod.cardmods.ExhaustMod;
 import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
+import com.megacrit.cardcrawl.cards.purple.SimmeringFury;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -57,7 +59,7 @@ public class nu extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-
+        this.addToBot(new ChangeStanceAction("Wrath"));
     }
 
 

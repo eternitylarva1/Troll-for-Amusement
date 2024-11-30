@@ -202,7 +202,7 @@
 },"Zhenghuo:hui": {
   "NAME": "回",
   "DESCRIPTION": "造成 !D! 点伤害 NL 抽 !M! 张牌",
-  "UPGRADE_DESCRIPTION": "获得 !M! 层临时力量"
+  "UPGRADE_DESCRIPTION": "造成 !D! 点伤害 NL 抽 !M! 张牌"
 },"Zhenghuo:bao": {
   "NAME": "暴",
   "DESCRIPTION": "造成 !D! 点伤害 NL 抽 !M! 张攻击牌",

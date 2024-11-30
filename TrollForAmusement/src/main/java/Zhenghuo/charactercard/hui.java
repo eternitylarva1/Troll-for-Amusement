@@ -9,6 +9,11 @@ import basemod.cardmods.ExhaustMod;
 import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.purple.WheelKick;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -34,7 +39,7 @@ public class hui extends CustomCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         this.damage = this.baseDamage = 15;
         this.magicNumber=this.baseMagicNumber=2;
-        Texture customTexture = TextImageGenerator.getTextImage(NAME,this.type);;
+        Texture customTexture = TextImageGenerator.getTextImage(NAME,this.type);
 
 // Step 2: 将Texture转换为TextureAtlas.AtlasRegion
         TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
@@ -57,7 +62,8 @@ public class hui extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-
+        this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+        this.addToBot(new DrawCardAction(p, this.magicNumber));
     }
 
 

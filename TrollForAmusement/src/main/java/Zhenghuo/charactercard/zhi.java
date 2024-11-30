@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
-
+//todo 在合成界面加一个Modifier
 public class zhi extends CustomCard {
 
     public static final String ID = ModHelper.makePath("zhi");

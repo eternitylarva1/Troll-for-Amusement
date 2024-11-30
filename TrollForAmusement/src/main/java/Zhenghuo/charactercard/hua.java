@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
-
+//Todo 在合成过程中完成这个卡牌
 public class hua extends CustomCard {
 
     public static final String ID = ModHelper.makePath("hua");
@@ -34,7 +34,7 @@ public class hua extends CustomCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         //this.damage = this.baseDamage = 6;
 
-        Texture customTexture = TextImageGenerator.getTextImage(NAME,this.type);;
+        Texture customTexture = TextImageGenerator.getTextImage(NAME,this.type);
 
 // Step 2: 将Texture转换为TextureAtlas.AtlasRegion
         TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
