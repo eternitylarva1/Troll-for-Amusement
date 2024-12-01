@@ -5,8 +5,10 @@ import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.modcore.CustomTags;
 import Zhenghuo.utils.TextImageGenerator;
 import basemod.AutoAdd;
+import basemod.abstracts.AbstractCardModifier;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
+import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.SpawnModificationCard;
@@ -306,6 +308,8 @@ public void update()
                 if (Objects.equals(cm.name, String.valueOf(a))){
                     sutureCards.add(cm);
                     changjianzi=true;
+           CardModifierManager.copyModifiers(cm,this,false,false,false);
+
                 }
             }
             if(!changjianzi){AbstractCard cm=getSpecificCardWithWord(String.valueOf(a));

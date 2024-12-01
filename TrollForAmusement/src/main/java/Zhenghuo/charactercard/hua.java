@@ -1,6 +1,7 @@
 package Zhenghuo.charactercard;
 
 
+import Zhenghuo.cardModifier.HuaModifier;
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.modcore.CustomTags;
 import Zhenghuo.utils.TextImageGenerator;
@@ -13,6 +14,8 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+
+import javax.smartcardio.Card;
 
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
 //Todo 在合成过程中完成这个卡牌
@@ -43,6 +46,7 @@ public class hua extends CustomCard {
         this.portrait = customRegion;
         CardModifierManager.addModifier(this,new ExhaustMod());
         this.tags.add(CustomTags.WordCard);
+        CardModifierManager.addModifier(this,new HuaModifier());
     }
     @Override
     public void upgrade() {

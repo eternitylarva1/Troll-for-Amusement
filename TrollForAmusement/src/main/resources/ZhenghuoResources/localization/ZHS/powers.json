@@ -19,7 +19,13 @@
   "DESCRIPTIONS": [
     "当你打出名字长度为 #y5 的牌时，获得 #b%d 点 真言 。"
   ]
-},"Zhenghuo:WuwenPower": {
+},"Zhenghuo:HuaPower": {
+  "NAME": "%s化",
+  "DESCRIPTIONS": [
+    "回合开始时，打出%d张%s"
+  ]
+},
+  "Zhenghuo:WuwenPower": {
   "NAME": "舞文",
   "DESCRIPTIONS": [
     "当你打出 zhenghuo:文字牌 时，抽 #b%d 张牌。"
