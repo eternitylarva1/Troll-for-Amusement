@@ -1,6 +1,7 @@
 package Zhenghuo.charactercard;
 
 
+import Zhenghuo.cardModifier.ShuangModifier;
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.modcore.CustomTags;
 import Zhenghuo.utils.TextImageGenerator;
@@ -41,8 +42,10 @@ public class shuang extends CustomCard {
         customRegion.flip(false, true);
 // Step 3: 设置卡牌的portrait属
         this.portrait = customRegion;
+        CardModifierManager.addModifier(this,new ShuangModifier());
         CardModifierManager.addModifier(this,new ExhaustMod());
         this.tags.add(CustomTags.WordCard);
+        //CardModifierManager.addModifier(this,new ShuangModifier());
     }
     @Override
     public void upgrade() {
