@@ -336,10 +336,12 @@ public void update()
 
                 }
             }
-            if(!changjianzi){AbstractCard cm=getSpecificCardWithWord(String.valueOf(a));
-                if(cm!=null) {
+            if(!changjianzi){
+                AbstractCard cm=getSpecificCardWithWord(String.valueOf(a),sutureCards);
+                if(cm!=null&&!sutureCards.contains(cm)) {
                     sutureCards.add(cm);
-                };}
+                };
+            }
 
         }
         getTopCardStat();
@@ -422,16 +424,20 @@ public void update()
 
         }
     }
-    public  AbstractCard getSpecificCardWithWord(String specialword){
+    public  AbstractCard getSpecificCardWithWord(String specialword ,ArrayList<AbstractCard> cardlist){
         ArrayList<AbstractCard> SPAC=new ArrayList<>();
 
 for(AbstractCard c: CardLibrary.getAllCards()){
     if(c.name.contains(specialword)){
         SPAC.add(c);
+        if(cardlist.contains(c)){
+            break;
+        }
     }
 }
 
 if(!SPAC.isEmpty()) {
+
     return SPAC.get(AbstractDungeon.cardRandomRng.random(SPAC.size()-1));
 }
 else

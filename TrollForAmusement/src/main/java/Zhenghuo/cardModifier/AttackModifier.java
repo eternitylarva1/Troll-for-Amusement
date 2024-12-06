@@ -1,6 +1,6 @@
 package Zhenghuo.cardModifier;
 
-import CardAugments.cardmods.util.PreviewedMod;
+
 import CardAugments.patches.InterruptUseCardFieldPatches;
 import CardAugments.util.PortraitHelper;
 import basemod.abstracts.AbstractCardModifier;

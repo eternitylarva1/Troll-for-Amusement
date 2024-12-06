@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static Zhenghuo.actions.GatherCharacterAction.result;
-import static Zhenghuo.utils.CardArguments.Chimeraopened;
+
 import static Zhenghuo.utils.CardArguments.RewardPatch.ModifiedCards;
 import static Zhenghuo.utils.CardArguments.RewardPatch.Relics;
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.gridSelectScreen;

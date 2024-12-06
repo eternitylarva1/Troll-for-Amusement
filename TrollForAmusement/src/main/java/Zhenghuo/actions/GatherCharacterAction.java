@@ -7,7 +7,7 @@ package Zhenghuo.actions;
 
 
 import CardAugments.CardAugmentsMod;
-import CardAugments.cardmods.AbstractAugment;
+
 import Zhenghuo.card.CardArgument;
 import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.TongpeiCard;
@@ -31,6 +31,8 @@ import java.util.stream.Collectors;
 
 import static Zhenghuo.patchs.playerMethodPatch.updatePatch.extractWords;
 import static Zhenghuo.patchs.playerMethodPatch.updatePatch.getWords;
+
+
 import static Zhenghuo.utils.CardArguments.Chimeraopened;
 import static Zhenghuo.utils.CardArguments.RewardPatch.ModifiedCards;
 
@@ -241,9 +243,7 @@ public class GatherCharacterAction extends AbstractGameAction {
             List<AbstractCard> resulta=preresult(charList);
                     if(resulta.isEmpty())
                     {
-                        //todo 检测其中是否包含词条
-                        //todo 如果包含词条，就把词条去掉，重新检测是否能组成卡牌
-                        //todo 如果能组成卡牌，则组成卡牌，然后把词条加上
+
                         ArrayList<AbstractCard> cardlist=extractWords(charList);
                         newcharlist=getWords(charList);
                         System.out.println(newcharlist);

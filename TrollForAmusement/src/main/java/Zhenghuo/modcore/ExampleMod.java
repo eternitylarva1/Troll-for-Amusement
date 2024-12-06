@@ -22,6 +22,7 @@ import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -52,8 +53,9 @@ import static Zhenghuo.actions.ChangePlayerAction.ChangePlayer;
 import static Zhenghuo.card.CharacterCard.CardPool;
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.Cangjie;
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
-import static Zhenghuo.utils.CardArguments.Chimeraopened;
+
 import static Zhenghuo.utils.CardArguments.RewardPatch.*;
+
 import static com.megacrit.cardcrawl.core.Settings.language;
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.player;
 
@@ -246,7 +248,7 @@ public static boolean hasLoaded=false;
     public void receivePostBattle(AbstractRoom abstractRoom) {
         OtherPlayerHelper.clearMinions(player);
     }
-    public static HashMap<String, AbstractAugment> modMap=new HashMap<>();
+
     @Override
     public void receivePostDungeonInitialize() {
         if(!Settings.isEndless){
@@ -272,7 +274,9 @@ public static boolean hasLoaded=false;
             }
         }}
     public static void InitizeModifiedCards()
-    {Descriptions.clear();
+    {
+
+        Descriptions.clear();
         Descriptions.add("虚无");
         Descriptions.add("斩杀");
         Descriptions.add("充能球");
@@ -337,56 +341,6 @@ System.out.println("正在预加载");
                .collect(Collectors.toCollection(ArrayList::new));
        System.out.println(Relics);
 
-        if(Chimeraopened())
-        {
-            cardAugmentsConfig.setBool("modifyInCombat", false);
-/*
-            for(AbstractCard c:CardLibrary.getAllCards()) {
-                if(!c.hasTag(CustomTags.WordCard)) {
-                    for (String id : CardAugmentsMod.modMap.keySet()) {
-                        ///遍历所有词条
-                        AbstractAugment a = (AbstractAugment) CardAugmentsMod.modMap.get(id);
-
-                        if (
-                                a.canApplyTo(c)) {
-                            //给卡牌加入词条
-
-                            AbstractCard copy = c.makeCopy();
-                            CardModifierManager.addModifier(copy, a.makeCopy());
-                            copy.targetDrawScale = 0.75F;
-                            copy.name = a.modifyName(copy.name, copy);
-
-                            ///加入卡池
-                            ModifiedCards.add(copy);
-                        }
-
-                    }
-                }
-            }
-*/
-
-            for (String id : CardAugmentsMod.modMap.keySet()) {
-                ///遍历所有词条
-                AbstractAugment a = (AbstractAugment) CardAugmentsMod.modMap.get(id);
-                //给卡牌加入词条
-                AbstractCard copy = new CardArgument(a);
-                //CardModifierManager.addModifier(copy,a);
-                copy.name= a.modifyName(copy.originalName,copy);
-                copy.rawDescription= a.modifyDescription(copy.rawDescription,copy);
-                copy.targetDrawScale = 0.75F;
-                ///加入卡池
-                CardAugrments.group.add(copy);
-            }
-
-
-
-            Collections.sort(CardAugrments.group, new Comparator<AbstractCard>() {
-                @Override
-                public int compare(AbstractCard o1, AbstractCard o2) {
-                    return Collator.getInstance().compare(o1.name, o2.name);
-                }
-            });
-        }
 
     }
 
@@ -399,6 +353,7 @@ System.out.println("正在预加载");
         });*/
         dictionary=new CharacterScreen();
         InitizeModifiedCards();
+
 
     }
 
