@@ -1,11 +1,9 @@
 package Zhenghuo.relics;
 
-import Zhenghuo.actions.BetteGatherCharacterAction;
-import Zhenghuo.actions.GatherCharacterAction;
+import Zhenghuo.actions.BetteFusionCharacterAction;
 import Zhenghuo.helpers.ModHelper;
 import basemod.abstracts.CustomRelic;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
@@ -36,6 +34,6 @@ public class GatherMachine extends CustomRelic implements ClickableRelic {
     @Override
     public void onRightClick() {
        /// addToBot(new GatherCharacterAction(AbstractDungeon.player, AbstractDungeon.player, -1, false,false));
-        addToBot(new BetteGatherCharacterAction(99,true));
+        addToBot(new BetteFusionCharacterAction(99,true));
     }
 }

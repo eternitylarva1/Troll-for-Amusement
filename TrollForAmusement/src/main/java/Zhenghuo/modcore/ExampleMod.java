@@ -340,45 +340,35 @@ System.out.println("正在预加载");
         if(Chimeraopened())
         {
             cardAugmentsConfig.setBool("modifyInCombat", false);
+/*
             for(AbstractCard c:CardLibrary.getAllCards()) {
+                if(!c.hasTag(CustomTags.WordCard)) {
+                    for (String id : CardAugmentsMod.modMap.keySet()) {
+                        ///遍历所有词条
+                        AbstractAugment a = (AbstractAugment) CardAugmentsMod.modMap.get(id);
 
-                for (String id : CardAugmentsMod.modMap.keySet()) {
-                    ///遍历所有词条
-                    AbstractAugment a = (AbstractAugment) CardAugmentsMod.modMap.get(id);
+                        if (
+                                a.canApplyTo(c)) {
+                            //给卡牌加入词条
 
-                    if (
-                            a.canApplyTo(c)) {
-                        //给卡牌加入词条
+                            AbstractCard copy = c.makeCopy();
+                            CardModifierManager.addModifier(copy, a.makeCopy());
+                            copy.targetDrawScale = 0.75F;
+                            copy.name = a.modifyName(copy.name, copy);
 
-                        AbstractCard copy = c.makeCopy();
-                        CardModifierManager.addModifier(copy, a.makeCopy());
-                        copy.targetDrawScale = 0.75F;
-                        copy.name=a.modifyName(copy.name,copy);
+                            ///加入卡池
+                            ModifiedCards.add(copy);
+                        }
 
-                        ///加入卡池
-                        ModifiedCards.add(copy);
                     }
-                /*
-
-                if (!c.getClass().isAnnotationPresent(NoCompendium.class) &&
-                        this.selectedAugment.canApplyTo(c)) {
-                    AbstractCard copy = c.makeCopy();
-                    CardModifierManager.addModifier(copy, this.selectedAugment.makeCopy());
-                    if (this.upgradePreview && copy.canUpgrade()) {
-                        copy.upgrade();
-                        copy.displayUpgrades();
-                    }
-                    copy.targetDrawScale = 0.75F;
-                    this.validCards.addToBottom(copy);
-                }
-*/
                 }
             }
+*/
 
             for (String id : CardAugmentsMod.modMap.keySet()) {
                 ///遍历所有词条
                 AbstractAugment a = (AbstractAugment) CardAugmentsMod.modMap.get(id);
-                AbstractCard c=new CharacterCard("",CharacterCard.DESCRIPTION);
+                AbstractCard c=new CharacterCard("",CharacterCard.DESCRIPTION,CharacterCard.ID,true);
                 //给卡牌加入词条
                 AbstractCard copy = new CardArgument(a.modifyName("",c),a.getAugmentDescription().replaceAll("#[yb]", ""));
 

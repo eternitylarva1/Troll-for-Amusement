@@ -157,8 +157,8 @@
   "UPGRADE_DESCRIPTION": "重复前面一个字的效果"
 },"Zhenghuo:shuang": {
   "NAME": "双",
-  "DESCRIPTION": "额外打出一次本牌",
-  "UPGRADE_DESCRIPTION": "额外打出一次本牌"
+  "DESCRIPTION": "额外执行一次效果",
+  "UPGRADE_DESCRIPTION": "额外执行一次效果"
 },"Zhenghuo:nu": {
   "NAME": "怒",
   "DESCRIPTION": "进入 愤怒 姿态",

@@ -5,6 +5,8 @@ import Zhenghuo.card.Strike;
 import Zhenghuo.card.TongpeiCard;
 import Zhenghuo.modcore.ExampleMod;
 import Zhenghuo.relics.Dictionary;
+import Zhenghuo.relics.GatherMachine;
+import Zhenghuo.relics.SplitMachine;
 import basemod.abstracts.CustomPlayer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -100,6 +102,8 @@ public class Mycharacter extends CustomPlayer  {
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
         retVal.add(Dictionary.ID);
+        retVal.add(SplitMachine.ID);
+        retVal.add(GatherMachine.ID);
         return retVal;
     }
 

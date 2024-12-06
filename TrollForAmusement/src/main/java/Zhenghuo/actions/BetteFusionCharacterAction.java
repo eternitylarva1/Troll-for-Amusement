@@ -6,7 +6,6 @@ package Zhenghuo.actions;
 //
 
 
-import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.TongpeiCard;
 import Zhenghuo.modcore.CustomTags;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -16,21 +15,23 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToHandEffect;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static Zhenghuo.actions.FusionAction.cardResult;
 import static Zhenghuo.actions.GatherCharacterAction.result;
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.gridSelectScreen;
 
-public class BetteGatherCharacterAction extends AbstractGameAction {
+public class BetteFusionCharacterAction extends AbstractGameAction {
     public static final String[] TEXT= new String[]{"",""};
     private AbstractPlayer player;
     private int numberOfCards;
     private boolean optional;
 
-    public BetteGatherCharacterAction(int numberOfCards, boolean optional) {
+    public BetteFusionCharacterAction(int numberOfCards, boolean optional) {
         this.actionType = ActionType.CARD_MANIPULATION;
         this.duration = this.startDuration = Settings.ACTION_DUR_FAST;
         this.player = AbstractDungeon.player;
@@ -38,7 +39,7 @@ public class BetteGatherCharacterAction extends AbstractGameAction {
         this.optional = optional;
     }
 
-    public BetteGatherCharacterAction(int numberOfCards) {
+    public BetteFusionCharacterAction(int numberOfCards) {
         this(numberOfCards, false);
     }
 
@@ -101,7 +102,7 @@ public class BetteGatherCharacterAction extends AbstractGameAction {
                             c.isGlowing=false;
                         }
                     }
-
+                    FusionAction.isFusion=true;
                     if (this.optional) {
                         gridSelectScreen.open(temp, this.numberOfCards, true, "请组合需要的卡牌(手牌+所有文字牌)");
                     } else {
@@ -150,43 +151,12 @@ public class BetteGatherCharacterAction extends AbstractGameAction {
                     }
                 }
 
-                List<AbstractCard> result =result(ChList);
-                if(!result.isEmpty()){
-                    System.out.println("检测到符合项目，开始获取结果");
-                    var4 = AbstractDungeon.gridSelectScreen.selectedCards.iterator();
-                    while(var4.hasNext()) {
-                        c = (AbstractCard)var4.next();
-                       AbstractDungeon.player.hand.removeCard(c);
-                       AbstractDungeon.player.discardPile.removeCard(c);
-                       AbstractDungeon.player.drawPile.removeCard(c);
-                    }
-
-
-                    AbstractCard cm=result.get(AbstractDungeon.cardRandomRng.random(0,result.size()-1)).makeSameInstanceOf();
-
-                    if(!(cm.hasTag(CustomTags.WordCard))){
-                        cm.name = cm.originalName;
-                    }else
-                    {/*
-                        AbstractCard am=new CharacterCard(true);
-                        ((CharacterCard) am).isAugrment=true;
-                        copyModifiers(cm,am,false,true,true);
-                        cm=am;
-                        cm.name=onRenderTitle(cm,cm.originalName);
-                        System.out.println("已经将牌改为词条");-*/
-                    }
-                    if(upgradenum>0){
-                        for(int i=0;i<upgradenum;i++)
-                        {
-                            cm.upgrade();
-                        }
-                    }
-
-
-                    AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(cm));
-                    System.out.println("已经合成"+cm.name);
-
+                //List<AbstractCard> result =result(ChList);
+                if(cardResult!=null){
+                    float PADDING = 25.0F * Settings.scale;
+                    AbstractDungeon.effectList.add(new ShowCardAndAddToHandEffect(cardResult, (float)Settings.WIDTH / 2.0F + PADDING + AbstractCard.IMG_WIDTH, (float)Settings.HEIGHT / 2.0F));
                 }
+
                 else
                 {
                     System.out.println("未检测到符合项");

@@ -48,11 +48,16 @@ public class CharacterCard extends CustomCard implements CustomSavable<String>, 
     private boolean haschanged=false;
     public boolean isAugrment=false;
 public static ArrayList<AbstractCard> CardPool=new ArrayList<>();
+    public CharacterCard(String NAME,String DESCRIPTION,String id)
+    {
+        this(NAME,DESCRIPTION,id,false);
 
-    public CharacterCard(String NAME,String DESCRIPTION,String id) {
+    }
+    public CharacterCard(String NAME,String DESCRIPTION,String id,boolean isAugrment) {
 
         // 为了命名规范修改了变量名。这些参数具体的作用见下方
         super(id, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        this.isAugrment=isAugrment;
         this.baseDamage = this.damage = 0;
         this.baseBlock = this.block = 0;
         this.baseMagicNumber = this.magicNumber = 0;
@@ -247,14 +252,17 @@ public void update()
             this.rarity = topCard.rarity;
             this.type = topCard.type;
             //this.color = topCard.color;
-            this.Text=TextImageGenerator.getTextImage(this.name,type);
-            Texture customTexture = Text;
+
+                this.Text = TextImageGenerator.getTextImage(this.name, type);
+                Texture customTexture = Text;
 // Step 2: 将Texture转换为TextureAtlas.AtlasRegion
-            TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
+                TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
+
+                customRegion.flip(false, true);
+                this.portrait = customRegion;
+
             int attack=0;
             int skill=0;
-            customRegion.flip(false, true);
-            this.portrait = customRegion;
             AbstractCard card;
             for (Iterator<AbstractCard> var1 = this.sutureCards.iterator(); var1.hasNext(); this.baseBlock += Integer.max(0, card.baseBlock)) {
                 card = (AbstractCard) var1.next();
@@ -297,13 +305,15 @@ public void update()
             }
         }
         else{
-            this.Text=TextImageGenerator.getTextImage(this.name,type);
-            Texture customTexture = Text;
-// Step 2: 将Texture转换为TextureAtlas.AtlasRegion
-            TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
 
-            customRegion.flip(false, true);
-            this.portrait = customRegion;
+                this.Text = TextImageGenerator.getTextImage(this.name, type);
+                Texture customTexture = Text;
+// Step 2: 将Texture转换为TextureAtlas.AtlasRegion
+                TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
+
+                customRegion.flip(false, true);
+                this.portrait = customRegion;
+
         }
     }
     public void InitizethisCard()

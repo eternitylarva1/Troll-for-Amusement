@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import static Zhenghuo.actions.FusionAction.cardResult;
+import static Zhenghuo.actions.FusionAction.isFusion;
 import static Zhenghuo.actions.GatherCharacterAction.result;
 
 
@@ -159,16 +160,34 @@ public class playerMethodPatch {
         {
 
             result= result1.get(AbstractDungeon.cardRandomRng.random(0,result1.size()-1)).makeSameInstanceOf();
-
+            System.out.println("检测到符合项目，开始获取结果");
+            var4 = AbstractDungeon.gridSelectScreen.selectedCards.iterator();
+            while(var4.hasNext()) {
+                c = (AbstractCard)var4.next();
+                AbstractDungeon.player.hand.removeCard(c);
+                AbstractDungeon.player.discardPile.removeCard(c);
+                AbstractDungeon.player.drawPile.removeCard(c);
+            }
         }
-        else{
+        else if(isFusion){
             StringBuilder sb = new StringBuilder();
             for (char s : ChList) {
                 sb.append(s);
             }
             result=new CharacterCard( sb.toString());
         }
-
+        else {
+            result=new CharacterCard("空");
+            result.rawDescription="未检测到符合条件的卡";
+            result.initializeDescription();
+           ((CharacterCard) result).sutureCards.clear();
+        }
+        if(upgradenum>0){
+            for(int i=0;i<upgradenum;i++)
+            {
+                result.upgrade();
+            }
+        }
 
         cardResult=result;
 

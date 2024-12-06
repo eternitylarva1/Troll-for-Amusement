@@ -1,22 +1,14 @@
 package Zhenghuo.card;
 
 
-import Zhenghuo.actions.BetteGatherCharacterAction;
-import Zhenghuo.actions.GatherAction;
-import Zhenghuo.actions.GatherCharacterAction;
-import Zhenghuo.actions.SplitCharacterAction;
+import Zhenghuo.actions.BetteFusionCharacterAction;
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.utils.TextImageGenerator;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.common.ExhaustAction;
-import com.megacrit.cardcrawl.actions.unique.CalculatedGambleAction;
-import com.megacrit.cardcrawl.cards.colorless.Purity;
-import com.megacrit.cardcrawl.cards.green.CalculatedGamble;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -64,7 +56,7 @@ public class Charactergather extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new BetteGatherCharacterAction( -1,true));
+        addToBot(new BetteFusionCharacterAction( -1,true));
 
     }
 

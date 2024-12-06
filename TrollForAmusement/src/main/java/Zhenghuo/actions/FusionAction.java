@@ -102,7 +102,7 @@ if(cardResult!=null){
     });
 }*/
         if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
-isFusion=false;
+                isFusion=false;
 
 
                 if(cardResult!=null){

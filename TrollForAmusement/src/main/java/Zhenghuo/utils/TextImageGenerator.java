@@ -133,6 +133,8 @@ public class TextImageGenerator {
     }
     public static Texture getTextImage(String Name, AbstractCard.CardType cardType)
     {
+        System.out.println("生成卡图ing");
         return convertToTexture( CardTextureGenerator.createTextImage( Name,  250,  190, cardType));
     }
+
 }
