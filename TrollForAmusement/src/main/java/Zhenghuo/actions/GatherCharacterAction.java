@@ -6,12 +6,9 @@ package Zhenghuo.actions;
 //
 
 
-import CardAugments.CardAugmentsMod;
-
 import Zhenghuo.card.CardArgument;
 import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.TongpeiCard;
-import basemod.abstracts.AbstractCardModifier;
 import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
@@ -33,7 +30,7 @@ import static Zhenghuo.patchs.playerMethodPatch.updatePatch.extractWords;
 import static Zhenghuo.patchs.playerMethodPatch.updatePatch.getWords;
 
 
-import static Zhenghuo.utils.CardArguments.Chimeraopened;
+import static Zhenghuo.modcore.ExampleMod.Chimeraopened;
 import static Zhenghuo.utils.CardArguments.RewardPatch.ModifiedCards;
 
 public class GatherCharacterAction extends AbstractGameAction {

@@ -19,7 +19,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import static CardAugments.CardAugmentsMod.applyWeightedCardMod;
 import static CardAugments.CardAugmentsMod.rollRarity;
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
-import static Zhenghuo.utils.CardArguments.Chimeraopened;
+import static Zhenghuo.modcore.ExampleMod.Chimeraopened;
 
 
 public class AugrmentAttack extends CustomCard {

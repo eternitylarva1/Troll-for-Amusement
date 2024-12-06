@@ -1,8 +1,6 @@
 package Zhenghuo.modcore;
 
-import CardAugments.CardAugmentsMod;
-import CardAugments.cardmods.AbstractAugment;
-import Zhenghuo.actions.FusionAction;
+
 import Zhenghuo.card.*;
 import Zhenghuo.charactercard.*;
 import Zhenghuo.events.MyFirstEvent;
@@ -86,7 +84,7 @@ public static String NowPlayer=null;
     private static final String ENEYGY_ORB = "ZhenghuoModResources/img/char/cost_orb.png";
     public static final List<Consumer<SpriteBatch>> renderable = new ArrayList();
 
-
+public static boolean Chimera1=false;
     public static final Color MY_COLOR = new Color(1.0F / 255.0F, 1.0F / 255.0F, 3.0F / 255.0F, 0.85F);
     public ExampleMod() {
         BaseMod.subscribe(this); // 告诉basemod你要订阅事件
@@ -107,6 +105,17 @@ public static CharacterScreen getdictionary()
 {
     return dictionary;
 }
+
+    public static boolean Chimeraopened()
+    {
+        if(Loader.isModLoadedOrSideloaded("CardAugments"))
+        {
+            Chimera1=true;
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void receiveEditCards() {/*
 

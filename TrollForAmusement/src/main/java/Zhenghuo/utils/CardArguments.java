@@ -3,23 +3,19 @@ package Zhenghuo.utils;
 import CardAugments.CardAugmentsMod;
 import CardAugments.cardmods.AbstractAugment;
 import Zhenghuo.card.CardArgument;
+import Zhenghuo.modcore.ExampleMod;
 import basemod.BaseMod;
 import basemod.interfaces.PostInitializeSubscriber;
 import com.evacipated.cardcrawl.modthespire.Loader;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.colorless.Madness;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.relics.PeacePipe;
 
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Map;
 
 import static CardAugments.CardAugmentsMod.cardAugmentsConfig;
 import static Zhenghuo.utils.CardArguments.RewardPatch.CardAugrments;
@@ -30,16 +26,8 @@ public class CardArguments implements PostInitializeSubscriber {
     }
     private static AbstractCard fallback=(AbstractCard)new Madness();
 
-    public static boolean Chimeraopened()
-    {
-        if(Loader.isModLoadedOrSideloaded("CardAugments"))
-        {
-            return true;
-        }
-        return false;
-    }
     private static void initializeModifiedCards(){
-        if(Chimeraopened()){
+        if(ExampleMod.Chimeraopened()){
             for (String id : CardAugmentsMod.modMap.keySet()) {
                 if(Loader.isModLoadedOrSideloaded("CardAugments"))
                 ///遍历所有词条
