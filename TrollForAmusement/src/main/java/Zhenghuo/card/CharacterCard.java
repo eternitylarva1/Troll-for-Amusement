@@ -9,6 +9,7 @@ import basemod.AutoAdd;
 import basemod.abstracts.AbstractCardModifier;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
+import basemod.cardmods.ExhaustMod;
 import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -76,12 +77,13 @@ public static ArrayList<AbstractCard> CardPool=new ArrayList<>();
 
             while(var2.hasNext()) {
                 AbstractCard c = (AbstractCard)var2.next();
-
+                //CardModifierManager.removeModifiersById(c, ExhaustMod.ID,false);
                 c.initializeDescription();
 
                 this.description.addAll(c.description);
 
             }
+
         }
 
 
@@ -388,21 +390,26 @@ public void update()
                 AbstractCard c = (AbstractCard)var2.next();
                 c.applyPowers();
                 c.initializeDescription();
-                System.out.println(c.description.get(0).text);
-
-                for(DescriptionLine dl:c.description){
+               // System.out.println(c.description.get(0).text);
+                ArrayList<DescriptionLine> description = new ArrayList<>(c.description);
+                for(DescriptionLine dl:description){
+                    if(var2.hasNext())
+                    {
+                        if(dl.text.contains("消耗")){
+                            c.description.remove(dl);
+                        };
+                    }
                     dl.text= dl.text.replaceAll(" D ", String.valueOf(c.damage));
-
+                    dl.text= dl.text.replaceAll(" B ", String.valueOf(c.block));
+                    dl.text= dl.text.replaceAll(" M ", String.valueOf(c.magicNumber));
                     System.out.println("检测到D,正在替换");
                 }
-
                 this.description.addAll(c.description);
-                if(this.exhaust){
-                    if(!this.rawDescription.contains("消耗"))
-                    {   this.rawDescription+="Nl 消耗";}
 
-                }
+
             }
+
+
         }
     }
     public  AbstractCard getSpecificCardWithWord(String specialword){
