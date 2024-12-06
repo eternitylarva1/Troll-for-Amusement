@@ -1,8 +1,8 @@
 {
   "modid": "Zhenghuo",
-  "name": "整活Mod",
+  "name": "文字Mod",
   "author_list": ["Butterfly"],
-  "description": "创意来自贴吧和群友，也有一部分自己想的",
+  "description": "目前还是个半成品，部分卡牌的效果并没有实装，建议配合奇美拉mod,moji奇美拉mod游玩",
   "version": "0.1.1",
   "sts_version": "12-22-2020",
   "mts_version": "3.23.2",
