@@ -124,8 +124,8 @@
   "UPGRADE_DESCRIPTION": "当你打出名字长度为5的牌时，获得 !M! 点 力量 "
 },"Zhenghuo:CardArgument": {
   "NAME": "词条",
-  "DESCRIPTION": "词条 ",
-  "UPGRADE_DESCRIPTION": "词条 "
+  "DESCRIPTION": "",
+  "UPGRADE_DESCRIPTION": ""
 },
   "Zhenghuo:Wuwen": {
   "NAME": "舞文",

@@ -1,8 +1,10 @@
 package Zhenghuo.patchs;
 
+import Zhenghuo.card.CardArgument;
 import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.TongpeiCard;
 import Zhenghuo.otherplayer.OtherPlayerHelper;
+import Zhenghuo.utils.CardArguments;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
@@ -20,6 +22,7 @@ import java.util.List;
 import static Zhenghuo.actions.FusionAction.cardResult;
 import static Zhenghuo.actions.FusionAction.isFusion;
 import static Zhenghuo.actions.GatherCharacterAction.result;
+import static Zhenghuo.utils.CardArguments.RewardPatch.CardAugrments;
 
 
 public class playerMethodPatch {
@@ -116,6 +119,34 @@ public class playerMethodPatch {
 
 
     }
+
+        public static ArrayList<AbstractCard> extractWords( List<Character> charList) {
+            ArrayList<AbstractCard> result = new ArrayList<>();
+            outer:
+            for (AbstractCard card : CardAugrments.group) {
+                List<Character> tempCharList = new ArrayList<>(charList);
+                int index = 0;
+                for (char c : card.name.toCharArray()) {
+                    boolean found = false;
+                    for (int i = 0; i < tempCharList.size(); i++) {
+                        if (tempCharList.get(i) == c) {
+                            tempCharList.remove(i);
+                            index++;
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        continue outer;
+                    }
+                }
+                if (index == card.name.length()) {
+                    result.add(card);
+                    charList.removeAll(tempCharList);
+                }
+            }
+            return result;
+        }
 
 
     public static void updateCard(Iterator var4)

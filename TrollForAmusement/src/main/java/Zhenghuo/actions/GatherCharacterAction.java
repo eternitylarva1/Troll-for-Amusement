@@ -201,7 +201,7 @@ public class GatherCharacterAction extends AbstractGameAction {
 public static List<AbstractCard> result (List<Character> charList){
         if(Chimeraopened())
         {
-            return ModifiedCards.stream()
+            List<AbstractCard> resulta=ModifiedCards.stream()
                     .filter(obj -> {
                         String name = obj.name;
 
@@ -227,7 +227,12 @@ public static List<AbstractCard> result (List<Character> charList){
                         // 最终，charListCopy 应该只剩下未使用的字符
                         return charListCopy.isEmpty();
                     })
-                    .collect(Collectors.toList());}
+                    .collect(Collectors.toList());
+                    if(resulta.isEmpty())
+                    {
+
+                    }
+            return resulta;}
 
         else{
         return CardLibrary.getAllCards().stream()

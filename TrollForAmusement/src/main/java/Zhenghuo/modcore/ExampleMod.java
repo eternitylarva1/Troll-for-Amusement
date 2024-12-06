@@ -368,10 +368,11 @@ System.out.println("正在预加载");
             for (String id : CardAugmentsMod.modMap.keySet()) {
                 ///遍历所有词条
                 AbstractAugment a = (AbstractAugment) CardAugmentsMod.modMap.get(id);
-                AbstractCard c=new CharacterCard("",CharacterCard.DESCRIPTION,CharacterCard.ID,true);
                 //给卡牌加入词条
-                AbstractCard copy = new CardArgument(a.modifyName("",c),a.getAugmentDescription().replaceAll("#[yb]", ""));
-
+                AbstractCard copy = new CardArgument();
+                CardModifierManager.addModifier(copy,a);
+                a.modifyName(copy.originalName,copy);
+                a.modifyDescription(copy.rawDescription,copy);
                 copy.targetDrawScale = 0.75F;
                 ///加入卡池
                 ModifiedCards.add(copy);

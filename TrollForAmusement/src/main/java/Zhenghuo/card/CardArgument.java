@@ -34,7 +34,7 @@ public class CardArgument extends CustomCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION+" NL zhenghuo:词条", TYPE, COLOR, RARITY, TARGET);
         this.magicNumber = this.baseMagicNumber = 100;
 
-        Texture customTexture = TextImageGenerator.getTextImage(NAME);;
+        Texture customTexture = TextImageGenerator.getTextImage("词条");;
         this.tags.add(CustomTags.WordCard);
 // Step 2: 将Texture转换为TextureAtlas.AtlasRegion
         TextureAtlas.AtlasRegion customRegion = new TextureAtlas.AtlasRegion(customTexture, 0, 0, customTexture.getWidth(), customTexture.getHeight());
