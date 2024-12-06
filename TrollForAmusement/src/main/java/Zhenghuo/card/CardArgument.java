@@ -4,6 +4,8 @@ package Zhenghuo.card;
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.modcore.CustomTags;
 import Zhenghuo.utils.TextImageGenerator;
+import basemod.AutoAdd;
+import basemod.abstracts.AbstractCardModifier;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,7 +17,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.ending.CorruptHeart;
 
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
-
+@AutoAdd.Ignore
 public class CardArgument extends CustomCard {
 
     public static final String ID = ModHelper.makePath("CardArgument");
@@ -28,12 +30,13 @@ public class CardArgument extends CustomCard {
     private static final CardColor COLOR = CharacterBlack;
     private static final CardRarity RARITY = CardRarity.SPECIAL;
     private static final CardTarget TARGET = CardTarget.ENEMY;
+    public   AbstractCardModifier cardModifier ;
 
-    public CardArgument(String NAME,String DESCRIPTION) {
+    public CardArgument(String NAME, String DESCRIPTION, AbstractCardModifier cardModifier) {
         // 为了命名规范修改了变量名。这些参数具体的作用见下方
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION+" NL zhenghuo:词条", TYPE, COLOR, RARITY, TARGET);
         this.magicNumber = this.baseMagicNumber = 100;
-
+        this.cardModifier=cardModifier;
         Texture customTexture = TextImageGenerator.getTextImage("词条");;
         this.tags.add(CustomTags.WordCard);
 // Step 2: 将Texture转换为TextureAtlas.AtlasRegion
@@ -45,7 +48,11 @@ public class CardArgument extends CustomCard {
     }
     public CardArgument()
     {
-        this("",DESCRIPTION);
+        this("",DESCRIPTION,null);
+    }
+    public CardArgument(AbstractCardModifier cardModifier )
+    {
+        this("",DESCRIPTION,cardModifier);
     }
     @Override
     public void upgrade() {

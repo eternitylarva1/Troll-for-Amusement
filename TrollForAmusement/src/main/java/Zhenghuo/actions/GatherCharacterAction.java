@@ -6,8 +6,13 @@ package Zhenghuo.actions;
 //
 
 
+import CardAugments.CardAugmentsMod;
+import CardAugments.cardmods.AbstractAugment;
+import Zhenghuo.card.CardArgument;
 import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.TongpeiCard;
+import basemod.abstracts.AbstractCardModifier;
+import basemod.helpers.CardModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -24,6 +29,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static Zhenghuo.patchs.playerMethodPatch.updatePatch.extractWords;
 import static Zhenghuo.utils.CardArguments.Chimeraopened;
 import static Zhenghuo.utils.CardArguments.RewardPatch.ModifiedCards;
 
@@ -198,41 +204,93 @@ public class GatherCharacterAction extends AbstractGameAction {
 
         this.tickDuration();
     }
-public static List<AbstractCard> result (List<Character> charList){
+    public static List<AbstractCard> preresult(List<Character> charList){
+        return ModifiedCards.stream()
+                .filter(obj -> {
+                    String name = obj.name;
+
+                    // 将 name 转换为字符集
+                    List<Character> nameCharList = name.chars()
+                            .mapToObj(c -> (char) c)
+                            .collect(Collectors.toList());
+
+                    // 复制一份字符集以供匹配
+                    List<Character> charListCopy = new ArrayList<>(charList);
+
+                    // 检查字符串中的字符是否能在字符集中找到对应项或被通配符替代
+                    for (char c : nameCharList) {
+                        if (charListCopy.contains(c)) {
+                            charListCopy.remove((Character) c);
+                        } else if (charListCopy.contains('*')) {
+                            charListCopy.remove((Character) '*');
+                        } else {
+                            return false; // 无法匹配字符时，过滤掉这个字符串
+                        }
+                    }
+
+                    // 最终，charListCopy 应该只剩下未使用的字符
+                    return charListCopy.isEmpty();
+                })
+                .collect(Collectors.toList());
+    }
+    public static List<AbstractCard> result (List<Character> charList){
         if(Chimeraopened())
         {
-            List<AbstractCard> resulta=ModifiedCards.stream()
-                    .filter(obj -> {
-                        String name = obj.name;
-
-                        // 将 name 转换为字符集
-                        List<Character> nameCharList = name.chars()
-                                .mapToObj(c -> (char) c)
-                                .collect(Collectors.toList());
-
-                        // 复制一份字符集以供匹配
-                        List<Character> charListCopy = new ArrayList<>(charList);
-
-                        // 检查字符串中的字符是否能在字符集中找到对应项或被通配符替代
-                        for (char c : nameCharList) {
-                            if (charListCopy.contains(c)) {
-                                charListCopy.remove((Character) c);
-                            } else if (charListCopy.contains('*')) {
-                                charListCopy.remove((Character) '*');
-                            } else {
-                                return false; // 无法匹配字符时，过滤掉这个字符串
-                            }
-                        }
-
-                        // 最终，charListCopy 应该只剩下未使用的字符
-                        return charListCopy.isEmpty();
-                    })
-                    .collect(Collectors.toList());
+            List<AbstractCard> resulta=preresult(charList);
                     if(resulta.isEmpty())
                     {
+                        //todo 检测其中是否包含词条
+                        //todo 如果包含词条，就把词条去掉，重新检测是否能组成卡牌
+                        //todo 如果能组成卡牌，则组成卡牌，然后把词条加上
 
+
+                        /*
+                        ArrayList<AbstractCard> cardlist=extractWords(charList);
+
+                        ArrayList<AbstractCardModifier> abstractAugments = new ArrayList<>();
+                       /* for(AbstractCard c:cardlist)
+                        {
+                            abstractAugments.addAll(CardModifierManager.getModifiers(c,null))  ;
+                        }
+                        if(!charList.isEmpty()) {
+                            resulta = ModifiedCards.stream()
+                                    .filter(obj -> {
+                                        String name = obj.name;
+
+                                        // 将 name 转换为字符集
+                                        List<Character> nameCharList = name.chars()
+                                                .mapToObj(c -> (char) c)
+                                                .collect(Collectors.toList());
+
+                                        // 复制一份字符集以供匹配
+                                        List<Character> charListCopy = new ArrayList<>(charList);
+
+                                        // 检查字符串中的字符是否能在字符集中找到对应项或被通配符替代
+                                        for (char c : nameCharList) {
+                                            if (charListCopy.contains(c)) {
+                                                charListCopy.remove((Character) c);
+                                            } else if (charListCopy.contains('*')) {
+                                                charListCopy.remove((Character) '*');
+                                            } else {
+                                                return false; // 无法匹配字符时，过滤掉这个字符串
+                                            }
+                                        }
+
+                                        // 最终，charListCopy 应该只剩下未使用的字符
+                                        return charListCopy.isEmpty();
+                                    })
+                                    .collect(Collectors.toList());
+                        }
+                        if(!resulta.isEmpty()){
+                            for(AbstractCard c: resulta){
+                              CardArgument card1= (CardArgument) cardlist.get(AbstractDungeon.cardRandomRng.random(cardlist.size()-1));
+                              if(card1.cardModifier!=null) {
+                                  CardModifierManager.addModifier(c, card1.cardModifier);
+                              }                      }
+                        }*/
                     }
-            return resulta;}
+            return resulta;
+        }
 
         else{
         return CardLibrary.getAllCards().stream()
