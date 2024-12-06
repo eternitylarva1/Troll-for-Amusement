@@ -5,12 +5,17 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.potions.DistilledChaosPotion;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.BurstPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 
 public class HuaPower extends AbstractPower {
@@ -29,7 +34,7 @@ public class HuaPower extends AbstractPower {
         this.cardname=name;
         this.card=card;
         this.name = String.format(name,NAME);
-        this.ID = POWER_ID;
+        this.ID = POWER_ID+name;
         this.owner = owner;
         this.type = PowerType.BUFF;
 
@@ -50,9 +55,24 @@ public class HuaPower extends AbstractPower {
     public void updateDescription() {
 
         this.description = String.format(DESCRIPTIONS[0], this.amount, cardname); // 这样，%d就被替换成能力的层数
+
     }
 
     public void atStartOfTurn() {
-        this.addToBot(new UseCardAction(this.card));
+        for(int i=0;i<this.amount;i++) {
+            AbstractMonster m = AbstractDungeon.getCurrRoom().monsters.getRandomMonster();
+            AbstractCard tmp = card.makeSameInstanceOf();
+            AbstractDungeon.player.limbo.addToBottom(tmp);
+            tmp.current_x = card.current_x;
+            tmp.current_y = card.current_y;
+            tmp.target_x = (float) Settings.WIDTH / 2.0F - 300.0F * Settings.scale;
+            tmp.target_y = (float) Settings.HEIGHT / 2.0F;
+            if (m != null) {
+                tmp.calculateCardDamage(m);
+            }
+            tmp.purgeOnUse = true;
+            AbstractDungeon.actionManager.addCardQueueItem(new CardQueueItem(tmp, m, card.energyOnUse, true, true), true);
+            this.addToBot(new UseCardAction(this.card));
+        }
     }
 }

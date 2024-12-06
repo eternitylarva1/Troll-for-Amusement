@@ -1,9 +1,9 @@
 {
   "Zhenghuo:StrongCharacter": {
-    "NAME": "最强角色",
-    "FLAVOR": "神秘高手，能够游走于无数的世界线",
+    "NAME": "开播查询器",
+    "FLAVOR": "",
     "DESCRIPTIONS": [
-      "你可以随时右键本遗物返回塔底。遗物，卡牌，随机数,地图等变为本局开始状态。"   ]
+      "你可以随时主播白夕seal是否开播，右键刷新状态"   ]
   },
   "Zhenghuo:GatherMachine": {
     "NAME": "文字合成器",

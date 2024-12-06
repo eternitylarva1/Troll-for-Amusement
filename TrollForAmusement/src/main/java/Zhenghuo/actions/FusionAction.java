@@ -9,6 +9,7 @@ package Zhenghuo.actions;
 import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.Characterfusion;
 import Zhenghuo.card.TongpeiCard;
+import Zhenghuo.modcore.CustomTags;
 import Zhenghuo.modcore.ExampleMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
@@ -64,7 +65,7 @@ public class FusionAction extends AbstractGameAction {
 
             while(var1.hasNext()) {
                 c = (AbstractCard)var1.next();
-                if (!(c instanceof CharacterCard)) {
+                if (!(c.hasTag(CustomTags.WordCard))) {
                     this.cannotUpgrade.add(c);
                 }
             }

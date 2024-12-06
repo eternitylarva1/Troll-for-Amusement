@@ -1,6 +1,7 @@
 package Zhenghuo.card;
 
 
+import Zhenghuo.cardModifier.HuaModifier;
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.modcore.CustomTags;
 import Zhenghuo.utils.TextImageGenerator;
@@ -22,6 +23,8 @@ import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import org.lwjgl.Sys;
 
+import javax.smartcardio.Card;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
@@ -75,6 +78,7 @@ public static ArrayList<AbstractCard> CardPool=new ArrayList<>();
                 AbstractCard c = (AbstractCard)var2.next();
 
                 c.initializeDescription();
+
                 this.description.addAll(c.description);
 
             }
@@ -222,6 +226,14 @@ public void update()
                 this.target = CardTarget.ENEMY;
                 break;
             }
+
+        }
+        var2 = this.sutureCards.iterator();
+
+        while(var2.hasNext()) {
+            c = (AbstractCard)var2.next();
+            CardModifierManager.copyModifiers(c,this,false,false,false);
+
         }
 
         ///ReflectionHacks.setPrivate(this, AbstractCard.class, "renderColor", new Color(0.8F, 0.0F, 0.0F, 1.0F));
@@ -308,7 +320,7 @@ public void update()
                 if (Objects.equals(cm.name, String.valueOf(a))){
                     sutureCards.add(cm);
                     changjianzi=true;
-           CardModifierManager.copyModifiers(cm,this,false,false,false);
+
 
                 }
             }
@@ -427,6 +439,8 @@ else
                 c.use(p, m);
             }
         }
+       // ArrayList<AbstractCardModifier> modifiers= CardModifierManager.modifiers(this);
+
 
     }
 
