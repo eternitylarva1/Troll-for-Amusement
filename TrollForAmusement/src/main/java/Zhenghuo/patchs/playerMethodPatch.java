@@ -5,6 +5,7 @@ import Zhenghuo.card.CharacterCard;
 import Zhenghuo.card.TongpeiCard;
 import Zhenghuo.otherplayer.OtherPlayerHelper;
 import Zhenghuo.utils.CardArguments;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
@@ -18,6 +19,7 @@ import com.megacrit.cardcrawl.screens.select.HandCardSelectScreen;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static Zhenghuo.actions.FusionAction.cardResult;
 import static Zhenghuo.actions.FusionAction.isFusion;
@@ -119,9 +121,38 @@ public class playerMethodPatch {
 
 
     }
+        public static ArrayList<Character> getWords( List<Character> charList) {
+            ArrayList<Character> result = new ArrayList<>();
+            List<Character> tempCharList1 = new ArrayList<>(charList);
+            outer:
+            for (AbstractCard card : CardAugrments.group) {
+                List<Character> tempCharList = new ArrayList<>(charList);
+                int index = 0;
+                for (char c : card.name.toCharArray()) {
+                    boolean found = false;
+                    for (int i = 0; i < tempCharList.size(); i++) {
+                        if (tempCharList.get(i) == c) {
+                            tempCharList.remove(i);
+                            index++;
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        continue outer;
+                    }
+                }
+                if (index == card.name.length()) {
+                    charList.removeAll(tempCharList);
+                }
+            }
 
+            result=removeAll(tempCharList1,charList);
+            return result;
+        }
         public static ArrayList<AbstractCard> extractWords( List<Character> charList) {
             ArrayList<AbstractCard> result = new ArrayList<>();
+            List<Character> tempCharList1 = new ArrayList<>(charList);
             outer:
             for (AbstractCard card : CardAugrments.group) {
                 List<Character> tempCharList = new ArrayList<>(charList);
@@ -145,7 +176,14 @@ public class playerMethodPatch {
                     charList.removeAll(tempCharList);
                 }
             }
+            charList.clear();
+            charList.addAll(tempCharList1);
             return result;
+        }
+        public static ArrayList<Character> removeAll(List<Character> listToModify, List<Character> elementsToRemove) {
+            return listToModify.stream()
+                    .filter(element ->!elementsToRemove.contains(element))
+                    .collect(Collectors.toCollection(ArrayList::new));
         }
 
 

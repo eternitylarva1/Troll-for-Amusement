@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static Zhenghuo.patchs.playerMethodPatch.updatePatch.extractWords;
+import static Zhenghuo.patchs.playerMethodPatch.updatePatch.getWords;
 import static Zhenghuo.utils.CardArguments.Chimeraopened;
 import static Zhenghuo.utils.CardArguments.RewardPatch.ModifiedCards;
 
@@ -236,58 +237,31 @@ public class GatherCharacterAction extends AbstractGameAction {
     public static List<AbstractCard> result (List<Character> charList){
         if(Chimeraopened())
         {
+            List<Character> newcharlist;
             List<AbstractCard> resulta=preresult(charList);
                     if(resulta.isEmpty())
                     {
                         //todo 检测其中是否包含词条
                         //todo 如果包含词条，就把词条去掉，重新检测是否能组成卡牌
                         //todo 如果能组成卡牌，则组成卡牌，然后把词条加上
-
-
-                        /*
                         ArrayList<AbstractCard> cardlist=extractWords(charList);
-
-                        ArrayList<AbstractCardModifier> abstractAugments = new ArrayList<>();
-                       /* for(AbstractCard c:cardlist)
-                        {
-                            abstractAugments.addAll(CardModifierManager.getModifiers(c,null))  ;
-                        }
-                        if(!charList.isEmpty()) {
-                            resulta = ModifiedCards.stream()
-                                    .filter(obj -> {
-                                        String name = obj.name;
-
-                                        // 将 name 转换为字符集
-                                        List<Character> nameCharList = name.chars()
-                                                .mapToObj(c -> (char) c)
-                                                .collect(Collectors.toList());
-
-                                        // 复制一份字符集以供匹配
-                                        List<Character> charListCopy = new ArrayList<>(charList);
-
-                                        // 检查字符串中的字符是否能在字符集中找到对应项或被通配符替代
-                                        for (char c : nameCharList) {
-                                            if (charListCopy.contains(c)) {
-                                                charListCopy.remove((Character) c);
-                                            } else if (charListCopy.contains('*')) {
-                                                charListCopy.remove((Character) '*');
-                                            } else {
-                                                return false; // 无法匹配字符时，过滤掉这个字符串
-                                            }
-                                        }
-
-                                        // 最终，charListCopy 应该只剩下未使用的字符
-                                        return charListCopy.isEmpty();
-                                    })
-                                    .collect(Collectors.toList());
+                        newcharlist=getWords(charList);
+                        System.out.println(newcharlist);
+                        if(!newcharlist.isEmpty()) {
+                        resulta=preresult(newcharlist);
                         }
                         if(!resulta.isEmpty()){
+                            List<AbstractCard> resultb = new ArrayList<>();
                             for(AbstractCard c: resulta){
+                                AbstractCard c1=c.makeCopy();
                               CardArgument card1= (CardArgument) cardlist.get(AbstractDungeon.cardRandomRng.random(cardlist.size()-1));
                               if(card1.cardModifier!=null) {
-                                  CardModifierManager.addModifier(c, card1.cardModifier);
-                              }                      }
-                        }*/
+                                  CardModifierManager.addModifier(c1, card1.cardModifier);
+                                  resultb.add(c1);
+                              }
+                            }
+                            resulta=resultb;
+                        }
                     }
             return resulta;
         }
