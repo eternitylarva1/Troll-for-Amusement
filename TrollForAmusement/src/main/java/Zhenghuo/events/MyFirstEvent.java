@@ -361,8 +361,8 @@ if(button.clicked)
                 popupArrow.getHeight(),
                 flipX,
                 false);
-     FontHelper.renderFont(sb,FontHelper.topPanelAmountFont,"确认",hitbox.cX - popupArrow.getWidth() / 2f,hitbox.cY - popupArrow.getHeight() / 2f+50, Color.WHITE);
-     FontHelper.renderFont(sb,FontHelper.menuBannerFont,"剩余时间"+(int)timer,convertX(6),convertY(-0.5f), Color.WHITE);
+        FontHelper.renderFont(sb,FontHelper.topPanelAmountFont,"确认",hitbox.cX - popupArrow.getWidth() / 2f,hitbox.cY - popupArrow.getHeight() / 2f+50, Color.WHITE);
+        FontHelper.renderFont(sb,FontHelper.menuBannerFont,"剩余时间"+(int)timer,convertX(6),convertY(-0.5f), Color.WHITE);
         if (hitbox.hovered) {
             sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
             sb.setColor(1, 1, 1, 0.5f);

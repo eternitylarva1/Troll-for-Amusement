@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardType;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -40,6 +41,21 @@ public class Hpr {
 
     public static boolean HasRelicOrUpgradedVersion(String id) {
         return AbstractDungeon.player.hasRelic(id) || AbstractDungeon.player.hasRelic(id + "Upgraded");
+    }
+    public static CardGroup InWhichCardGroup(AbstractCard card) {
+        if (AbstractDungeon.player.drawPile.contains(card)) {
+            return AbstractDungeon.player.drawPile;
+        } else if (AbstractDungeon.player.discardPile.contains(card)) {
+            return AbstractDungeon.player.discardPile;
+        } else if (AbstractDungeon.player.exhaustPile.contains(card)) {
+            return AbstractDungeon.player.exhaustPile;
+        } else if (AbstractDungeon.player.hand.contains(card)) {
+            return AbstractDungeon.player.hand;
+        }else if (AbstractDungeon.player.masterDeck.contains(card)) {
+            return AbstractDungeon.player.masterDeck;
+        } else {
+            return null;
+        }
     }
 
     public static int GetRelicAmount(String id) {

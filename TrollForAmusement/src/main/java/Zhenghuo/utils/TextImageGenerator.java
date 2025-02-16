@@ -10,7 +10,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
-
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class TextImageGenerator {
@@ -127,14 +128,20 @@ public class TextImageGenerator {
             pixmap.dispose();
             return texture;
         }
+    private static final Map<String, Texture> imageCache = new HashMap<>();
     public static Texture getTextImage(String Name)
     {
         return convertToTexture(createTextImage(Name,250,190));
     }
-    public static Texture getTextImage(String Name, AbstractCard.CardType cardType)
-    {
-        System.out.println("生成卡图ing");
-        return convertToTexture( CardTextureGenerator.createTextImage( Name,  250,  190, cardType));
+    public static Texture getTextImage(String name, AbstractCard.CardType cardType) {
+        String key = name + "_" + cardType;
+        if (imageCache.containsKey(key)) {
+            return imageCache.get(key);
+        }
+
+        Texture texture = convertToTexture(CardTextureGenerator.createTextImage(name, 250, 190,cardType));
+        imageCache.put(key, texture);
+        return texture;
     }
 
 }

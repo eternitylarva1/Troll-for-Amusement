@@ -7,6 +7,7 @@ package Zhenghuo.actions;
 
 
 import Zhenghuo.card.TongpeiCard;
+import Zhenghuo.helpers.Hpr;
 import Zhenghuo.modcore.CustomTags;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
@@ -122,8 +123,9 @@ public class BetteFusionCharacterAction extends AbstractGameAction {
                 int upgradenum=0;
                 while(var4.hasNext()) {
                     c = (AbstractCard)var4.next();
-
-
+if(Hpr.InWhichCardGroup(c)!=null) {
+    Hpr.InWhichCardGroup(c).moveToExhaustPile(c);
+}/*
                     if(!(c instanceof TongpeiCard)){
 
                         System.out.println("正在尝试组合"+c.name);
@@ -148,12 +150,13 @@ public class BetteFusionCharacterAction extends AbstractGameAction {
                     else{
                         System.out.println("检测到名字为通配符，改为*");
                         ChList.add("*".charAt(0));
-                    }
+                    }*/
                 }
 
                 //List<AbstractCard> result =result(ChList);
                 if(cardResult!=null){
                     float PADDING = 25.0F * Settings.scale;
+
                     AbstractDungeon.effectList.add(new ShowCardAndAddToHandEffect(cardResult, (float)Settings.WIDTH / 2.0F + PADDING + AbstractCard.IMG_WIDTH, (float)Settings.HEIGHT / 2.0F));
                 }
 
