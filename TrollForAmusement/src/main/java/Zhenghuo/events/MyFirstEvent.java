@@ -34,7 +34,7 @@ import static Zhenghuo.utils.CardArguments.RewardPatch.Relics;
 import static com.megacrit.cardcrawl.helpers.CardLibrary.getAllCards;
 
 public class MyFirstEvent extends AbstractImageEvent {
-    public static final String ID = "CharacterGather";
+    public static final String ID = "c";
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(ID);
     //This text should be set up through loading an event localization json file
     private static final String[] DESCRIPTIONS = eventStrings.DESCRIPTIONS;

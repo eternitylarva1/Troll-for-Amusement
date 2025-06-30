@@ -1,6 +1,8 @@
 package Zhenghuo.modcore;
 
 
+import ChouXiangRelic.hook.LoadMySpireMod;
+import ChouXiangRelic.relic.*;
 import Zhenghuo.card.*;
 import Zhenghuo.charactercard.*;
 import Zhenghuo.events.MyFirstEvent;
@@ -13,10 +15,12 @@ import Zhenghuo.relics.StrongCharacter;
 import Zhenghuo.screens.CharacterScreen;
 import basemod.AutoAdd;
 import basemod.BaseMod;
+import basemod.abstracts.CustomRelic;
 import basemod.abstracts.CustomSavable;
 import basemod.helpers.CardModifierManager;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
+import cn.candy.relic.Money;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -39,6 +43,7 @@ import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 import java.nio.charset.StandardCharsets;
 import java.text.Collator;
@@ -187,10 +192,20 @@ i++;
     @Override
     public void receiveEditRelics() {
         BaseMod.addRelic(new StrongCharacter(), RelicType.SHARED); // RelicType表示是所有角色都能拿到的遗物，还是一个角色的独有遗物
+        BaseMod.addRelic(new Money(), RelicType.SHARED);
 
         BaseMod.addRelic(new GatherMachine(), RelicType.SHARED);
         BaseMod.addRelic(new SplitMachine(), RelicType.SHARED);
         BaseMod.addRelic(new Dictionary(),RelicType.SHARED);
+        BaseMod.addRelic(new aoman(),RelicType.SHARED);
+        BaseMod.addRelic(new chenghuacheng(),RelicType.SHARED);
+        BaseMod.addRelic(new dangao(),RelicType.SHARED);
+        BaseMod.addRelic(new gangtiehexin(),RelicType.SHARED);
+        BaseMod.addRelic(new kuangwang(),RelicType.SHARED);
+        BaseMod.addRelic(new tanlan(),RelicType.SHARED);
+        BaseMod.addRelic(new weixianbaoxiang(),RelicType.SHARED);
+        BaseMod.addRelic(new chuncui(),RelicType.SHARED);
+
 
     }
 
@@ -213,7 +228,7 @@ i++;
     @Override
     public void receiveEditCharacters() {
         // 向basemod注册人物
-        BaseMod.addCharacter(new Mycharacter(CardCrawlGame.playerName), MY_CHARACTER_BUTTON, MY_CHARACTER_PORTRAIT, Cangjie);
+        //BaseMod.addCharacter(new Mycharacter(CardCrawlGame.playerName), MY_CHARACTER_BUTTON, MY_CHARACTER_PORTRAIT, Cangjie);
     }
     @Override
     public void onLoad(String s) {
