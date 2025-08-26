@@ -1,15 +1,13 @@
 package Zhenghuo.card;
 
 
-import Zhenghuo.cardModifier.HuaModifier;
+
 import Zhenghuo.helpers.ModHelper;
 import Zhenghuo.modcore.CustomTags;
 import Zhenghuo.utils.TextImageGenerator;
 import basemod.AutoAdd;
-import basemod.abstracts.AbstractCardModifier;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
-import basemod.cardmods.ExhaustMod;
 import basemod.helpers.CardModifierManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -17,19 +15,13 @@ import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.SpawnModificationCar
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DescriptionLine;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import org.lwjgl.Sys;
-
-import javax.smartcardio.Card;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
-
 import static Zhenghuo.player.Mycharacter.PlayerColorEnum.CharacterBlack;
 import static Zhenghuo.utils.CardArguments.RewardPatch.Words;
 @AutoAdd.Ignore

@@ -13,6 +13,7 @@ import Zhenghuo.relics.GatherMachine;
 import Zhenghuo.relics.SplitMachine;
 import Zhenghuo.relics.StrongCharacter;
 import Zhenghuo.screens.CharacterScreen;
+import Zhenghuo.utils.ScreenDarkener;
 import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.abstracts.CustomRelic;
@@ -91,11 +92,15 @@ public static String NowPlayer=null;
 
 public static boolean Chimera1=false;
     public static final Color MY_COLOR = new Color(1.0F / 255.0F, 1.0F / 255.0F, 3.0F / 255.0F, 0.85F);
+    public static String Tips="";
+    public static boolean StartRecord=false;
+
     public ExampleMod() {
         BaseMod.subscribe(this); // 告诉basemod你要订阅事件
         BaseMod.addSaveField("Zhenghuo", this);
 
     }
+    public static ArrayList<ScreenDarkener> screendarkeners=new ArrayList();
     public  static CharacterScreen dictionary;
     public static void initialize() {
 

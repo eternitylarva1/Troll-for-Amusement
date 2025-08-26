@@ -8,6 +8,7 @@ package Zhenghuo.actions;
 
 
 import Zhenghuo.card.AugrmentAttack;
+import Zhenghuo.card.AugrmentAttack1;
 import Zhenghuo.effects.Clockeffect;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.ActionType;
@@ -35,11 +36,11 @@ public class DiscoveryAction1 extends AbstractGameAction {
     private boolean hasquestion = false;
     ArrayList generatedCards;
     Object[] question = new Object[0];
-    AugrmentAttack correctAnswer;
+    AugrmentAttack1 correctAnswer;
 
-    AugrmentAttack distractor1 ;
+    AugrmentAttack1 distractor1 ;
 
-    AugrmentAttack distractor2 ;
+    AugrmentAttack1 distractor2 ;
 
     public DiscoveryAction1() {
         this.actionType = ActionType.CARD_MANIPULATION;
@@ -74,9 +75,9 @@ public class DiscoveryAction1 extends AbstractGameAction {
             System.out.println(String.valueOf(question[2]) + "是正确答案");
             System.out.println(String.valueOf(distractors[0]) + "是干扰1");
             System.out.println(String.valueOf(distractors[1]) + "是干扰2");
-            correctAnswer = new AugrmentAttack(String.valueOf(question[2]));
-            distractor1 = new AugrmentAttack(String.valueOf(distractors[0]));
-            distractor2 = new AugrmentAttack(String.valueOf(distractors[1]));
+            correctAnswer = new AugrmentAttack1(String.valueOf(question[2]));
+            distractor1 = new AugrmentAttack1(String.valueOf(distractors[0]));
+            distractor2 = new AugrmentAttack1(String.valueOf(distractors[1]));
             generatedCards.add(correctAnswer);
             generatedCards.add(distractor1);
             generatedCards.add(distractor2);

@@ -12,7 +12,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
         import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import static Zhenghuo.relics.StrongCharacter.initizeGame;
+import static Zhenghuo.relics.Customweapon.initizeGame;
+
 
 public class Chongqi extends AbstractCard {
     public static final String ID = "Chongqi";
